@@ -23,7 +23,7 @@ public class GalleryDriver extends AppCompatActivity {
 
         LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-        // TODO Change 8 to the number of picutres found in database
+        // TODO Change 8 to the number of pictures found in database
         for (int i = 0; i < 8; i++) {
             ImageView im = new ImageView(c);
             Ion.with(im)
