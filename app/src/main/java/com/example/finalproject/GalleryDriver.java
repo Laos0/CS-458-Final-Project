@@ -1,57 +1,35 @@
 package com.example.finalproject;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
-import java.io.FileNotFoundException;
+import com.koushikdutta.ion.Ion;
 
-public class GalleryDriver extends Activity {
+public class GalleryDriver extends AppCompatActivity {
 
-    TextView textTargetUri;
-    ImageView targetImage;
+    Context c;
+    LinearLayout gallery;
 
-    /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gallery);
-        Button buttonLoadImage = findViewById(R.id.loadimage);
-        textTargetUri = findViewById(R.id.targeturi);
-        targetImage = findViewById(R.id.targetimage);
 
-        buttonLoadImage.setOnClickListener(new Button.OnClickListener(){
+        c = this.getApplicationContext();
+        gallery = findViewById(R.id.gallery);
 
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 0);
-            }});
-    }
+        LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK){
-            Uri targetUri = data.getData();
-            assert targetUri != null;
-            textTargetUri.setText(targetUri.toString());
-            Bitmap bitmap;
-            try {
-                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                targetImage.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        // TODO Change 8 to the number of picutres found in database
+        for (int i = 0; i < 8; i++) {
+            ImageView im = new ImageView(c);
+            Ion.with(im)
+                    // TODO Change .load() to the database
+                    .load("https://upload.wikimedia.org/wikipedia/commons/b/bf/Test_card.png");
+            gallery.addView(im, imParams);
         }
     }
 }
