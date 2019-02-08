@@ -1,8 +1,11 @@
 package com.example.finalproject;
 
+import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,10 +20,24 @@ public class MainPage extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
+        /* Create our Navigation Drawer as on object */
+        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         /* Create our toolbar as an object and add a back button to it */
         Toolbar navBar = (Toolbar) findViewById(R.id.navBar);
         navBar.setTitle("PictoCache");
         setSupportActionBar(navBar);
+        navBar.setNavigationIcon(R.drawable.ic_user_actions);
+
+        /* Open the Navigation Drawer on clicking the hamburger button */
+        navBar.setNavigationOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
     }
 
     @Override
@@ -36,13 +53,11 @@ public class MainPage extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.settings:
-                // User chose the "Settings" item, show the app settings UI...
+                {
+                    Intent mainPage = new Intent(MainPage.this, SettingsActivity.class);
+                    startActivity(mainPage);
                 return true;
-
-            case R.id.userActions:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
-                return true;
+            }
 
             default:
                 // If we got here, the user's action was not recognized.
