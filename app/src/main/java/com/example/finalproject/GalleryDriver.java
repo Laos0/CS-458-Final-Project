@@ -28,7 +28,7 @@ public class GalleryDriver extends AppCompatActivity {
             ImageView im = new ImageView(c);
             Ion.with(im)
                     // TODO Change .load() to the database
-                    .load("https://upload.wikimedia.org/wikipedia/commons/b/bf/Test_card.png");
+                    .load("file:///Internal storage/DCIM/Camera/20190122_203946.jpg");
             gallery.addView(im, imParams);
         }
     }

@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">FinalProject</string>
-    <string name="hello">Hello</string>
-    <string name="load_image">Load Image</string>
-    <string name="found_image">found image</string>
 </resources>
