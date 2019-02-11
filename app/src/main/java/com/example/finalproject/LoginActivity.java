@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +31,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Determine which button was pressed and open the corresponding page
         switch (v.getId()) {
             case R.id.sign_up: {
-                Intent signUp = new Intent(MainActivity.this, SignUpActivity.class);
+                Intent signUp = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(signUp);
                 break;
             }
             case R.id.log_in: {
-                Intent mainPage = new Intent(MainActivity.this, MainPage.class);
+                Intent mainPage = new Intent(LoginActivity.this, MainPage.class);
                 startActivity(mainPage);
                 break;
             }

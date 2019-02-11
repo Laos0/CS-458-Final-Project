@@ -1,9 +1,9 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,10 +21,10 @@ public class MainPage extends AppCompatActivity
         setContentView(R.layout.activity_main_page);
 
         /* Create our Navigation Drawer as on object */
-        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
 
         /* Create our toolbar as an object and add a back button to it */
-        Toolbar navBar = (Toolbar) findViewById(R.id.navBar);
+        Toolbar navBar = findViewById(R.id.navBar);
         navBar.setTitle("PictoCache");
         setSupportActionBar(navBar);
         navBar.setNavigationIcon(R.drawable.ic_user_actions);
