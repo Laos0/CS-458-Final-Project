@@ -1,5 +1,10 @@
 package com.example.finalproject;
 
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -15,7 +20,7 @@ public class OpenWeather {
     private static final String URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final String APP_ID = "a13ad27bb93bad8492322d46f328666e";
 
-    public static List<Map<String, String>> retrieveWeather(final String lat, final String lon) {
+    public static List<Map<String, String>> retrieveWeather(double lat, double lon) {
 
         final List<Map<String, String>> data = new ArrayList<>();
 
@@ -53,7 +58,7 @@ public class OpenWeather {
         return conn.getInputStream();
     }
 
-    private static String createRequestURL(final String lat, final String lon) {
+    private static String createRequestURL(final double lat, final double lon) {
         return URL + "?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APP_ID;
     }
 
