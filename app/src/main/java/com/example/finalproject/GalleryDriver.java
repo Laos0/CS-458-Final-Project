@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 
@@ -23,7 +22,6 @@ public class GalleryDriver extends AppCompatActivity {
 
         c = this.getApplicationContext();
         gallery = findViewById(R.id.gallery);
-        TextView t = new TextView(c);
 
         LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         ImageView im = new ImageView(c);
