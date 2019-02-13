@@ -12,12 +12,12 @@ import android.util.Log;
 
 public class GPSTracker implements LocationListener {
     private final Context mContext;
-    boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
-    Location location = null;
-    double latitude;
-    double longitude;
+    private boolean isGPSEnabled = false;
+    private boolean isNetworkEnabled = false;
+    private boolean canGetLocation = false;
+    private Location location = null;
+    private double latitude;
+    private double longitude;
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
@@ -49,8 +49,17 @@ public class GPSTracker implements LocationListener {
             } else {
                 this.canGetLocation = true;
                 if (isNetworkEnabled) {
-                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        location.setLatitude(0);
+                        location.setLatitude(0);
+                        return location;
                     }
                     locationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
@@ -83,7 +92,8 @@ public class GPSTracker implements LocationListener {
                         }
                     }
                 }
-        } catch (Exception e) {
+            }
+        }catch (Exception e) {
             e.printStackTrace();
         }
 
