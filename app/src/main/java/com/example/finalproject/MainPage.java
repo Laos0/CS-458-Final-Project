@@ -112,6 +112,14 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new HomeFragment()).commit();
                 break;
+            case R.id.nav_friends:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new FriendFragment()).commit();
+                break;
+            case R.id.nav_camera:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new CameraFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
