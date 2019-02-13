@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -18,19 +19,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".MainPage"/>
-        <activity android:name=".SettingsActivity"></activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".GalleryDriver" />
+        <activity android:name=".SettingsActivity"/>
+        <activity android:name=".MainPage" />
+        <activity android:name=".SignUpActivity" />
     </application>
 
 </manifest>
