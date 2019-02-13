@@ -9,6 +9,11 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+import java.util.List;
+import java.util.Map;
 
 public class MainPage extends AppCompatActivity
 {
@@ -38,7 +43,20 @@ public class MainPage extends AppCompatActivity
                 drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
+        final ImageButton weatherButton = findViewById(R.id.weatherBtn);
+        weatherButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                GPSTracker locationTracker = new GPSTracker(MainPage.this);
+
+                List<Map<String, String>> data = OpenWeather.retrieveWeather(locationTracker.getLatitude(), locationTracker.getLongitude());
+
+                String title = data.get(0).get("main");
+
+            }
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
