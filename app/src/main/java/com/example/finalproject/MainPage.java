@@ -52,6 +52,8 @@ public class MainPage extends AppCompatActivity
                 List<Map<String, String>> data = OpenWeather.retrieveWeather(locationTracker.getLatitude(), locationTracker.getLongitude());
 
                 String title = data.get(0).get("main");
+                String desc = data.get(0).get("desc");
+
 
             }
         });
