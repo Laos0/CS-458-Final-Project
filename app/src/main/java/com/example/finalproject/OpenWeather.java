@@ -1,9 +1,7 @@
 package com.example.finalproject;
 
-import android.location.Location;
-import android.location.LocationListener;
-import android.os.Bundle;
-import android.widget.Toast;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class OpenWeather {
@@ -20,6 +19,7 @@ public class OpenWeather {
     private static final String URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final String APP_ID = "82c47aa6e7dddfb4ca74723c654b3d41";
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static List<Map<String, String>> retrieveWeather(double lat, double lon) {
 
         final List<Map<String, String>> data = new ArrayList<>();
@@ -33,7 +33,7 @@ public class OpenWeather {
             final InputStream inputStream = getStream(url);
 
             // Parse Response
-            data.addAll(WeatherParser.parse(inputStream));
+            data.addAll(Objects.requireNonNull(WeatherParser.parse(inputStream)));
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

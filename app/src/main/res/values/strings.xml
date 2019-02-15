@@ -89,4 +89,9 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- These codes below are for people who need a screen reader: Navigation Drawer related -->
+    <string name="navigation_drawer_open"> Open navigation drawer</string>
+    <string name="navigation_drawer_close"> Close navigation drawer</string>
+    <!-- End of navigation drawer related -->
 </resources>

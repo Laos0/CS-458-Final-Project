@@ -21,7 +21,7 @@ public class GalleryDriver extends AppCompatActivity {
         setContentView(R.layout.gallery);
 
         c = this.getApplicationContext();
-        gallery = findViewById(R.id.gallery);
+        gallery = findViewById(R.id.galleryV);
 
         LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         ImageView im = new ImageView(c);
