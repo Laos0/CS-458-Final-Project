@@ -12,9 +12,10 @@ import com.koushikdutta.ion.Ion;
 
 public class GalleryDriver extends AppCompatActivity {
 
-    Context c;
-    String SQLQ;
-    int userID;
+    @SuppressLint("StaticFieldLeak")
+    static Context c;
+    @SuppressLint("StaticFieldLeak")
+    static LinearLayout gallery;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -23,25 +24,26 @@ public class GalleryDriver extends AppCompatActivity {
         setContentView(R.layout.gallery);
 
         c = this.getApplicationContext();
+        gallery = findViewById(R.id.galleryV);
 
-        // TODO Get this from logged-in user
-        userID = 44;
-        SQLQ = "SELECT * FROM [images] WHERE fileName LIKE '%" + userID + "';";
-
+        new FetchDB().execute();
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class FetchDB extends AsyncTask<Integer, Integer, Integer> {
+    private static class FetchDB extends AsyncTask<Integer, Integer, Integer> {
         LinearLayout.LayoutParams imParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         @SuppressLint("StaticFieldLeak")
         ImageView im = new ImageView(c);
-        LinearLayout gallery = findViewById(R.id.galleryV);
+
+        // TODO Get userID from current user
+        String userID = "44";
+        String SQLQ = "SELECT filePath FROM images WHERE CONTAINS(fileName, ?)";
 
         @Override
         protected Integer doInBackground(Integer... integers) {
+            // rawQuery("SELECT filePath FROM images WHERE CONTAINS(fileName, ?)", new String[] {userID})
             // TODO Load image(s) from server path
             // Maybe append all files with the userID of the person who took it so it will be easy to get all images?
-            // Loop through path and count the number of images
             // For each file found, load it into the view
             Ion.with(im)
                     .load("http://example.com/image.png");
