@@ -1,7 +1,7 @@
 package com.example.finalproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -15,7 +15,7 @@ public class SettingsActivity extends AppCompatActivity
         setContentView(R.layout.activity_settings);
 
         /* Create our toolbar as an object and add a back button to it */
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Settings");
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 

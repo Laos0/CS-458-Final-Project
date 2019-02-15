@@ -14,18 +14,18 @@ import android.widget.TextView;
 public class AddFragment extends Fragment {
 
     EditText userAcc;
-    Button sumbitBtn;
+    Button submitBtn;
     TextView dummyT;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container,false);
-        userAcc = (EditText)view.findViewById(R.id.friendAcc);
-        sumbitBtn = (Button)view.findViewById(R.id.submitAdd);
-        dummyT = (TextView)view.findViewById(R.id.dummyText);
+        userAcc = view.findViewById(R.id.friendAcc);
+        submitBtn = view.findViewById(R.id.submitAdd);
+        dummyT = view.findViewById(R.id.dummyText);
 
-        sumbitBtn.setOnClickListener(new View.OnClickListener() {
+        submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Testing code line, to see if my button was working in fragment

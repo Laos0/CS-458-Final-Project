@@ -1,11 +1,14 @@
 package com.example.finalproject;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.util.JsonReader;
 import android.util.JsonToken;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,10 +54,11 @@ class WeatherParser {
         sysData.put("sunset", null);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     static List<Map<String, String>> parse(final InputStream in) throws IOException {
         try {
 
-            final JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+            final JsonReader reader = new JsonReader(new InputStreamReader(in, StandardCharsets.UTF_8));
             readWeather(reader);
 
             List<Map<String, String>> data = new ArrayList<>();
