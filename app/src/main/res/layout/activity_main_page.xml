@@ -53,13 +53,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.finalproject.UserProfileFragment"
+            android:layout_width="426dp"
+            android:layout_height="675dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.451"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/navBar" />
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/navView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start" />
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_view"
+        app:headerLayout="@layout/nav_header"/>
     **** This is the end of Jay's navigation xml -->
 
     <!--- This is Sony's Navigation xml -->
@@ -91,7 +107,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menu" />
+        app:menu="@menu/drawer_menu" />
 
     <!-- This is the end of Sony's navigation xml -->
 </android.support.v4.widget.DrawerLayout>
