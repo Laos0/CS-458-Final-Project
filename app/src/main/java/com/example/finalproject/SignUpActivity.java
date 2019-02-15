@@ -6,9 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class SignUpActivity extends AppCompatActivity
 {
+    EditText userName, password, email, confemail;
+    SignUpDatabase dbTester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,6 +49,15 @@ public class SignUpActivity extends AppCompatActivity
                 finish();
             }
         });
+
+
+
+        userName= findViewById(R.id.userID);
+        password= findViewById(R.id.editText2);
+        email= findViewById(R.id.editText3);
+        confemail= findViewById(R.id.editText4);
+
+        dbTester = new SignUpDatabase(this);
     }
 
 }
