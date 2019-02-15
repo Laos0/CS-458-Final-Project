@@ -95,9 +95,9 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new FriendFragment()).commit();
                 break;
-            case R.id.nav_camera:
+            case R.id.nav_gallery:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
-                        new CameraFragment()).commit();
+                        new GalleryFragment()).commit();
                 break;
             case R.id.nav_settings:
                 {
