@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class SignUpActivity extends AppCompatActivity
 {
     EditText userName, password, email, confemail;
-    SignUpDatabase dbTester;
+    SignUpDatabase mydb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,6 +21,14 @@ public class SignUpActivity extends AppCompatActivity
         /* Instantiate the activity and set the layout */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        userName= findViewById(R.id.userID);
+        password= findViewById(R.id.editText2);
+        email= findViewById(R.id.editText3);
+        confemail= findViewById(R.id.editText4);
+
+        mydb = new SignUpDatabase(this);
+
+        
 
         /* Create the register button as an object and create an onclick() function */
         Button register = findViewById(R.id.register);
@@ -50,14 +60,6 @@ public class SignUpActivity extends AppCompatActivity
             }
         });
 
-
-
-        userName= findViewById(R.id.userID);
-        password= findViewById(R.id.editText2);
-        email= findViewById(R.id.editText3);
-        confemail= findViewById(R.id.editText4);
-
-        dbTester = new SignUpDatabase(this);
     }
 
 }
