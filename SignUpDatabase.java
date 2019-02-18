@@ -1,3 +1,4 @@
+
 package com.example.finalproject;
 
 import android.database.sqlite.SQLiteOpenHelper;
@@ -5,7 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import andriod.content.Context;
 import andriod.database.sqlite.SQLiteDatabase;
 
-public class SignUpDatabase extends SQLiteOpenHelper {
+public class SignUpDatabase extends SQLiteOpenHelper
+{
 
     private static final in DATABASE_VERSION = 1;
 
