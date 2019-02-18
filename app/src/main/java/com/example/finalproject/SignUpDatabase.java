@@ -1,73 +1,43 @@
 package com.example.finalproject;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
-public class SignUpDatabase extends SQLiteOpenHelper{
+//import andriod.content.Context;
+//import andriod.database.sqlite.SQLiteDatabase;
 
-    //database version
+public class SignUpDatabase extends SQLiteOpenHelper {
+
     private static final int DATABASE_VERSION = 1;
 
-    //database name
     private static final String DATABASE_NAME = "users.db";
 
-    //table name
     private static final String TABLE_NAME = "userinfo";
 
-    //table fields
-    private static final String COLUMN_ID = "ID";
+    private static final String COLUMN_ID = "id";
     private static final String COLUMN_NAME = "name";
     //private static final String COLUMN_ID = "id";
 
-    //constructor
+    SQLiteDatabase database;
+
     public SignUpDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        //database = getWriteableDatabase();
+    }
+
+    public void onDowngrade(SignUpDatabase db, int oldVersion, int newVersion) {
+        onUpgrade(database, oldVersion, newVersion);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE "+TABLE_NAME+" (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_NAME+" TEXT)";
-        db.execSQL(createTable);
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " ( " + COLUMN_ID + " INTEGER PRIMARY KEY ," + COLUMN_NAME + " TEXT )");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE EXISTS" + TABLE_NAME);
         onCreate(db);
     }
-
-    public boolean addData(String item){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_NAME, item);
-
-        long result = db.insert(TABLE_NAME,null,contentValues);
-
-        if (result == -1) {
-            return false;
-        }else{
-            return true;
-        }
-
-    }
-
-    public Cursor getData(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
-    public Cursor getItemID(String name){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT " + COLUMN_ID + " FROM " + TABLE_NAME +
-                " WHERE " + COLUMN_NAME + " = '" + name + "'";
-        Cursor data = db.rawQuery(query, null);
-        return data;
-    }
-
 }

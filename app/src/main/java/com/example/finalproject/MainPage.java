@@ -25,26 +25,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        // Create our Navigation Drawer as on object
-        /*
-        final DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-
-        // Create our toolbar as an object and add a back button to it
-        Toolbar navBar = findViewById(R.id.navBar);
-        navBar.setTitle("PictoCache");
-        setSupportActionBar(navBar);
-        navBar.setNavigationIcon(R.drawable.ic_user_actions);
-
-        // Open the Navigation Drawer on clicking the hamburger button
-        navBar.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
-        */
         // ----------------------- Navigation Drawer Implementations ---------------------------------------------------------------
         // The tool bar or navigation to add friend implementations
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -85,13 +65,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     {
         switch (item.getItemId())
         {
-            case R.id.settings:
-                {
-                    Intent mainPage = new Intent(MainPage.this, SettingsActivity.class);
-                    startActivity(mainPage);
-                return true;
-            }
-
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -102,8 +75,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
     // ------------------ Sony's Navigation Drawer Methods -----------------------------------------------------
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+    {
+        switch(menuItem.getItemId())
+        {
             case R.id.nav_add:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new AddFragment()).commit();
@@ -112,14 +87,24 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new HomeFragment()).commit();
                 break;
+            case R.id.nav_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new UserProfileFragment()).commit();
+                break;
             case R.id.nav_friends:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new FriendFragment()).commit();
                 break;
-            case R.id.nav_camera:
+            case R.id.nav_gallery:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
-                        new CameraFragment()).commit();
+                        new GalleryFragment()).commit();
                 break;
+            case R.id.nav_settings:
+                {
+                Intent settingsPage = new Intent(MainPage.this, SettingsActivity.class);
+                startActivity(settingsPage);
+                break;
+            }
         }
 
         drawer.closeDrawer((GravityCompat.START));
