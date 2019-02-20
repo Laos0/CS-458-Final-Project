@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 String windSpeed = data.get(2).get("speed");
                 String windChill = data.get(2).get("deg");
 
-                LinearLayout viewGroup = (LinearLayout) MainPage.this.findViewById(R.id.weatherPup);
+                LinearLayout viewGroup = (LinearLayout) findViewById(R.id.weatherPup);
                 LayoutInflater layoutInflater = (LayoutInflater) MainPage.this.getSystemService(MainPage.this.LAYOUT_INFLATER_SERVICE);
                 View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
 
@@ -90,6 +91,14 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 popup.setWidth(MainPage.this.getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
                 popup.setFocusable(true);
                 popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
+                TextView wTitle = (TextView)findViewById(R.id.weatherTitle);
+                wTitle.setText(title);
+                TextView wDesc = (TextView)findViewById(R.id.weatherDesc);
+                wDesc.setText(desc);
+                TextView wTemp =  (TextView) findViewById(R.id.temp);
+                wTemp.setText(temp);
+                TextView wPressure = (TextView) findViewById(R.id.pressure);
+                wPressure.setText(pressure);
 
 
 
