@@ -96,9 +96,20 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 TextView wDesc = (TextView)findViewById(R.id.weatherDesc);
                 wDesc.setText(desc);
                 TextView wTemp =  (TextView) findViewById(R.id.temp);
-                wTemp.setText(temp);
+                wTemp.setText("temperature: " + temp);
                 TextView wPressure = (TextView) findViewById(R.id.pressure);
-                wPressure.setText(pressure);
+                wPressure.setText("pressure: " + pressure);
+                TextView wHumidity = (TextView) findViewById(R.id.humidity);
+                wHumidity.setText("humidity: " + humidity);
+                TextView wTempLow = (TextView) findViewById(R.id.temp_low);
+                wTempLow.setText("Low: "+ temp_low);
+                TextView wTempHigh = (TextView) findViewById(R.id.temp_high);
+                wTempHigh.setText("Low: "+ temp_high);
+                TextView wSpeed = (TextView) findViewById(R.id.windSpeed);
+                wSpeed.setText("windspeed: " + windSpeed);
+                TextView wChill = (TextView) findViewById(R.id.windChill);
+                wChill.setText("windchill: " + windChill);
+
 
 
 
