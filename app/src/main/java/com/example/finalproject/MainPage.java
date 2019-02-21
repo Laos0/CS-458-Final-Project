@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -63,7 +64,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         }
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
-        final ImageButton weatherButton = findViewById(R.id.weatherBtn);
+        final Button weatherButton = findViewById(R.id.weather_btn);
         weatherButton.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

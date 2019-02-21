@@ -13,21 +13,28 @@ import android.os.strictmode.NonSdkApiUsedViolation;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 import static android.os.Environment.getExternalStoragePublicDirectory;
@@ -60,6 +67,15 @@ public class HomeFragment extends Fragment
                 dispatchPictureTakerAction();
             }
         });
+        final Button weatherButton = view.findViewById(R.id.weather_btn);
+        weatherButton.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                applyWeatherPopup(v);
+
+            }
+        });
         return view;
     }
 
@@ -72,6 +88,51 @@ public class HomeFragment extends Fragment
                 photo.setImageBitmap(bitmap);
             }
         }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void applyWeatherPopup(View v){
+        GPSTracker locationTracker = new GPSTracker(getContext());
+
+            List<Map<String, String>> data = OpenWeather.retrieveWeather(locationTracker.getLatitude(), locationTracker.getLongitude());
+
+
+        String title = data.get(0).get("main");
+        String desc = data.get(0).get("description");
+        String temp = "temperature: " + data.get(1).get("temp");
+        String pressure = "pressure: " + data.get(1).get("temp");
+        String humidity = data.get(1).get("temp");
+        String temp_low = data.get(1).get("temp");
+        String temp_high = data.get(1).get("temp");
+        String windSpeed = data.get(2).get("speed");
+        String windChill = data.get(2).get("deg");
+
+        LinearLayout viewGroup = (LinearLayout) v.findViewById(R.id.weatherPup);
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
+
+        final PopupWindow popup = new PopupWindow(getActivity());
+        popup.setContentView(layout);
+        popup.setWidth(getActivity().getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
+        popup.setFocusable(true);
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
+        TextView wTitle = (TextView)layout.findViewById(R.id.weatherTitle);
+        wTitle.setText(title);
+        TextView wDesc = (TextView)layout.findViewById(R.id.weatherDesc);
+        wDesc.setText(desc);
+        TextView wTemp =  (TextView) layout.findViewById(R.id.temp);
+        wTemp.setText(temp);
+        TextView wPressure = (TextView) layout.findViewById(R.id.pressure);
+        wPressure.setText(pressure);
+        TextView wHumidity = (TextView) layout.findViewById(R.id.humidity);
+        wHumidity.setText("humidity: " + humidity);
+        TextView wTempLow = (TextView) layout.findViewById(R.id.temp_low);
+        wTempLow.setText("Low: "+ temp_low);
+        TextView wTempHigh = (TextView) layout.findViewById(R.id.temp_high);
+        wTempHigh.setText("Low: "+ temp_high);
+        TextView wSpeed = (TextView) layout.findViewById(R.id.windSpeed);
+        wSpeed.setText("windspeed: " + windSpeed);
+        TextView wChill = (TextView) layout.findViewById(R.id.windChill);
+        wChill.setText("windchill: " + windChill);
     }
 
     private void dispatchPictureTakerAction() {
@@ -107,4 +168,5 @@ public class HomeFragment extends Fragment
         return image;
 
     }
+
 }
