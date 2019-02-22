@@ -100,11 +100,11 @@ public class HomeFragment extends Fragment
         String desc = data.get(0).get("description");
         String temp = "temperature: " + data.get(1).get("temp");
         String pressure = "pressure: " + data.get(1).get("temp");
-        String humidity = data.get(1).get("temp");
-        String temp_low = data.get(1).get("temp");
-        String temp_high = data.get(1).get("temp");
-        String windSpeed = data.get(2).get("speed");
-        String windChill = data.get(2).get("deg");
+        String humidity = "humidity: " + data.get(1).get("temp");
+        String temp_low = "Low: " + data.get(1).get("temp");
+        String temp_high = "High: " + data.get(1).get("temp");
+        String windSpeed = "windspeed: " + data.get(2).get("speed");
+        String windChill = "windchill: " +  data.get(2).get("deg");
 
         LinearLayout viewGroup = (LinearLayout) v.findViewById(R.id.weatherPup);
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
@@ -124,15 +124,15 @@ public class HomeFragment extends Fragment
         TextView wPressure = (TextView) layout.findViewById(R.id.pressure);
         wPressure.setText(pressure);
         TextView wHumidity = (TextView) layout.findViewById(R.id.humidity);
-        wHumidity.setText("humidity: " + humidity);
+        wHumidity.setText(humidity);
         TextView wTempLow = (TextView) layout.findViewById(R.id.temp_low);
-        wTempLow.setText("Low: "+ temp_low);
+        wTempLow.setText(temp_low);
         TextView wTempHigh = (TextView) layout.findViewById(R.id.temp_high);
-        wTempHigh.setText("Low: "+ temp_high);
+        wTempHigh.setText(temp_high);
         TextView wSpeed = (TextView) layout.findViewById(R.id.windSpeed);
-        wSpeed.setText("windspeed: " + windSpeed);
+        wSpeed.setText(windSpeed);
         TextView wChill = (TextView) layout.findViewById(R.id.windChill);
-        wChill.setText("windchill: " + windChill);
+        wChill.setText(windChill);
     }
 
     private void dispatchPictureTakerAction() {
