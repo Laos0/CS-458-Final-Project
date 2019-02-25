@@ -11,6 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
+import java.util.List;
+import java.util.Map;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -69,8 +77,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 String windSpeed = data.get(2).get("speed");
                 String windChill = data.get(2).get("deg");
 
-                LinearLayout viewGroup = findViewById(R.id.weatherPup);
-                LayoutInflater layoutInflater = (LayoutInflater) MainPage.this.getSystemService(LAYOUT_INFLATER_SERVICE);
+                LinearLayout viewGroup = (LinearLayout) findViewById(R.id.weatherPup);
+                LayoutInflater layoutInflater = (LayoutInflater) MainPage.this.getSystemService(MainPage.this.LAYOUT_INFLATER_SERVICE);
                 View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
 
                 final PopupWindow popup = new PopupWindow(MainPage.this);
@@ -78,23 +86,23 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 popup.setWidth(MainPage.this.getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
                 popup.setFocusable(true);
                 popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
-                TextView wTitle = findViewById(R.id.weatherTitle);
+                TextView wTitle = (TextView)findViewById(R.id.weatherTitle);
                 wTitle.setText(title);
-                TextView wDesc = findViewById(R.id.weatherDesc);
+                TextView wDesc = (TextView)findViewById(R.id.weatherDesc);
                 wDesc.setText(desc);
-                TextView wTemp = findViewById(R.id.temp);
+                TextView wTemp =  (TextView) findViewById(R.id.temp);
                 wTemp.setText("temperature: " + temp);
-                TextView wPressure = findViewById(R.id.pressure);
+                TextView wPressure = (TextView) findViewById(R.id.pressure);
                 wPressure.setText("pressure: " + pressure);
-                TextView wHumidity = findViewById(R.id.humidity);
+                TextView wHumidity = (TextView) findViewById(R.id.humidity);
                 wHumidity.setText("humidity: " + humidity);
-                TextView wTempLow = findViewById(R.id.temp_low);
+                TextView wTempLow = (TextView) findViewById(R.id.temp_low);
                 wTempLow.setText("Low: "+ temp_low);
-                TextView wTempHigh = findViewById(R.id.temp_high);
+                TextView wTempHigh = (TextView) findViewById(R.id.temp_high);
                 wTempHigh.setText("Low: "+ temp_high);
-                TextView wSpeed = findViewById(R.id.windSpeed);
+                TextView wSpeed = (TextView) findViewById(R.id.windSpeed);
                 wSpeed.setText("windspeed: " + windSpeed);
-                TextView wChill = findViewById(R.id.windChill);
+                TextView wChill = (TextView) findViewById(R.id.windChill);
                 wChill.setText("windchill: " + windChill);
 
 

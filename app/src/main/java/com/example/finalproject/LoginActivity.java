@@ -6,10 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
@@ -27,9 +29,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         // Determine which button was pressed and open the corresponding page
-        switch (v.getId()) {
+        switch (v.getId())
+        {
             case R.id.sign_up: {
                 Intent signUp = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(signUp);
