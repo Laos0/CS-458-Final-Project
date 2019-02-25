@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.strictmode.NonSdkApiUsedViolation;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,8 +49,8 @@ public class HomeFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_home, container,false);
-        cameraBtn = (FloatingActionButton) view.findViewById(R.id.camera_btn);
-        photo = (ImageView)view.findViewById(R.id.photo);
+        cameraBtn = view.findViewById(R.id.camera_btn);
+        photo = view.findViewById(R.id.photo);
 
         // for the camera
         if (Build.VERSION.SDK_INT >= 23) {
@@ -100,13 +99,13 @@ public class HomeFragment extends Fragment
         String desc = data.get(0).get("description");
         String temp = "temperature: " + data.get(1).get("temp");
         String pressure = "pressure: " + data.get(1).get("temp");
-        String humidity = data.get(1).get("temp");
-        String temp_low = data.get(1).get("temp");
-        String temp_high = data.get(1).get("temp");
-        String windSpeed = data.get(2).get("speed");
-        String windChill = data.get(2).get("deg");
+        String humidity = "humidity: " + data.get(1).get("temp");
+        String temp_low = "Low: " + data.get(1).get("temp");
+        String temp_high = "High: " + data.get(1).get("temp");
+        String windSpeed = "windspeed: " + data.get(2).get("speed");
+        String windChill = "windchill: " +  data.get(2).get("deg");
 
-        LinearLayout viewGroup = (LinearLayout) v.findViewById(R.id.weatherPup);
+        LinearLayout viewGroup = v.findViewById(R.id.weatherPup);
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
 
@@ -115,24 +114,25 @@ public class HomeFragment extends Fragment
         popup.setWidth(getActivity().getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
         popup.setFocusable(true);
         popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
-        TextView wTitle = (TextView)layout.findViewById(R.id.weatherTitle);
+        TextView wTitle = layout.findViewById(R.id.weatherTitle);
         wTitle.setText(title);
-        TextView wDesc = (TextView)layout.findViewById(R.id.weatherDesc);
+        TextView wDesc = layout.findViewById(R.id.weatherDesc);
         wDesc.setText(desc);
-        TextView wTemp =  (TextView) layout.findViewById(R.id.temp);
+        TextView wTemp = layout.findViewById(R.id.temp);
         wTemp.setText(temp);
-        TextView wPressure = (TextView) layout.findViewById(R.id.pressure);
+        TextView wPressure = layout.findViewById(R.id.pressure);
         wPressure.setText(pressure);
         TextView wHumidity = (TextView) layout.findViewById(R.id.humidity);
-        wHumidity.setText("humidity: " + humidity);
+        wHumidity.setText(humidity);
         TextView wTempLow = (TextView) layout.findViewById(R.id.temp_low);
-        wTempLow.setText("Low: "+ temp_low);
+        wTempLow.setText(temp_low);
         TextView wTempHigh = (TextView) layout.findViewById(R.id.temp_high);
-        wTempHigh.setText("Low: "+ temp_high);
+        wTempHigh.setText(temp_high);
         TextView wSpeed = (TextView) layout.findViewById(R.id.windSpeed);
-        wSpeed.setText("windspeed: " + windSpeed);
+        wSpeed.setText(windSpeed);
         TextView wChill = (TextView) layout.findViewById(R.id.windChill);
-        wChill.setText("windchill: " + windChill);
+        wChill.setText(windChill);
+
     }
 
     private void dispatchPictureTakerAction() {

@@ -46,7 +46,6 @@
         </provider>
         <!-- End of camera related activities -->
 
-        <activity android:name=".GalleryDriver" />
         <activity android:name=".SettingsActivity"/>
 
 
