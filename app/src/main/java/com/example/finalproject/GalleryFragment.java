@@ -32,7 +32,7 @@ public class GalleryFragment extends Fragment {
         LinearLayout DAD = new LinearLayout(getActivity());
         DAD.setOrientation(LinearLayout.VERTICAL);
 
-        // TODO Replace 4 with amount of foind images for current user
+        // TODO Replace 4 with amount of found images for current user
         for (int i = 0; i < 4; i++) {
             ImageView im = new ImageView(getActivity());
             Glide.with(this)
