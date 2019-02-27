@@ -30,10 +30,30 @@
         android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Settings_title" />
+
+    <TextView
+        android:id="@+id/language_title"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/languages"
+        app:layout_constraintEnd_toStartOf="@+id/language_spinner"
+        app:layout_constraintTop_toTopOf="@+id/language_spinner" />
 
 </android.support.constraint.ConstraintLayout>
