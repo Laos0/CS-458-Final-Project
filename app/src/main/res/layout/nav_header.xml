@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorPrimaryDark"
     android:padding="16dp"
@@ -10,41 +10,22 @@
     android:gravity="bottom">
 
     <ImageView
+        android:id="@+id/profilePic"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:srcCompat="@drawable/ic_profile" />
 
     <TextView
-        android:id="@+id/userName"
+        android:id="@+id/displayUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UserName"
+        android:text="@string/username"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
-    android:layout_height="176dp"
-    android:background="@color/design_default_color_primary"
-    android:gravity="bottom"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round" />
-
     <TextView
-        android:id="@+id/accountName"
+        android:id="@+id/displayEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="Cat"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/email"
-        android:text="Meow@gmail.com" />
+        android:text="@string/userEmail" />
 </LinearLayout>
