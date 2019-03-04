@@ -63,9 +63,28 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                Toast.makeText(this,getString(R.string.enIsMyfriend),Toast.LENGTH_LONG).show();
                break;
            case 2:
+               Locale locale3 = new Locale("sp");
+               Locale.setDefault(locale3);
+               Configuration config3 = new Configuration();
+               config3.locale = locale3;
+               getBaseContext().getResources().updateConfiguration(config3,getBaseContext().getResources().getDisplayMetrics());
+               Toast.makeText(this,getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+               break;
            case 3:
+               Locale locale4 = new Locale("dl");
+               Locale.setDefault(locale4);
+               Configuration config4 = new Configuration();
+               config4.locale = locale4;
+               getBaseContext().getResources().updateConfiguration(config4,getBaseContext().getResources().getDisplayMetrics());
+               Toast.makeText(this,getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+               break;
            case 4:
-
+               Locale locale5 = new Locale("ru");
+               Locale.setDefault(locale5);
+               Configuration config5 = new Configuration();
+               config5.locale = locale5;
+               getBaseContext().getResources().updateConfiguration(config5,getBaseContext().getResources().getDisplayMetrics());
+               break;
        }
 
     }
