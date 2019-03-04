@@ -1,10 +1,12 @@
-package com.example.finalproject;
+package com.example.finalproject.ServerCommunication;
 
 import java.util.HashMap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.example.finalproject.LoginActivity;
 
 public class SessionManagement
 {

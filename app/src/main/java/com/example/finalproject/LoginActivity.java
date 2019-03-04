@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.finalproject.ServerCommunication.BackgroundWorker;
+import com.example.finalproject.ServerCommunication.SessionManagement;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
     // Global Variables
@@ -70,6 +73,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Get the username and password from the fields
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
+        String type = "login";
+
+        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+        backgroundWorker.execute(type, username, password);
 
         // Check to make sure the user actually entered a username and password
         if(username.trim().length() > 0 && password.trim().length() > 0)
