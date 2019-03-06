@@ -63,7 +63,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                Toast.makeText(this,getString(R.string.enIsMyfriend),Toast.LENGTH_LONG).show();
                break;
            case 2:
-               Locale locale3 = new Locale("sp");
+               Locale locale3 = new Locale("es");
                Locale.setDefault(locale3);
                Configuration config3 = new Configuration();
                config3.locale = locale3;
@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                Toast.makeText(this,getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                break;
            case 3:
-               Locale locale4 = new Locale("dl");
+               Locale locale4 = new Locale("de");
                Locale.setDefault(locale4);
                Configuration config4 = new Configuration();
                config4.locale = locale4;

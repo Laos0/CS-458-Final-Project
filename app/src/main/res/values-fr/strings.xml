@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="enIsMyfriend">La France est géniale</string>
+    <string name="title_activity_login">Se connecter</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Mot de passe (optionnel)</string>
+    <string name="action_sign_in">Connexion ou Inscription</string>
+</resources>

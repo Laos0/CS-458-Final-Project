@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="enIsMyfriend">El español es elegante</string>
+    <string name="title_activity_login">Registrarse</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Contraseña (opcional)</string>
+    <string name="action_sign_in">Ingresa o Registro</string>
+</resources>

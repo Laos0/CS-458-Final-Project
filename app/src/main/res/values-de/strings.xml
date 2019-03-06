@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="enIsMyfriend">"Deutsch ist cool "</string>
+    <string name="title_activity_login">Einloggen</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Passwort (optional)</string>
+    <string name="action_sign_in">Einloggen oder Registrieren</string>
+</resources>
