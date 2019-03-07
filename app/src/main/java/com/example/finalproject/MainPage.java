@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,10 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Filter;
+import android.widget.ImageView;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer; // for the drawer menu
+    private Bitmap targetPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,7 +26,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
 
         // ----------------------- Navigation Drawer Implementations ---------------------------------------------------------------
         // The tool bar or navigation to add friend implementations
@@ -154,11 +157,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                         new GalleryFragment()).commit();
                 break;
             case R.id.nav_settings:
-                {
                 Intent settingsPage = new Intent(MainPage.this, SettingsActivity.class);
                 startActivity(settingsPage);
                 break;
-            }
+            case R.id.nav_email:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new ContactUsFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
@@ -179,4 +184,24 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
     // ----------------------- End of Sony's Navigation Drawer Methods -------------------------------------------
+
+
+    // Grabbing the photo bitmap from the recent taken photo
+    public void savePhoto(Bitmap photo){
+        targetPhoto = photo;
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                new HomeFragment()).commit();
+    }
+
+    public boolean isThereTargetPhoto(){
+        if(targetPhoto != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Bitmap getTargetPhoto(){
+        return targetPhoto;
+    }
 }
