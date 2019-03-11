@@ -12,17 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.util.List;
-import java.util.Map;
+import com.example.finalproject.ServerCommunication.SessionManagement;
+
+import java.util.HashMap;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer; // for the drawer menu
+    private SessionManagement session; // For accessing the current user info
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,61 +56,22 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+        // Get the user's info from the session
+        session = new SessionManagement(getApplicationContext());
+        HashMap<String, String> userInfo = session.getUserDetails();
+
+        // Set the user information in the Navigation Drawer header
+        View headerView = navigationView.getHeaderView(0); // Needed to edit the nav header
+        TextView userName = headerView.findViewById(R.id.displayUserName);
+        TextView userEmail = headerView.findViewById(R.id.displayEmail);
+
+        String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+
+        userName.setText(userToDisplay);
+        userEmail.setText(emailToDisplay);
+
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
-        /*final Button weatherButton = findViewById(R.id.weather_btn);
-        weatherButton.setOnClickListener(new View.OnClickListener(){
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                GPSTracker locationTracker = new GPSTracker(MainPage.this);
-
-                List<Map<String, String>> data = OpenWeather.retrieveWeather(locationTracker.getLatitude(), locationTracker.getLongitude());
-
-                String title = data.get(0).get("main");
-                String desc = data.get(0).get("description");
-                String temp = data.get(1).get("temp");
-                String pressure = data.get(1).get("temp");
-                String humidity = data.get(1).get("temp");
-                String temp_low = data.get(1).get("temp");
-                String temp_high = data.get(1).get("temp");
-                String windSpeed = data.get(2).get("speed");
-                String windChill = data.get(2).get("deg");
-
-                LinearLayout viewGroup = (LinearLayout) findViewById(R.id.weatherPup);
-                LayoutInflater layoutInflater = (LayoutInflater) MainPage.this.getSystemService(MainPage.this.LAYOUT_INFLATER_SERVICE);
-                View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
-
-                final PopupWindow popup = new PopupWindow(MainPage.this);
-                popup.setContentView(layout);
-                popup.setWidth(MainPage.this.getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
-                popup.setFocusable(true);
-                popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
-                TextView wTitle = (TextView)findViewById(R.id.weatherTitle);
-                wTitle.setText(title);
-                TextView wDesc = (TextView)findViewById(R.id.weatherDesc);
-                wDesc.setText(desc);
-                TextView wTemp =  (TextView) findViewById(R.id.temp);
-                wTemp.setText("temperature: " + temp);
-                TextView wPressure = (TextView) findViewById(R.id.pressure);
-                wPressure.setText("pressure: " + pressure);
-                TextView wHumidity = (TextView) findViewById(R.id.humidity);
-                wHumidity.setText("humidity: " + humidity);
-                TextView wTempLow = (TextView) findViewById(R.id.temp_low);
-                wTempLow.setText("Low: "+ temp_low);
-                TextView wTempHigh = (TextView) findViewById(R.id.temp_high);
-                wTempHigh.setText("Low: "+ temp_high);
-                TextView wSpeed = (TextView) findViewById(R.id.windSpeed);
-                wSpeed.setText("windspeed: " + windSpeed);
-                TextView wChill = (TextView) findViewById(R.id.windChill);
-                wChill.setText("windchill: " + windChill);
-
-
-
-
-
-
-            }
-        });*/
     }
 
 
