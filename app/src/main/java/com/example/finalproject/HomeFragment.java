@@ -72,7 +72,8 @@ public class HomeFragment extends Fragment
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                applyWeatherPopup(v);
+                Intent WeatherPage = new Intent(getContext(),WeatherActivity.class);
+                startActivity(WeatherPage);
 
             }
         });
@@ -91,48 +92,11 @@ public class HomeFragment extends Fragment
     }
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void applyWeatherPopup(View v){
-        GPSTracker locationTracker = new GPSTracker(getContext());
-
-            List<Map<String, String>> data = OpenWeather.retrieveWeather(locationTracker.getLatitude(), locationTracker.getLongitude());
 
 
-        String title = data.get(0).get("main");
-        String desc = data.get(0).get("description");
-        String temp = "temperature: " + data.get(1).get("temp");
-        String pressure = "pressure: " + data.get(1).get("temp");
-        String humidity = "humidity: " + data.get(1).get("temp");
-        String temp_low = "Low: " + data.get(1).get("temp");
-        String temp_high = "High: " + data.get(1).get("temp");
-        String windSpeed = "windspeed: " + data.get(2).get("speed");
-        String windChill = "windchill: " +  data.get(2).get("deg");
 
-        LinearLayout viewGroup = v.findViewById(R.id.weatherPup);
-        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(getContext().LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.weather_popup, viewGroup);
 
-        final PopupWindow popup = new PopupWindow(getActivity());
-        popup.setContentView(layout);
-        popup.setWidth(getActivity().getWindow().getWindowManager().getDefaultDisplay().getWidth()*9/10);
-        popup.setFocusable(true);
-        popup.showAtLocation(layout, Gravity.NO_GRAVITY, 0,0);
-        TextView wTitle = layout.findViewById(R.id.weatherTitle);
-        wTitle.setText(title);
-        TextView wDesc = layout.findViewById(R.id.weatherDesc);
-        wDesc.setText(desc);
-        TextView wTemp = layout.findViewById(R.id.temp);
-        wTemp.setText(temp);
-        TextView wPressure = layout.findViewById(R.id.pressure);
-        wPressure.setText(pressure);
-        TextView wHumidity = (TextView) layout.findViewById(R.id.humidity);
-        wHumidity.setText(humidity);
-        TextView wTempLow = (TextView) layout.findViewById(R.id.temp_low);
-        wTempLow.setText(temp_low);
-        TextView wTempHigh = (TextView) layout.findViewById(R.id.temp_high);
-        wTempHigh.setText(temp_high);
-        TextView wSpeed = (TextView) layout.findViewById(R.id.windSpeed);
-        wSpeed.setText(windSpeed);
-        TextView wChill = (TextView) layout.findViewById(R.id.windChill);
-        wChill.setText(windChill);
+
 
     }
 

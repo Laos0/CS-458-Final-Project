@@ -6,4 +6,8 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Mot de passe (optionnel)</string>
     <string name="action_sign_in">Connexion ou Inscription</string>
+    <string name="action_sign_in_short">se connecter</string>
+    <string name="error_invalid_email">Cette adresse email est invalide</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court</string>
+    <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
 </resources>
