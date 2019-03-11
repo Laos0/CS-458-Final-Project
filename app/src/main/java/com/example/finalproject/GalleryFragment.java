@@ -94,9 +94,13 @@ public class GalleryFragment extends Fragment {
 
         // endregion
 
+        // region hierarchy
+
         // Adds the layouts to each other
         linear.addView(grid);
         DAD.addView(linear);
+
+        // endregion
 
         // Displays the parent layout
         return DAD;
