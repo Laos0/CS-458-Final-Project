@@ -15,7 +15,7 @@ public class SignUpActivity extends AppCompatActivity
     EditText userName, password, email, confemail;
     SignUpDatabase mydb;
     String nameString, emailString, passString;
-    boolean emptyField = false;
+    boolean emptyField = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
