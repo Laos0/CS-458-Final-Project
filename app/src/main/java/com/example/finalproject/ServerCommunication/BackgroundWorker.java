@@ -39,7 +39,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         String password = params[2];
 
         // Get the url to the database that we are logging into
-        String login_url = "https://144.13.22.61";
+        String login_url = "http://144.13.22.61/CS458SP19/Team2/api/login.php";
 
         // If we are trying to login to the application, do the following code
         if(type.equals("login"))
@@ -88,10 +88,14 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
 
                 // Return the result
                 return result;
-            } catch (MalformedURLException e) {
+            } catch (MalformedURLException e)
+            {
+                alertDialog.setMessage("Incorrect URL!");
                 e.printStackTrace();
             }
-            catch (IOException e) {
+            catch (IOException e)
+            {
+                alertDialog.setMessage("IO Exception!");
                 e.printStackTrace();
             }
         }
@@ -108,12 +112,20 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String result)
     {
-        if(result.contains("failed"))
+       if(result.contains("Failed"))
         {
             alertDialog.setMessage(result);
             alertDialog.show();
             loginPass = false;
         }
+
+        else if(result.length() <= 0)
+       {
+           alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
+           alertDialog.show();
+           loginPass = false;
+       }
+
         else
             loginPass = true;
     }

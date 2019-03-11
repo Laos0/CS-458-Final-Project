@@ -75,33 +75,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = txtPassword.getText().toString();
         String type = "login";
 
-        BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-        backgroundWorker.execute(type, username, password);
-
         // Check to make sure the user actually entered a username and password
-        if(username.trim().length() > 0 && password.trim().length() > 0)
-        {
-            // For testing, make sure user typed in Test for both fields
-            if (username.equals("Test") && password.equals("Test"))
-            {
-                // Create the user login session. For testing, this simply stores an example name and email
-                session.createLoginSession("Test User", "test@gmail.com");
-
-                // Start the main page activity after logging in
-                Intent mainPage = new Intent(LoginActivity.this, MainPage.class);
-                startActivity(mainPage);
-                finish();
-            }
-            else
-            {
-                // If user/password doesn't match, show an alert
-                alert.showAlertDialog(LoginActivity.this, "Login Failed", "Username and/or Password Incorrect!", false);
-            }
-        }
-        else
+        if(username.trim().length() <= 0 || password.trim().length() <= 0)
         {
             // If the user didn't enter in anything, show an alert
             alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
+        }
+
+        else {
+            BackgroundWorker backgroundWorker = new BackgroundWorker(this);
+            backgroundWorker.execute(type, username, password);
+            if(backgroundWorker.loginPass)
+            {
+                Intent home = new Intent(LoginActivity.this, MainPage.class);
+                startActivity(home);
+            }
+
         }
     }
 
