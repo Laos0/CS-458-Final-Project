@@ -3,8 +3,7 @@ package com.example.finalproject;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -16,6 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.finalproject.ServerCommunication.SessionManagement;
+
+import java.util.HashMap;
+import android.widget.Filter;
+import android.widget.ImageView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -25,6 +32,9 @@ import java.util.Map;
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer; // for the drawer menu
+    private SessionManagement session; // For accessing the current user info
+    private Bitmap targetPhoto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +42,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
 
         // ----------------------- Navigation Drawer Implementations ---------------------------------------------------------------
         // The tool bar or navigation to add friend implementations
@@ -61,6 +70,20 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
 
+        // Get the user's info from the session
+        session = new SessionManagement(getApplicationContext());
+        HashMap<String, String> userInfo = session.getUserDetails();
+
+        // Set the user information in the Navigation Drawer header
+        View headerView = navigationView.getHeaderView(0); // Needed to edit the nav header
+        TextView userName = headerView.findViewById(R.id.displayUserName);
+        TextView userEmail = headerView.findViewById(R.id.displayEmail);
+
+        String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+
+        userName.setText(userToDisplay);
+        userEmail.setText(emailToDisplay);
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
 
@@ -115,11 +138,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                         new GalleryFragment()).commit();
                 break;
             case R.id.nav_settings:
-                {
                 Intent settingsPage = new Intent(MainPage.this, SettingsActivity.class);
                 startActivity(settingsPage);
                 break;
-            }
+            case R.id.nav_email:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new ContactUsFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
@@ -141,4 +166,28 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
     // ----------------------- End of Sony's Navigation Drawer Methods -------------------------------------------
 
+
+
+    // ------------------- Sony's Methods for data on Fragments -----------------------------------------------------
+
+    // Grabbing the photo bitmap from HomeFragment from the recent taken photo
+    public void savePhoto(Bitmap photo){
+        targetPhoto = photo;
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                new FilterFragment()).commit();
+    }
+
+    public boolean isThereTargetPhoto(){
+        if(targetPhoto != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Bitmap getTargetPhoto(){
+        return targetPhoto;
+    }
+
+    // ---------------------- End of Sony's Methods for data on Fragments ------------------------------------------
 }
