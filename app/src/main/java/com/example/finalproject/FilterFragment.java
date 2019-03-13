@@ -68,6 +68,9 @@ public class FilterFragment extends Fragment {
             public void onClick(View v) {
                //filterBtn1.setText("GAGA");
                 editPhoto.getDrawable().setColorFilter(0x763c3686, PorterDuff.Mode.DARKEN );
+                bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                editPhoto.draw(canvas);
             }
         });
 
@@ -81,6 +84,9 @@ public class FilterFragment extends Fragment {
 
                 ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
                 editPhoto.setColorFilter(filter);
+                bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                editPhoto.draw(canvas);
             }
         });
 
