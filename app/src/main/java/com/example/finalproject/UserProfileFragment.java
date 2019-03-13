@@ -22,7 +22,8 @@ import java.util.HashMap;
 public class UserProfileFragment extends Fragment
 {
     //private EditText userName;
-    Button editbtn, followbtn, savebtn;
+    //Button editbtn;
+    Button followbtn, savebtn;
     private DrawerLayout drawer; // for the drawer menu
     private SessionManagement session; // For accessing the current user info
 
@@ -45,12 +46,12 @@ public class UserProfileFragment extends Fragment
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
 
-        editbtn = getView().findViewById(R.id.editProfile);
+        //editbtn = getView().findViewById(R.id.editProfile);
         followbtn = getView().findViewById(R.id.followBtn);
-        savebtn = getView().findViewById(R.id.saveBtn);
-        savebtn.setVisibility(View.INVISIBLE);
+        //savebtn = getView().findViewById(R.id.saveBtn);
+        //savebtn.setVisibility(View.INVISIBLE);
 
-        editbtn.setOnClickListener(new View.OnClickListener() {
+        /*editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText editEmail = (EditText) getView().findViewById(R.id.profileEmail);
@@ -60,7 +61,7 @@ public class UserProfileFragment extends Fragment
 
                 savebtn.setVisibility(View.VISIBLE);
             }
-        });
+        });*/
 
         //follow the user
         followbtn.setOnClickListener(new View.OnClickListener() {
@@ -74,16 +75,16 @@ public class UserProfileFragment extends Fragment
             }
         });
 
-        //saves the user email and phone number
+        /*//saves the user email and phone number
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userName.getText().toString().trim();
-                
-                userName.setText();
+
+                //userName.setText();
             }
         });
-
+*/
         return inflater.inflate(R.layout.fragment_user_profile,container, false);
     }
 
