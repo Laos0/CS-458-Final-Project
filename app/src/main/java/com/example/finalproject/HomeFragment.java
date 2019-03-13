@@ -43,15 +43,26 @@ public class HomeFragment extends Fragment
 {
     String pathToFile; // path of the image in directory
     FloatingActionButton cameraBtn;
-    ImageView photo;
+    ImageView photo, filterPhoto;
+    Button saveBtn, filterBtn1, filterBtn2, filterBtn3;
+    boolean photoExist;
+    View filterView;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_home, container,false);
+
+        // once the photo is taken
+        filterView = inflater.inflate(R.layout.fragment_filter, container,false);
+
+
+
         cameraBtn = view.findViewById(R.id.camera_btn);
         photo = view.findViewById(R.id.photo);
+
 
         // for the camera
         if (Build.VERSION.SDK_INT >= 23) {
@@ -65,6 +76,7 @@ public class HomeFragment extends Fragment
                 // String tag = "TESTING";
                 // Log.d(tag, "DISPATCHPICTURETAKERACTION IS BEING RUN");
                 dispatchPictureTakerAction();
+
             }
         });
         final Button weatherButton = view.findViewById(R.id.weather_btn);
@@ -77,16 +89,21 @@ public class HomeFragment extends Fragment
 
             }
         });
-        return view;
+
+        // a boolean is returned from the MainPage
+       photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
+
+       return view;
     }
 
-    @Override
+    @Override // after photo is saved, give ImageView an image that is a bitmap
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
                 photo.setImageBitmap(bitmap);
+                ((MainPage)getActivity()).savePhoto(bitmap);
             }
         }
     }
@@ -100,26 +117,31 @@ public class HomeFragment extends Fragment
 
     }
 
+    // Intent to capture a photo, load up camera
     private void dispatchPictureTakerAction() {
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         FragmentActivity activity = HomeFragment.this.getActivity();
         PackageManager packageManager = activity.getPackageManager();
         if (takePic.resolveActivity(packageManager) != null) {
             File photoFile = null;
-            photoFile = createPhotoFile();
+            photoFile = preparePhotoFile();
 
-            if (photoFile != null) {
-                pathToFile = photoFile.getAbsolutePath(); // path to the photo file
-                Uri photoURI = FileProvider.getUriForFile(HomeFragment.this.getActivity(), "com.example.finalproject", photoFile);
-                takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(takePic, 1);
-            }
+            savePhotoToDevice(takePic,photoFile);
+        }
+    }
 
+    // Assuming this method saves the photo file
+    private void savePhotoToDevice(Intent takePic, File photoFile){
+        if (photoFile != null) {
+            pathToFile = photoFile.getAbsolutePath(); // path to the photo file
+            Uri photoURI = FileProvider.getUriForFile(HomeFragment.this.getActivity(), "com.example.finalproject", photoFile);
+            takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+            startActivityForResult(takePic, 1);
         }
     }
 
     // Creating the file of the photo
-    private File createPhotoFile() {
+    private File preparePhotoFile() {
         String pattern = "yyyy-MM-dd";
         String name = new SimpleDateFormat(pattern).format(new Date());
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
@@ -131,7 +153,7 @@ public class HomeFragment extends Fragment
         }
 
         return image;
-
     }
+
 
 }
