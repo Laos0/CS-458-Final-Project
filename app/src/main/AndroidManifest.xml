@@ -60,6 +60,7 @@
 
 
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".WeatherActivity"/>
     </application>
 
 </manifest>

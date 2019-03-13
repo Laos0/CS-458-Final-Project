@@ -60,8 +60,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         }
 
 
-        
-        new WeatherTask(this).execute(34.0,53.0);
+
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
 
