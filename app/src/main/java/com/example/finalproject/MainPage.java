@@ -186,11 +186,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     // ----------------------- End of Sony's Navigation Drawer Methods -------------------------------------------
 
 
-    // Grabbing the photo bitmap from the recent taken photo
+    // ------------------- Sony's Methods for data on Fragments -----------------------------------------------------
+
+    // Grabbing the photo bitmap from HomeFragment from the recent taken photo
     public void savePhoto(Bitmap photo){
         targetPhoto = photo;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
-                new HomeFragment()).commit();
+                new FilterFragment()).commit();
     }
 
     public boolean isThereTargetPhoto(){
@@ -204,4 +206,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     public Bitmap getTargetPhoto(){
         return targetPhoto;
     }
+
+    // ---------------------- End of Sony's Methods for data on Fragments ------------------------------------------
 }

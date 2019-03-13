@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +26,7 @@ public class ContactUsFragment extends Fragment {
     private EditText editTextSubject;
     private EditText editTextMessage;
     private Button sendBtn;
+    private Handler myHandler;
 
     @Nullable
     @Override
@@ -31,9 +34,13 @@ public class ContactUsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_contactus, container,false);
 
+        // For later use
+        myHandler = new Handler();
+
         editTextTo = (EditText) view.findViewById(R.id.edit_text_to);
         editTextSubject = (EditText) view.findViewById(R.id.edit_text_subject);
         editTextMessage = (EditText) view.findViewById(R.id.edit_text_message);
+        editTextTo.setText("laos0524@my.uwstout.edu");
 
         sendBtn = (Button) view.findViewById(R.id.button_sendEmail);
         sendBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,8 +69,28 @@ public class ContactUsFragment extends Fragment {
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
 
+
         // opening email clients like gmail etc.
         intent.setType("message/rfc822");
         startActivity(Intent.createChooser(intent,"Choose an email client"));
+        // To wait for an intent
+        startActivityForResult(intent, 1);
+
+    }
+
+    void toastEmailSend(){
+        Toast.makeText(getActivity(), "Your email has been sent.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //after the email is sent, return to the home page fragment
+        getFragmentManager().beginTransaction().replace(R.id.frame_container,
+                new HomeFragment()).commit();
+        if(requestCode == 1){
+            toastEmailSend();
+        }else{
+
+        }
     }
 }

@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment
     String pathToFile; // path of the image in directory
     FloatingActionButton cameraBtn;
     ImageView photo, filterPhoto;
-    Button saveBtn;
+    Button saveBtn, filterBtn1, filterBtn2, filterBtn3;
     boolean photoExist;
     View filterView;
 
@@ -56,6 +56,8 @@ public class HomeFragment extends Fragment
 
         // once the photo is taken
         filterView = inflater.inflate(R.layout.fragment_filter, container,false);
+
+
 
         cameraBtn = view.findViewById(R.id.camera_btn);
         photo = view.findViewById(R.id.photo);
@@ -89,18 +91,10 @@ public class HomeFragment extends Fragment
         // a boolean is returned from the MainPage
        photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
 
-        if(photoExist == true){
-            Bitmap myPhoto = ((MainPage)getActivity()).getTargetPhoto();
-            filterPhoto = filterView.findViewById(R.id.photoFilter);
-            filterPhoto.setImageBitmap(myPhoto);
-            return filterView;
-        }else{
-            return view;
-        }
-
+       return view;
     }
 
-    @Override
+    @Override // after photo is saved, give ImageView an image that is a bitmap
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -158,7 +152,7 @@ public class HomeFragment extends Fragment
 
     }
 
-    // Loads up the camera
+    // Intent to capture a photo, load up camera
     private void dispatchPictureTakerAction() {
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         FragmentActivity activity = HomeFragment.this.getActivity();
@@ -171,6 +165,7 @@ public class HomeFragment extends Fragment
         }
     }
 
+    // Assuming this method saves the photo file
     private void savePhotoToDevice(Intent takePic, File photoFile){
         if (photoFile != null) {
             pathToFile = photoFile.getAbsolutePath(); // path to the photo file
