@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="enIsMyfriend">Русский вкусный</string>
+    <string name="title_activity_login">Войти в систему</string>
+    <string name="prompt_email">Эл. адрес</string>
+    <string name="prompt_password">Пароль (необязательно)</string>
+    <string name="action_sign_in">Войдите или зарегистрируйтесь</string>
+    <string name="action_sign_in_short">войти в систему</string>
+    <string name="error_invalid_email">Этот адрес электронной почты недействителен</string>
+    <string name="error_invalid_password">Этот пароль слишком короткий\n</string>
+    <string name="error_incorrect_password">Неверный пароль</string>
+</resources>
