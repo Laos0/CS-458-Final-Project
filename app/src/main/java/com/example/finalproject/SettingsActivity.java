@@ -45,6 +45,21 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        // Get the log out button as an object
+        Button logout = findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Get the session
+                SessionManagement session = new SessionManagement(getApplicationContext());
+
+                // Call the log out function in the SessionManagement class
+                session.logoutUser();
+            }
+        });
     }
 
     @Override
@@ -98,20 +113,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
 
 
-        /*** Log Out ***/
-        // Get the log out button as an object
-        Button logout = findViewById(R.id.logout_btn);
-        logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // Get the session
-                SessionManagement session = new SessionManagement(getApplicationContext());
 
-                // Call the log out function in the SessionManagement class
-                session.logoutUser();
-            }
-        });
     }
 }
