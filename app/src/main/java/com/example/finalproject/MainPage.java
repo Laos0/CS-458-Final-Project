@@ -1,9 +1,14 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,6 +26,11 @@ import java.util.HashMap;
 import android.widget.Filter;
 import android.widget.ImageView;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer; // for the drawer menu
@@ -34,6 +44,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
 
         // ----------------------- Navigation Drawer Implementations ---------------------------------------------------------------
         // The tool bar or navigation to add friend implementations
@@ -74,6 +85,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
+
+
+
+        //new WeatherTask(this).execute(34.0,53.0);
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
     }
