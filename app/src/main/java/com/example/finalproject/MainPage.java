@@ -71,6 +71,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+
+
         // Get the user's info from the session
         session = new SessionManagement(getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
@@ -91,6 +93,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         //new WeatherTask(this).execute(34.0,53.0);
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
+
     }
 
 
@@ -168,6 +171,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
     // ----------------------- End of Sony's Navigation Drawer Methods -------------------------------------------
+
 
 
     // ------------------- Sony's Methods for data on Fragments -----------------------------------------------------

@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 
-class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
