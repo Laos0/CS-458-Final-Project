@@ -1,14 +1,21 @@
 package com.example.finalproject;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class SignUpActivity extends AppCompatActivity
 {
+    EditText userName, password, email, confemail;
+    SignUpDatabase mydb;
+    String nameString, emailString, passString;
+    boolean emptyField = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -16,6 +23,12 @@ public class SignUpActivity extends AppCompatActivity
         /* Instantiate the activity and set the layout */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        userName= findViewById(R.id.userID);
+        password= findViewById(R.id.editText2);
+        email= findViewById(R.id.editText3);
+        confemail= findViewById(R.id.editText4);
+
+        mydb = new SignUpDatabase(this);
 
         /* Create the register button as an object and create an onclick() function */
         Button register = findViewById(R.id.register);
@@ -28,8 +41,30 @@ public class SignUpActivity extends AppCompatActivity
             {
                 Intent mainPage = new Intent(SignUpActivity.this, MainPage.class);
                 startActivity(mainPage);
+
+                while (!emptyField) {
+                    Toast.makeText(SignUpActivity.this, "Please fill in all the fields!", Toast.LENGTH_LONG).show();
+
+                    if (isEmpty(nameString) && isEmpty(emailString) && isEmpty(passString)){
+                        emptyField = true;
+                    }else {emptyField = false;}
+                }
+
+                while(!email.getText().toString().equals(confemail.getText().toString())){
+                    Toast.makeText(SignUpActivity.this, "Email does not match!", Toast.LENGTH_LONG).show();
+                }
+                nameString = userName.getText().toString().trim();
+                passString = password.getText().toString().trim();
+                emailString = email.getText().toString().trim();
+
+                mydb.addUserInfo(nameString, emailString, passString);
+
+            }
+            boolean isEmpty(String someText){
+                return !someText.equals("");
             }
         });
+
 
 
         /* Create our toolbar as an object and add a back button to it */
@@ -46,6 +81,7 @@ public class SignUpActivity extends AppCompatActivity
                 finish();
             }
         });
+
     }
 
 }

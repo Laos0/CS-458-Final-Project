@@ -12,8 +12,6 @@ import android.util.Log;
 
 public class GPSTracker implements LocationListener {
     private final Context mContext;
-    private boolean isGPSEnabled = false;
-    private boolean isNetworkEnabled = false;
     private boolean canGetLocation = false;
     private Location location = null;
     private double latitude;
@@ -23,11 +21,10 @@ public class GPSTracker implements LocationListener {
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60; // 1 minute
 
     protected LocationManager locationManager;
-    private Location m_Location;
 
     public GPSTracker(Context context) {
         this.mContext = context;
-        m_Location = getLocation();
+        Location m_Location = getLocation();
         System.out.println("location Latitude:" + m_Location.getLatitude());
         System.out.println("location Longitude:" + m_Location.getLongitude());
         System.out.println("getLocation():" + getLocation());
@@ -38,10 +35,10 @@ public class GPSTracker implements LocationListener {
             locationManager = (LocationManager) mContext
                     .getSystemService(Context.LOCATION_SERVICE);
 
-            isGPSEnabled = locationManager
+            boolean isGPSEnabled = locationManager
                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-            isNetworkEnabled = locationManager
+            boolean isNetworkEnabled = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGPSEnabled && !isNetworkEnabled) {
