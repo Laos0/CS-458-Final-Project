@@ -1,8 +1,14 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +23,20 @@ import android.widget.TextView;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.HashMap;
+import android.widget.Filter;
+import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer; // for the drawer menu
     private SessionManagement session; // For accessing the current user info
+    private Bitmap targetPhoto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,6 +71,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+
+
         // Get the user's info from the session
         session = new SessionManagement(getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
@@ -71,7 +88,12 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
 
+
+
+        //new WeatherTask(this).execute(34.0,53.0);
+
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
+
     }
 
 
@@ -122,11 +144,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                         new GalleryFragment()).commit();
                 break;
             case R.id.nav_settings:
-                {
                 Intent settingsPage = new Intent(MainPage.this, SettingsActivity.class);
                 startActivity(settingsPage);
                 break;
-            }
+            case R.id.nav_email:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new ContactUsFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
@@ -147,4 +171,29 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
 
     // ----------------------- End of Sony's Navigation Drawer Methods -------------------------------------------
+
+
+
+    // ------------------- Sony's Methods for data on Fragments -----------------------------------------------------
+
+    // Grabbing the photo bitmap from HomeFragment from the recent taken photo
+    public void savePhoto(Bitmap photo){
+        targetPhoto = photo;
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                new FilterFragment()).commit();
+    }
+
+    public boolean isThereTargetPhoto(){
+        if(targetPhoto != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public Bitmap getTargetPhoto(){
+        return targetPhoto;
+    }
+
+    // ---------------------- End of Sony's Methods for data on Fragments ------------------------------------------
 }
