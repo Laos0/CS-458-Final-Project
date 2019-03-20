@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,10 +42,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             }
         });
         // Language Spinner Setup
-        Spinner spinner = findViewById(R.id.language_spinner);
+         SharedPreferences prefs = getPreferences(0);
+         spinner = findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.language_list,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setSelection(prefs.getInt("languageSelection",0));
         spinner.setOnItemSelectedListener(this);
 
         // Get the log out button as an object
@@ -105,6 +109,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                getBaseContext().getResources().updateConfiguration(config5,getBaseContext().getResources().getDisplayMetrics());
                break;
        }
+        SharedPreferences.Editor editor = getPreferences(0).edit();
+        int selectedPosition = spinner.getSelectedItemPosition();
+        editor.putInt("languageSelection",selectedPosition);
+        editor.apply();
+       recreate();
 
     }
 
@@ -113,6 +122,16 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
 
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = getPreferences(0).edit();
+        int selectedPosition = spinner.getSelectedItemPosition();
+        editor.putInt("languageSelection",selectedPosition);
+        editor.apply();
 
     }
 }

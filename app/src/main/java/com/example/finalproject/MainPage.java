@@ -41,6 +41,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     {
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_page);
 
         // ----------------------- Navigation Drawer Implementations ---------------------------------------------------------------
