@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="10sp"
-                    android:text="userName"
+                    android:text="@string/username"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="22sp"
                     android:textStyle="bold" />
@@ -122,7 +122,6 @@
             android:ems="10"
             android:inputType="textEmailAddress"
             android:text="email@domain.com"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phoneNum" />
@@ -165,7 +164,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profileEmail"
             app:layout_constraintVertical_bias="0.12" />
 
-        <!--
+
         <Button
             android:id="@+id/editProfile"
             android:layout_width="wrap_content"
@@ -202,7 +201,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.989"/>
--->
+
 
     </android.support.constraint.ConstraintLayout>
 

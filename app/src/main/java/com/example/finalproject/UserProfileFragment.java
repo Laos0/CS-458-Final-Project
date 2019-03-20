@@ -22,9 +22,9 @@ import java.util.HashMap;
 public class UserProfileFragment extends Fragment
 {
     //private EditText userName;
-    //Button editbtn;
+    Button editbtn;
     Button followbtn, savebtn;
-    private DrawerLayout drawer; // for the drawer menu
+    EditText editEmail, editPhone;
     private SessionManagement session; // For accessing the current user info
 
 
@@ -36,32 +36,44 @@ public class UserProfileFragment extends Fragment
         session = new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
 
+        //other shared preferences
+        /*
+        public static final String MyPREFERENCES = "MyPrefs" ;
+        public static final String userPhone = "phoneKey";
+        public static final String userEmail = "emailKey";
+        SharedPreferences sharedpreferences;
+        */
+
         // Set the user information
-        final TextView userName = getView().findViewById(R.id.profileUserName);
-        TextView userEmail = getView().findViewById(R.id.profileEmail);
+        TextView userName = getView().findViewById(R.id.profileUserName);
+        final TextView userEmail = getView().findViewById(R.id.profileEmail);
+        final TextView userPhone = getView().findViewById(R.id.phoneNum);
 
         String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
         String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
 
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
+        userPhone.setText("123-456-7890");
 
-        //editbtn = getView().findViewById(R.id.editProfile);
+        //set up buttons
+        editbtn = getView().findViewById(R.id.editProfile);
         followbtn = getView().findViewById(R.id.followBtn);
-        //savebtn = getView().findViewById(R.id.saveBtn);
-        //savebtn.setVisibility(View.INVISIBLE);
+        savebtn = getView().findViewById(R.id.saveBtn);
+        savebtn.setVisibility(View.INVISIBLE);
 
-        /*editbtn.setOnClickListener(new View.OnClickListener() {
+        //edit email and phone number
+        editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editEmail = (EditText) getView().findViewById(R.id.profileEmail);
+                editEmail = getView().findViewById(R.id.profileEmail);
                 editEmail.setEnabled(true);
-                EditText editPhone = (EditText) getView().findViewById(R.id.phoneNum);
+                editPhone = getView().findViewById(R.id.phoneNum);
                 editPhone.setEnabled(true);
 
                 savebtn.setVisibility(View.VISIBLE);
             }
-        });*/
+        });
 
         //follow the user
         followbtn.setOnClickListener(new View.OnClickListener() {
@@ -75,16 +87,24 @@ public class UserProfileFragment extends Fragment
             }
         });
 
-        /*//saves the user email and phone number
+        //saves the user email and phone number after editing
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userName.getText().toString().trim();
+                String newEmail = editEmail.getText().toString().trim();
+                userEmail.setText(newEmail);
 
-                //userName.setText();
+                String newPhone = editPhone.getText().toString().trim();
+                userPhone.setText(newPhone);
+
+
+                /*SharedPreferences.Editor editor = sharedpreferences.edit();
+                editor.putString(userPhone, newPhone);
+                editor.putString(userEmail, newEmail);
+                editor.commit();*/
             }
         });
-*/
+
         return inflater.inflate(R.layout.fragment_user_profile,container, false);
     }
 
