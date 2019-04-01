@@ -39,7 +39,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         String password = params[2];
 
         // Get the url to the database that we are logging into
-        String login_url = "http://144.13.22.61/CS458SP19/Team2/api/login.php";
+        String login_url = "http://144.13.22.48/CS458SP19/Team2/api/login_email.php";
 
         // If we are trying to login to the application, do the following code
         if(type.equals("login"))
@@ -71,6 +71,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
 
                 // Create an input stream to get the result of the login back from the database
                 InputStream inputStream = httpURLConnection.getInputStream();
+
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
                 String result = "";
                 String line = "";
@@ -85,6 +86,25 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                 bufferedReader.close();
                 inputStream.close();
                 httpURLConnection.disconnect();
+
+                // Check to see if the login was successful
+                if(result == null)
+                {
+                    alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
+                    alertDialog.show();
+                    loginPass = false;
+                }
+                else if(result.contains("Failed"))
+                {
+                    alertDialog.setMessage(result);
+                    alertDialog.show();
+                    loginPass = false;
+                }
+
+                else if(result.contains("Success"))
+                {
+                    loginPass = true;
+                }
 
                 // Return the result
                 return result;
@@ -102,6 +122,11 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         return null;
     }
 
+    public boolean loginSuccess()
+    {
+        return this.loginPass;
+    }
+
     @Override
     protected void onPreExecute()
     {
@@ -112,22 +137,23 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
     @Override
     protected void onPostExecute(String result)
     {
-       if(result.contains("Failed"))
+        if(result == null)
+        {
+            alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
+            alertDialog.show();
+            loginPass = false;
+        }
+       else if(result.contains("Failed"))
         {
             alertDialog.setMessage(result);
             alertDialog.show();
             loginPass = false;
         }
 
-        else if(result.length() <= 0)
-       {
-           alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
-           alertDialog.show();
-           loginPass = false;
-       }
-
-        else
+        else if(result.contains("Success"))
+        {
             loginPass = true;
+        }
     }
 
     @Override
