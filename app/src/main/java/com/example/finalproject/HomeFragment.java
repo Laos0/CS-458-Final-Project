@@ -107,18 +107,15 @@ public class HomeFragment extends Fragment
             }
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void applyWeatherPopup(View v){
-
-
-
-
-
-
+    private void applyWeatherPopup(View v)
+    {
     }
 
     // Intent to capture a photo, load up camera
-    private void dispatchPictureTakerAction() {
+    private void dispatchPictureTakerAction()
+    {
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         FragmentActivity activity = HomeFragment.this.getActivity();
         PackageManager packageManager = activity.getPackageManager();
@@ -154,6 +151,4 @@ public class HomeFragment extends Fragment
 
         return image;
     }
-
-
 }
