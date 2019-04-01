@@ -35,4 +35,10 @@
         android:clickable="true"
         app:srcCompat="@drawable/ic_camera" />
 
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.finalproject.MapBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </RelativeLayout>

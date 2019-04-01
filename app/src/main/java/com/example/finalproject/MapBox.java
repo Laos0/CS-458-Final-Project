@@ -44,7 +44,7 @@ public class MapBox extends Fragment
             public void onMapReady(@NonNull MapboxMap mapboxMap)
             {
 
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded()
+                mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/kaseradtke/cjshyt7dt0y1r1fs16ej3fr4j"), new Style.OnStyleLoaded()
                 {
                     @Override
                     public void onStyleLoaded(@NonNull Style style)
