@@ -44,7 +44,7 @@
         tools:text="Register" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/profileUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -76,7 +76,7 @@
         android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/profileUserName"
         tools:text="Password"
         android:selectAllOnFocus="true"/>
 

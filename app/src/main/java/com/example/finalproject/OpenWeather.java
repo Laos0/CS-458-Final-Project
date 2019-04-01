@@ -14,13 +14,13 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class OpenWeather {
+class OpenWeather {
 
     private static final String URL = "http://api.openweathermap.org/data/2.5/weather";
     private static final String APP_ID = "82c47aa6e7dddfb4ca74723c654b3d41";
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static List<Map<String, String>> retrieveWeather(double lat, double lon) {
+    static List<Map<String, String>> retrieveWeather(double lat, double lon) {
 
         final List<Map<String, String>> data = new ArrayList<>();
 
