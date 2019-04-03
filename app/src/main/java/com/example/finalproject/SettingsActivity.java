@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
@@ -54,12 +56,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 session.logoutUser();
             }
         });
+
         // Language Spinner Setup
         Spinner spinner = findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.language_list,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
     }
 
     @Override

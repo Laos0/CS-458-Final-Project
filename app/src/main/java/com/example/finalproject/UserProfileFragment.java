@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,35 +15,23 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.HashMap;
 
-public class UserProfileFragment extends Fragment
-{
-    //private EditText userName;
-    Button editbtn;
-    Button followbtn, savebtn;
-    EditText editEmail, editPhone;
+public class UserProfileFragment extends Fragment {
+    Button editbtn, followbtn;
     private SessionManagement session; // For accessing the current user info
-
+    Intent intent;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Get the user's info from the session
         session = new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
-
-        //other shared preferences
-        /*
-        public static final String MyPREFERENCES = "MyPrefs" ;
-        public static final String userPhone = "phoneKey";
-        public static final String userEmail = "emailKey";
-        SharedPreferences sharedpreferences;
-        */
 
         // Set the user information
         TextView userName = getView().findViewById(R.id.profileUserName);
@@ -50,32 +39,30 @@ public class UserProfileFragment extends Fragment
         final TextView userPhone = getView().findViewById(R.id.phoneNum);
 
         String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
-        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+        final String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+        final String phoneToDisplay = "123-456-7890";
 
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
-        userPhone.setText("123-456-7890");
+        userPhone.setText(phoneToDisplay);
 
         //set up buttons
         editbtn = getView().findViewById(R.id.editProfile);
         followbtn = getView().findViewById(R.id.followBtn);
-        savebtn = getView().findViewById(R.id.saveBtn);
-        savebtn.setVisibility(View.INVISIBLE);
+
+        //intent = new Intent(getActivity(), Contact_Developer.class);
 
         //edit email and phone number
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editEmail = getView().findViewById(R.id.profileEmail);
-                editEmail.setEnabled(true);
-                editPhone = getView().findViewById(R.id.phoneNum);
-                editPhone.setEnabled(true);
-
-                savebtn.setVisibility(View.VISIBLE);
+                //redirect to settings page
+                startActivity(intent);
             }
         });
 
         //follow the user
+        //TO DO: 1+ in follower counter and add follower to list
         followbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,26 +74,6 @@ public class UserProfileFragment extends Fragment
             }
         });
 
-        //saves the user email and phone number after editing
-        savebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newEmail = editEmail.getText().toString().trim();
-                userEmail.setText(newEmail);
-
-                String newPhone = editPhone.getText().toString().trim();
-                userPhone.setText(newPhone);
-
-
-                /*SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString(userPhone, newPhone);
-                editor.putString(userEmail, newEmail);
-                editor.commit();*/
-            }
-        });
-
-        return inflater.inflate(R.layout.fragment_user_profile,container, false);
+        return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
-
-
 }
