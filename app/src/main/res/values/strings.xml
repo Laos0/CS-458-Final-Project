@@ -103,5 +103,6 @@
     <string name="username">UserName</string>
     <string name="userEmail">Meow@gmail.com</string>
     <string name="log_out">Log Out</string>
+    <string name="themes">Themes:</string>
     <!-- End of navigation drawer related -->
 </resources>
