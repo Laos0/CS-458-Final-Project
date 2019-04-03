@@ -1,3 +1,6 @@
+//Created 03-13-2019 by Kase Radtke
+//Java file for MapBox fragment to be used in HomeFragment.java
+
 package com.example.finalproject;
 
 import android.os.Bundle;
@@ -8,48 +11,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+//Import MapBox SDK libraries
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
-public class MapBox extends Fragment
-{
+
+public class MapBox extends Fragment {
     private MapView mapView;
 
-    public MapBox()
-    {
+    public MapBox() {
         // Required empty public constructor
     }
 
 
-    /*@Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        mapView.onCreateView();
-    } */
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Grabs Kase's API key stored from MapBox.com
         Mapbox.getInstance(getContext(), "pk.eyJ1Ijoia2FzZXJhZHRrZSIsImEiOiJjanNoeXBkb2owcHpqNDNwa3F6ZXZkZDhnIn0.Do4trV9xyKwtjGagHzL7_Q");
-        View view = inflater.inflate(R.layout.fragment_map_box, container,false);
+        View view = inflater.inflate(R.layout.fragment_map_box, container, false);
 
         mapView = (MapView) view.findViewById(R.id.mapView);
-        mapView.getMapAsync(new OnMapReadyCallback()
-                            {
+        mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(@NonNull MapboxMap mapboxMap)
-            {
+            public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-                mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/kaseradtke/cjshyt7dt0y1r1fs16ej3fr4j"), new Style.OnStyleLoaded()
-                {
+                //Sets the style for the map. Pulls from style created by Kase stored on mapbox server.
+                mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/kaseradtke/cjshyt7dt0y1r1fs16ej3fr4j"), new Style.OnStyleLoaded() {
                     @Override
-                    public void onStyleLoaded(@NonNull Style style)
-                    {
-                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+                    public void onStyleLoaded(@NonNull Style style) {
+                        // Map is set up and the style has loaded. Make any adjustments needed for the maps style here.
                     }
                 });
             }
@@ -58,6 +51,7 @@ public class MapBox extends Fragment
         return view;
     }
 
+    //Presets for each status change possible with MapBox SDK for best app optimization.
     @Override
     public void onStart() {
         super.onStart();
@@ -95,8 +89,7 @@ public class MapBox extends Fragment
     }
 
     @Override
-    public void onDestroyView()
-    {
+    public void onDestroyView() {
         super.onDestroyView();
 
         mapView.onDestroy();
