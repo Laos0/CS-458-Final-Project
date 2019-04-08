@@ -39,7 +39,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         String password = params[2];
 
         // Get the url to the database that we are logging into
-        String login_url = "http://144.13.22.48/CS458SP19/Team2/api/login_email.php";
+        String login_url = "http://144.13.22.48/CS458SP19/Team2/api/testEmailLogin.php";
 
         // If we are trying to login to the application, do the following code
         if(type.equals("login"))
@@ -87,25 +87,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                 inputStream.close();
                 httpURLConnection.disconnect();
 
-                // Check to see if the login was successful
-                if(result == null)
-                {
-                    alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
-                    alertDialog.show();
-                    loginPass = false;
-                }
-                else if(result.contains("Failed"))
-                {
-                    alertDialog.setMessage(result);
-                    alertDialog.show();
-                    loginPass = false;
-                }
-
-                else if(result.contains("Success"))
-                {
-                    loginPass = true;
-                }
-
                 // Return the result
                 return result;
             } catch (MalformedURLException e)
@@ -122,39 +103,17 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         return null;
     }
 
-    public boolean loginSuccess()
-    {
-        return this.loginPass;
-    }
 
     @Override
     protected void onPreExecute()
     {
+        // Test function to make sure that the user is not currently logged in
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle("Login Status");
     }
 
     @Override
-    protected void onPostExecute(String result)
-    {
-        if(result == null)
-        {
-            alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
-            alertDialog.show();
-            loginPass = false;
-        }
-       else if(result.contains("Failed"))
-        {
-            alertDialog.setMessage(result);
-            alertDialog.show();
-            loginPass = false;
-        }
-
-        else if(result.contains("Success"))
-        {
-            loginPass = true;
-        }
-    }
+    protected void onPostExecute(String result) { }
 
     @Override
     protected void onProgressUpdate(Void... values)
