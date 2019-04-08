@@ -42,6 +42,7 @@ public class GalleryFragment extends Fragment {
 
     // endregion
 
+    // Creates the fragment view for programmatic use
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -50,9 +51,9 @@ public class GalleryFragment extends Fragment {
         // region layouts
 
         // Creates the parent layout to hold other layouts and to allow scrolling
-        ScrollView DAD = new ScrollView(getActivity());
-        DAD.setSmoothScrollingEnabled(true);
-        DAD.setHorizontalScrollBarEnabled(true);
+        ScrollView parent = new ScrollView(getActivity());
+        parent.setSmoothScrollingEnabled(true);
+        parent.setHorizontalScrollBarEnabled(true);
 
         // Creates a layout to hold the image grid
         LinearLayout linear = new LinearLayout(getActivity());
@@ -97,12 +98,13 @@ public class GalleryFragment extends Fragment {
         // region hierarchy
 
         // Adds the layouts to each other
+        // grid.addView(im);
         linear.addView(grid);
-        DAD.addView(linear);
+        parent.addView(linear);
 
         // endregion
 
-        // Displays the parent layout
-        return DAD;
+        // Displays the parent layout with all elements inside
+        return parent;
     }
 }
