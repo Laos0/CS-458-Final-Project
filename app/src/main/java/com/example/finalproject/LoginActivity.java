@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.example.finalproject.ServerCommunication.BackgroundWorker;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
-import java.io.Console;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
@@ -98,8 +97,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     alert.showAlertDialog(LoginActivity.this, "Login Failed", "Username and/or Password Incorrect!", false);
                 }
             }*/
-                // If the user didn't enter in anything, show an alert
-                alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
+            // If the user didn't enter in anything, show an alert
+            alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
         }
 
         else if(username.trim().length() > 0 && password.trim().length() > 0)
