@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getPreferences(0);
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.weather_popup);
         AsyncTask<Double, Void, List<Map<String, String>>> task = new WeatherTask(this);
         task.execute(45.5,23.6);

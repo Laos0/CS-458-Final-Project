@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getPreferences(0);
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.activity_settings);
 
         /* Create our toolbar as an object and add a back button to it */
@@ -43,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             }
         });
         // Language Spinner Setup
-         SharedPreferences prefs = getPreferences(0);
+
         spinner = findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.language_list,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -130,8 +132,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             case R.id.themelabel:
                 switch (position){
                     case 0:
+                        editor.putInt("theme",R.style.AppTheme);
+                        editor.putInt("themeNoAction",R.style.AppTheme_NoActionBar);
                         break;
                     case 1:
+                        editor.putInt("theme",R.style.AppThemeDark);
+                        editor.putInt("themeNoAction",R.style.AppThemeDark_NoActionBar);
                         break;
                 }
 

@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name=".LoginActivity" android:theme="@style/AppTheme">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -47,11 +47,10 @@
         </provider>
         <!-- End of camera related activities -->
 
-        <activity android:name=".SettingsActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".SettingsActivity" />
 
 
-        <activity android:name=".MainPage"
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".MainPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,8 +59,8 @@
         </activity>
 
 
-        <activity android:name=".SignUpActivity" android:theme="@style/AppTheme" />
-        <activity android:name=".WeatherActivity" android:theme="@style/AppTheme"/>
+        <activity android:name=".SignUpActivity"  />
+        <activity android:name=".WeatherActivity" />
     </application>
 
 </manifest>
