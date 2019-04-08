@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:layout_margin="10dp"
-    >
+    android:layout_margin="10dp">
 
     <Button
         android:id="@+id/filterSaveBtn"
@@ -19,6 +20,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
+        <Button
+        android:id="@+id/cropButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Crop Photo" />
+
+    <Button
+        android:id="@+id/writeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/cropButton"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="72dp"
+        android:text="Crop Photo" />
 
         <Button
             android:id="@+id/filter1"

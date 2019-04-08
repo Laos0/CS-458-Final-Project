@@ -79,7 +79,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(username.trim().length() <= 0 || password.trim().length() <= 0)
         {
             // If the user didn't enter in anything, show an alert
-            alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
+            //alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
+            Intent home = new Intent(LoginActivity.this, MainPage.class);
+            startActivity(home);
         }
 
         else {
