@@ -7,13 +7,18 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
@@ -26,6 +31,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +59,7 @@ public class FilterFragment extends Fragment {
 
     private Button filterBtn1, filterBtn2, filterBtn3, saveFilterPhotoBtn, cropBtn;
     private ImageView editPhoto;
+    private EditText editToCaption;
     private Bitmap bitmap;
     private Uri photoUri;
 
@@ -68,6 +75,9 @@ public class FilterFragment extends Fragment {
         saveFilterPhotoBtn = (Button) view.findViewById(R.id.filterSaveBtn); // saved button
         cropBtn = (Button) view.findViewById(R.id.cropButton); // cropped button
 
+        editToCaption = (EditText)view.findViewById(R.id.editCaption);
+        editToCaption = (EditText)view.findViewById(R.id.editCaption);
+
         editPhoto = (ImageView) view.findViewById(R.id.photoFilter); // current photo being edited
         bitmap = ((MainPage)getActivity()).getTargetPhoto(); // getting bitmap from the MainPage that we saved from the HomeFragment
         editPhoto.setImageBitmap(bitmap); // setting imageView's bitmap to the one we saved in MainPage or after taking a photo
@@ -79,11 +89,45 @@ public class FilterFragment extends Fragment {
         filterBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //filterBtn1.setText("GAGA");
+                // Changing the color of a photo
+                // editPhoto is an ImageView
                 editPhoto.getDrawable().setColorFilter(0x763c3686, PorterDuff.Mode.DARKEN );
+
+                // Since I changed the editPhoto, I have to also update its bitmap and save it and use it later
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
+
+
+               // The width and height of the photo ImageView
+                int bitW = bitmap.getWidth();
+                int bitH = bitmap.getHeight();
+                String bWidth = Integer.toString(bitW);
+                String bHeight = Integer.toString(bitH);
+
+                // I Do not need the two lines below to display it,
+                // However, I need them to display in the gallery or apply changes to the bitmap
                 Canvas canvas = new Canvas(bitmap);
                 editPhoto.draw(canvas);
+
+                Paint paint = new Paint();
+                paint.setStyle(Paint.Style.FILL);
+                paint.setStrokeWidth(1);
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(50);
+
+                String myTxt = editToCaption.getText().toString();
+                float txtWidth = paint.measureText(myTxt);
+                float x = bitW/2 - txtWidth/2;
+                float y = bitH/2 - 6;
+                canvas.drawText(myTxt, x, y, paint);
+
+                editPhoto.setImageBitmap(bitmap);
+
+                // After changes on the bitmap, we need to update the photoURI for cropping purposes
+                photoUri = getImageUri(getContext(), bitmap);
+
+                // The width of the photo is: 774
+                // The height of the photo is: 1137
+                Toast.makeText(getActivity(), "Photo width: " + bWidth + " " + "Photo height: " + bHeight, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -197,12 +241,6 @@ public class FilterFragment extends Fragment {
     }
 
     private void cropRequest(Uri imageUri){
-        /*
-        CropImage.activity(imageUri)
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .setMultiTouchEnabled(true)
-                .start(this.getActivity());
-                */
         // Load up the Crop activity
         CropImage.activity(imageUri).start(this.getActivity());
     }
@@ -220,12 +258,13 @@ public class FilterFragment extends Fragment {
                     //editPhoto.setImageBitmap(bitmap);
                     //photoUri = result.getUri(); <--- The original
                     photoUri = CropImage.getPickImageResultUri(this.getContext(),data); //<-- The new one
-                    editPhoto.setImageURI(photoUri);
+                    editPhoto.setImageURI(result.getUri());
+
+                    //bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),photoUri);
+                    //editPhoto.setImageBitmap(bitmap);
 
                     //Toast.makeText(getActivity(), "Photo Cropped", Toast.LENGTH_LONG).show();
                     //Log.d("CROPPED PHOTO", "PHOTO CROPPPPPPPED");
-
-
 
                     // I believe I might have to save the photo in the MainPage
                     // Then bring it back to the filter page
@@ -234,7 +273,6 @@ public class FilterFragment extends Fragment {
                     // I might have to use bundle or intent as well.
 
                     //((MainPage)getActivity()).savePhoto();
-
                 }
                 catch(Exception e){
                     // print the exception
@@ -251,4 +289,46 @@ public class FilterFragment extends Fragment {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+
+    // Combine two bitmaps: imageView and editTextView
+    // the background is the photo and the foreground is the text
+    // Delete whenever, was one of the method to combined an editText bitmap and imageview together
+    public Bitmap combineImages(Bitmap background, Bitmap foreground){
+        Bitmap cs;
+
+        int width = this.getActivity().getWindowManager().getDefaultDisplay().getWidth();
+        int height = this.getActivity().getWindowManager().getDefaultDisplay().getHeight();
+
+        cs = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas comboImage = new Canvas(cs);
+        background = Bitmap.createScaledBitmap(background, width, height,true);
+        comboImage.drawBitmap(background, 0, 0, null);
+        comboImage.drawBitmap(foreground,0,0,null);
+
+        return cs;
+    }
+
+    // Delete whenever, was one of the method to combined an editText bitmap and imageview together
+    public static byte[] mergeImages(Bitmap baseImage, Bitmap captionImg){
+
+        Bitmap finalImage = Bitmap.createBitmap(baseImage.getWidth(), baseImage.getHeight(), baseImage.getConfig());
+        Canvas canvas = new Canvas(finalImage);
+        canvas.drawBitmap(baseImage, new Matrix(), null);
+
+        if(captionImg != null){
+            canvas.drawBitmap(captionImg, new Matrix(), null);
+        }
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        finalImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] bytes = stream.toByteArray();
+
+        return bytes;
+    }
+
+    public void writeText(){
+
+    }
+
+
 }
