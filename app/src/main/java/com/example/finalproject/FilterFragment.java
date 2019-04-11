@@ -62,6 +62,7 @@ public class FilterFragment extends Fragment {
     private EditText editToCaption;
     private Bitmap bitmap;
     private Uri photoUri;
+    private String testStr;
 
     @Nullable
     @Override
@@ -163,7 +164,9 @@ public class FilterFragment extends Fragment {
         cropBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 cropRequest(photoUri);
+                Toast.makeText(getActivity(), testStr, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -207,6 +210,7 @@ public class FilterFragment extends Fragment {
     }
 
         public void saveBitmapToDevice(Bitmap bitmap){
+            Log.i("TEST METHOD RUNS:", "Save method 2");
             //String root = Environment.getExternalStorageDirectory().toString();
             File myDir = preparePhotoFile(); // give myDir a file
             myDir.mkdirs();
@@ -242,42 +246,20 @@ public class FilterFragment extends Fragment {
 
     private void cropRequest(Uri imageUri){
         // Load up the Crop activity
-        CropImage.activity(imageUri).start(this.getActivity());
+        CropImage.activity(imageUri).start(getContext(), this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Result from cropping activity
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
             if(resultCode == RESULT_OK){
-                try{
-                    //editPhoto.setImageBitmap(bitmap);
-                    //photoUri = result.getUri(); <--- The original
-                    photoUri = CropImage.getPickImageResultUri(this.getContext(),data); //<-- The new one
-                    editPhoto.setImageURI(result.getUri());
-
-                    //bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),photoUri);
-                    //editPhoto.setImageBitmap(bitmap);
-
-                    //Toast.makeText(getActivity(), "Photo Cropped", Toast.LENGTH_LONG).show();
-                    //Log.d("CROPPED PHOTO", "PHOTO CROPPPPPPPED");
-
-                    // I believe I might have to save the photo in the MainPage
-                    // Then bring it back to the filter page
-                    // This will involved in getting the bitmap from a Uri
-                    // and putting it in the imageView
-                    // I might have to use bundle or intent as well.
-
-                    //((MainPage)getActivity()).savePhoto();
-                }
-                catch(Exception e){
-                    // print the exception
-                    e.printStackTrace();
-                }
+                editPhoto.setImageURI(result.getUri());
+                Toast.makeText(this.getContext(), "Successful Crop", Toast.LENGTH_SHORT).show();
+            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                Toast.makeText(this.getContext(), "Failed to Crop Photo", Toast.LENGTH_SHORT).show();
             }
         }
     }
