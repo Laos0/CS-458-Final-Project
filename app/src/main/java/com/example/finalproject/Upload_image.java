@@ -188,7 +188,7 @@ public class Upload_image extends Activity {
                         else {
                             Toast.makeText(
                                     getApplicationContext(),
-                                    "Error Occurred! Device not connected to Internet OR Web App is not getting deployed in App server"
+                                    "Error Occurred n Most Common Error: 1:Device not connected to Internet. 2:Web App is not deployed in App server. 3:App server is not running HTTP Status code : "
                                             + statusCode, Toast.LENGTH_LONG)
                                     .show();
                         }
