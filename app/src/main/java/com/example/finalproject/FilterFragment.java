@@ -1,31 +1,21 @@
 package com.example.finalproject;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Matrix;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -34,15 +24,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
-import static android.app.Activity.RESULT_OK;
-import static android.content.ContentValues.TAG;
 import static android.os.Environment.getExternalStoragePublicDirectory;
+
+
 
 public class FilterFragment extends Fragment {
 
-    private Button filterBtn1, filterBtn2, filterBtn3, saveFilterPhotoBtn;
+    private Button filterBtn1, filterBtn2, filterBtn3, saveFilterPhotoBtn, loadImagefromGallery;
     private ImageView editPhoto;
     private Bitmap bitmap;
 
@@ -56,6 +45,7 @@ public class FilterFragment extends Fragment {
         filterBtn2 = (Button) view.findViewById(R.id.filter2);
         filterBtn3 = (Button) view.findViewById(R.id.filter3);
         saveFilterPhotoBtn = (Button) view.findViewById(R.id.filterSaveBtn);
+        loadImagefromGallery = (Button) view.findViewById(R.id.buttonLoadPicture);
 
         editPhoto = (ImageView) view.findViewById(R.id.photoFilter);
         bitmap = ((MainPage)getActivity()).getTargetPhoto();
@@ -120,6 +110,16 @@ public class FilterFragment extends Fragment {
             }
         });
 
+       loadImagefromGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), Upload_image.class);
+                startActivity(intent);
+
+            }
+        });
+
         return view;
     }
 
@@ -165,4 +165,9 @@ public class FilterFragment extends Fragment {
     void toastSavePhoto(){
         Toast.makeText(getActivity(), "Photo saved", Toast.LENGTH_LONG).show();
     }
+
+    /*public void openImageUpload(){
+        Intent intent = new Intent(this, Upload_image.class);
+        startActivity(intent);
+    } */
 }
