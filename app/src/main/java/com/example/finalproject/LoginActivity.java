@@ -75,16 +75,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Get the username and password from the fields
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
+        String phoneNumber = "123-456-7890";
         String type = "login";
 
         // Check to make sure the user actually entered a username and password
         if(username.trim().length() < 0 && password.trim().length() < 0)
         {
-                /* For testing, make sure user typed in Test for both fields
+                // For testing, make sure user typed in Test for both fields
                 if (username.equals("Test") && password.equals("Test"))
                 {
                     // Create the user login session. For testing, this simply stores an example name and email
-                    session.createLoginSession("Test User", "test@gmail.com");
+                    session.createLoginSession("Test User", "test@gmail.com",phoneNumber);
 
                     // Start the main page activity after logging in
                     Intent mainPage = new Intent(LoginActivity.this, MainPage.class);
@@ -96,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     // If user/password doesn't match, show an alert
                     alert.showAlertDialog(LoginActivity.this, "Login Failed", "Username and/or Password Incorrect!", false);
                 }
-            }*/
+
             // If the user didn't enter in anything, show an alert
             alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
         }
@@ -110,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (result.contains("Success"))
                 {
                     // Create the user login session
-                    session.createLoginSession(username, username + "@gmail.com");
+                    session.createLoginSession(username, username + "@gmail.com",phoneNumber);
                     Intent home = new Intent(LoginActivity.this, MainPage.class);
                     startActivity(home);
                 }

@@ -30,10 +30,11 @@ public class SignUpActivity extends AppCompatActivity
 
         mydb = new SignUpDatabase(this);
 
-        /* Create the register button as an object and create an onclick() function */
+        /* Create the register button
+        as an object and create an onclick() function */
         Button register = findViewById(R.id.register);
 
-        // Go to the main page on tapping the register button
+        // Redirect to the main page on tapping the register button
         register.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity
                 Intent mainPage = new Intent(SignUpActivity.this, MainPage.class);
                 startActivity(mainPage);
 
+                // While loop to check for any empty fields
                 while (!emptyField) {
                     Toast.makeText(SignUpActivity.this, "Please fill in all the fields!", Toast.LENGTH_LONG).show();
 
@@ -50,13 +52,17 @@ public class SignUpActivity extends AppCompatActivity
                     }else {emptyField = false;}
                 }
 
+                // While loop to validate that both email fields are matching
                 while(!email.getText().toString().equals(confemail.getText().toString())){
                     Toast.makeText(SignUpActivity.this, "Email does not match!", Toast.LENGTH_LONG).show();
                 }
+
+                // Passes the user written data the the appropriate text strings
                 nameString = userName.getText().toString().trim();
                 passString = password.getText().toString().trim();
                 emailString = email.getText().toString().trim();
 
+                // Adds the text strings into the database
                 mydb.addUserInfo(nameString, emailString, passString);
 
             }

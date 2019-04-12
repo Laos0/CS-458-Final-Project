@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,18 +10,23 @@ import android.view.View;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private Spinner spinner;
     private Spinner spinner2;
+    private SessionManagement session; // For accessing the current user info
+    private Dialog thisDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,14 +48,16 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 finish();
             }
         });
+
         // Language Spinner Setup
-         SharedPreferences prefs = getPreferences(0);
+        SharedPreferences prefs = getPreferences(0);
         spinner = findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.language_list,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(prefs.getInt("languageSelection",0));
         spinner.setOnItemSelectedListener(this);
+
         // Themes spinner setup
         spinner2 = findViewById(R.id.themespinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.themeslist,android.R.layout.simple_spinner_item);
@@ -57,6 +65,94 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner2.setAdapter(adapter2);
         spinner2.setSelection(prefs.getInt("themeSelection",0));
         spinner2.setOnItemSelectedListener(this);
+
+        /*Display displayable user information*/
+        // Get the user's info from the session
+        session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> userInfo = session.getUserDetails();
+
+        // Set the user information to appropriate fields
+        final EditText userEmail = findViewById(R.id.email_box);
+        final EditText userPhone = findViewById(R.id.phone_box);
+        final TextView userPassword = findViewById(R.id.password_box);
+
+        // Grabs user information from shared preferences
+        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+        String phoneToDisplay = userInfo.get(SessionManagement.KEY_PHONE);
+
+        // Display user information
+        userEmail.setText(emailToDisplay);
+        userPhone.setText(phoneToDisplay);
+
+        /*Allow user to change password*/
+        userPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thisDialog = new Dialog(SettingsActivity.this);
+                thisDialog.setContentView(R.layout.dialog_template);
+                final EditText write = thisDialog.findViewById(R.id.write);
+                final Button saveBtn = thisDialog.findViewById(R.id.saveBtn);
+
+                write.setEnabled(true);
+                saveBtn.setEnabled(true);
+
+                saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //TODO: password change
+                    }
+                });
+                thisDialog.show();
+            }
+        });
+
+        /*Allow user to change email*/
+        userEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thisDialog = new Dialog(SettingsActivity.this);
+                thisDialog.setContentView(R.layout.dialog_template);
+                final EditText write = thisDialog.findViewById(R.id.write);
+                final Button saveBtn = thisDialog.findViewById(R.id.saveBtn);
+
+                write.setEnabled(true);
+                saveBtn.setEnabled(true);
+
+                saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String inputStr = write.getText().toString();
+                        session.editSharedPref("KEY_EMAIL",inputStr);
+                        thisDialog.cancel();
+                    }
+                });
+                thisDialog.show();
+            }
+        });
+
+        /*Allow user to change phone number*/
+        userPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thisDialog = new Dialog(SettingsActivity.this);
+                thisDialog.setContentView(R.layout.dialog_template);
+                final EditText write = thisDialog.findViewById(R.id.write);
+                final Button saveBtn = thisDialog.findViewById(R.id.saveBtn);
+
+                write.setEnabled(true);
+                saveBtn.setEnabled(true);
+
+                saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String inputStr = write.getText().toString();
+                        session.editSharedPref("KEY_PHONE",inputStr);
+                        thisDialog.cancel();
+                    }
+                });
+                thisDialog.show();
+            }
+        });
 
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
@@ -147,9 +243,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-
-
 
     }
 
