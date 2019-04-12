@@ -97,6 +97,7 @@ public class FilterFragment extends Fragment {
                 // Since I changed the editPhoto, I have to also update its bitmap and save it and use it later
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
 
+                /*
 
                // The width and height of the photo ImageView
                 int bitW = bitmap.getWidth();
@@ -125,10 +126,12 @@ public class FilterFragment extends Fragment {
 
                 // After changes on the bitmap, we need to update the photoURI for cropping purposes
                 photoUri = getImageUri(getContext(), bitmap);
+                */
+                writeText(bitmap);
 
                 // The width of the photo is: 774
                 // The height of the photo is: 1137
-                Toast.makeText(getActivity(), "Photo width: " + bWidth + " " + "Photo height: " + bHeight, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "Photo width: " + bWidth + " " + "Photo height: " + bHeight, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -144,8 +147,9 @@ public class FilterFragment extends Fragment {
                 ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
                 editPhoto.setColorFilter(filter);
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                editPhoto.draw(canvas);
+                //Canvas canvas = new Canvas(bitmap);
+                writeText(bitmap);
+                //editPhoto.draw(canvas);
             }
         });
 
@@ -155,8 +159,9 @@ public class FilterFragment extends Fragment {
             public void onClick(View v) {
                 editPhoto.getDrawable().setColorFilter(0x76f70000, PorterDuff.Mode.DARKEN );
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                editPhoto.draw(canvas);
+                //Canvas canvas = new Canvas(bitmap);
+                //editPhoto.draw(canvas);
+                writeText(bitmap);
             }
         });
 
@@ -308,8 +313,33 @@ public class FilterFragment extends Fragment {
         return bytes;
     }
 
-    public void writeText(){
+    private void writeText(Bitmap b){
 
+        // The width and height of the photo ImageView
+        int bitW = b.getWidth();
+        int bitH = b.getHeight();
+        String bWidth = Integer.toString(bitW);
+        String bHeight = Integer.toString(bitH);
+
+        Canvas canvas = new Canvas(b);
+        editPhoto.draw(canvas);
+
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(1);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(50);
+
+        String myTxt = editToCaption.getText().toString();
+        float txtWidth = paint.measureText(myTxt);
+        float x = bitW/2 - txtWidth/2;
+        float y = bitH/2 - 6;
+        canvas.drawText(myTxt, x, y, paint);
+
+        editPhoto.setImageBitmap(b);
+
+        // After changes on the bitmap, we need to update the photoURI for cropping purposes
+        photoUri = getImageUri(getContext(), b);
     }
 
 
