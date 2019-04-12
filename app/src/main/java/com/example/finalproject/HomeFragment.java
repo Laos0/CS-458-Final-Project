@@ -58,8 +58,6 @@ public class HomeFragment extends Fragment
         // once the photo is taken
         filterView = inflater.inflate(R.layout.fragment_filter, container,false);
 
-
-
         cameraBtn = view.findViewById(R.id.camera_btn);
         photo = view.findViewById(R.id.photo);
 
@@ -107,18 +105,15 @@ public class HomeFragment extends Fragment
             }
         }
     }
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void applyWeatherPopup(View v){
-
-
-
-
-
-
+    private void applyWeatherPopup(View v)
+    {
     }
 
     // Intent to capture a photo, load up camera
-    private void dispatchPictureTakerAction() {
+    private void dispatchPictureTakerAction()
+    {
         Intent takePic = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         FragmentActivity activity = HomeFragment.this.getActivity();
         PackageManager packageManager = activity.getPackageManager();
@@ -137,6 +132,7 @@ public class HomeFragment extends Fragment
             Uri photoURI = FileProvider.getUriForFile(HomeFragment.this.getActivity(), "com.example.finalproject", photoFile);
             takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePic, 1);
+            Log.i("TEST METHOD RUNS:", "Save method 1");
         }
     }
 
@@ -154,6 +150,4 @@ public class HomeFragment extends Fragment
 
         return image;
     }
-
-
 }

@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
+import com.example.finalproject.ServerCommunication.SessionManagement;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Button;
-
-import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.Locale;
 
@@ -45,6 +44,22 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 finish();
             }
         });
+
+        /*** Log Out ***/
+        // Get the log out button as an object
+        Button logout = findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // Get the session
+                SessionManagement session = new SessionManagement(getApplicationContext());
+
+                // Call the log out function in the SessionManagement class
+                session.logoutUser();
+            }
+        });
         // Language Spinner Setup
 
         spinner = findViewById(R.id.language_spinner);
@@ -53,6 +68,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner.setAdapter(adapter);
         spinner.setSelection(prefs.getInt("languageSelection",0));
         spinner.setOnItemSelectedListener(this);
+
         // Themes spinner setup
         spinner2 = findViewById(R.id.themespinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.themeslist,android.R.layout.simple_spinner_item);
@@ -75,6 +91,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 session.logoutUser();
             }
         });
+
     }
 
     @Override

@@ -33,17 +33,20 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
     @Override
     protected String doInBackground(String... params)
     {
-        // Get the username, password, and type of function that the background worker needs to do
+        // Get the type of function that the background worker needs to do
         String type = params[0];
-        String username = params[1];
-        String password = params[2];
 
-        // Get the url to the database that we are logging into
-        String login_url = "http://144.13.22.61/CS458SP19/Team2/api/login.php";
 
         // If we are trying to login to the application, do the following code
         if(type.equals("login"))
         {
+            // Get the username and password
+            String username = params[1];
+            String password = params[2];
+
+            // Get the url to the database that we are logging into
+            String login_url = "http://144.13.22.48/CS458SP19/Team2/api/testEmailLogin.php";
+
             try
             {
                 // Get the URL for the database we are trying to connect to and open an HTTP connection to the database
@@ -71,6 +74,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
 
                 // Create an input stream to get the result of the login back from the database
                 InputStream inputStream = httpURLConnection.getInputStream();
+
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
                 String result = "";
                 String line = "";
@@ -99,36 +103,91 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                 e.printStackTrace();
             }
         }
+
+        // If the type is 'register', perform the following code
+        else if(type.equals("register"))
+        {
+            // Get the url to the database that we are trying to add a user into
+            String signup_url = "http://144.13.22.48/CS458SP19/Team2/api/signup.php";
+
+            // Get the username password
+            String username = params[1];
+            String password = params[2];
+            String email = params[3];
+
+            try
+            {
+                // Get the URL for the database we are trying to connect to and open an HTTP connection to the database
+                URL url = new URL(signup_url);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+
+                // Create an output stream to send our data to the database to check the login info against
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
+                // This is the data that we received from the user that we will be passing
+                String post_data = URLEncoder.encode("username", "UTF-8")+"="+
+                        URLEncoder.encode(username, "UTF-8")+"&"+
+                        URLEncoder.encode("password", "UTF-8")+"="+
+                        URLEncoder.encode(password, "UTF-8")+"&"+
+                        URLEncoder.encode("email", "UTF-8")+"="+
+                        URLEncoder.encode(email, "UTF-8");
+
+                // Write the post data to the buffered writer and close the writer and the output stream
+                bufferedWriter.write(post_data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                // Create an input stream to get the result of the login back from the database
+                InputStream inputStream = httpURLConnection.getInputStream();
+
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String result = "";
+                String line = "";
+
+                // Read each line of the data we received and store it the result string
+                while((line = bufferedReader.readLine()) != null)
+                {
+                    result += line;
+                }
+
+                // Once we have finished getting all the data and storing it to result, close the buffered reader, input stream, and HTTP connection
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+
+                // Return the result
+                return result;
+
+            } catch (MalformedURLException e)
+            {
+                alertDialog.setMessage("Incorrect URL!");
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
+                alertDialog.setMessage("IO Exception!");
+                e.printStackTrace();
+            }
+        }
         return null;
     }
+
 
     @Override
     protected void onPreExecute()
     {
+        // Test function to make sure that the user is not currently logged in
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle("Login Status");
     }
 
     @Override
-    protected void onPostExecute(String result)
-    {
-       if(result.contains("Failed"))
-        {
-            alertDialog.setMessage(result);
-            alertDialog.show();
-            loginPass = false;
-        }
-
-        else if(result.length() <= 0)
-       {
-           alertDialog.setMessage("Log-in Failed! Failed to connect to server!");
-           alertDialog.show();
-           loginPass = false;
-       }
-
-        else
-            loginPass = true;
-    }
+    protected void onPostExecute(String result) { }
 
     @Override
     protected void onProgressUpdate(Void... values)

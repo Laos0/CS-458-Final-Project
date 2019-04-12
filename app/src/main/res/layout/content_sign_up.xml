@@ -40,11 +40,11 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/conf_user_email"
         tools:text="Register" />
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -62,7 +62,7 @@
         android:selectAllOnFocus="true"/>
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -76,12 +76,12 @@
         android:text="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName"
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
         tools:text="Password"
         android:selectAllOnFocus="true"/>
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,12 +94,12 @@
         android:text="Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/user_password"
         tools:text="Email Address"
         android:selectAllOnFocus="true"/>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/conf_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -112,7 +112,7 @@
         android:text="Confirm Email Address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/user_email"
         tools:text="Confirm Email Address"
         android:selectAllOnFocus="true"/>
 
