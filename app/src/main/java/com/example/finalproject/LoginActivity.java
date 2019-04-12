@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.example.finalproject.ServerCommunication.BackgroundWorker;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
+import java.util.concurrent.ExecutionException;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
     // Global Variables
@@ -76,21 +78,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String type = "login";
 
         // Check to make sure the user actually entered a username and password
-        if(username.trim().length() <= 0 || password.trim().length() <= 0)
+        if(username.trim().length() < 0 && password.trim().length() < 0)
         {
+                /* For testing, make sure user typed in Test for both fields
+                if (username.equals("Test") && password.equals("Test"))
+                {
+                    // Create the user login session. For testing, this simply stores an example name and email
+                    session.createLoginSession("Test User", "test@gmail.com");
+
+                    // Start the main page activity after logging in
+                    Intent mainPage = new Intent(LoginActivity.this, MainPage.class);
+                    startActivity(mainPage);
+                    finish();
+                }
+                else
+                {
+                    // If user/password doesn't match, show an alert
+                    alert.showAlertDialog(LoginActivity.this, "Login Failed", "Username and/or Password Incorrect!", false);
+                }
+            }*/
             // If the user didn't enter in anything, show an alert
             alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
         }
 
-        else {
+        else if(username.trim().length() > 0 && password.trim().length() > 0)
+        {
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-            backgroundWorker.execute(type, username, password);
-            if(backgroundWorker.loginPass)
+            try
             {
-                Intent home = new Intent(LoginActivity.this, MainPage.class);
-                startActivity(home);
+                String result = backgroundWorker.execute(type, username, password).get();
+                if (result.contains("Success"))
+                {
+                    // Create the user login session
+                    session.createLoginSession(username, username + "@gmail.com");
+                    Intent home = new Intent(LoginActivity.this, MainPage.class);
+                    startActivity(home);
+                }
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
         }
     }
 
