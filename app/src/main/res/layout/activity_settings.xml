@@ -72,4 +72,25 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/themelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/themes"
+        app:layout_constraintEnd_toEndOf="@+id/language_title"
+        app:layout_constraintTop_toBottomOf="@+id/language_title" />
+
+    <Spinner
+        android:id="@+id/themespinner"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/language_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/language_spinner" />
+
 </android.support.constraint.ConstraintLayout>
