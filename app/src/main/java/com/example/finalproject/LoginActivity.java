@@ -13,16 +13,14 @@ import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.concurrent.ExecutionException;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener
-{
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     // Global Variables
     EditText txtUsername, txtPassword;
     SessionManagement session;
     AlertDialogManager alert = new AlertDialogManager();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
@@ -49,11 +47,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         // Determine which button was pressed and open the corresponding page
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.sign_up: {
                 Intent signUp = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(signUp);
@@ -70,40 +66,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     // Function to log the user into the application
-    void LogIn()
-    {
+    void LogIn() {
         // Get the username and password from the fields
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String type = "login";
 
         // Check to make sure the user actually entered a username and password
-        if(username.trim().length() < 0 && password.trim().length() < 0)
-        {
-
-
+        if (username.trim().length() < 0 && password.trim().length() < 0) {
             // If the user didn't enter in anything, show an alert
             alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
         }
 
         // Else, send the user's input to the server to see if their account exists in our database
-        else if(username.trim().length() > 0 && password.trim().length() > 0)
-        {
+        else if (username.trim().length() > 0 && password.trim().length() > 0) {
             // Create the background worker that will asynchronously send the login request to the server
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
-            try
-            {
+            try {
                 // Get the result of the login back from the server and check to see if the login was successful
                 String result = backgroundWorker.execute(type, username, password).get();
-                if (result.contains("Success"))
-                {
+                if (result.contains("Success")) {
                     // Create the user login session
                     session.createLoginSession(username, username + "@gmail.com");
                     Intent home = new Intent(LoginActivity.this, MainPage.class);
                     startActivity(home);
-                }
-                else
-                {
+                } else {
                     alert.showAlertDialog(LoginActivity.this, "Login Failed", result, false);
                 }
 

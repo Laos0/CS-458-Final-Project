@@ -165,6 +165,26 @@
             app:layout_constraintTop_toBottomOf="@+id/profileEmail"
             app:layout_constraintVertical_bias="0.12" />
 
+        <EditText
+            android:id="@+id/txt_ChangePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="New Password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/followBtn" />
+
+        <Button
+            android:id="@+id/btn_ChangePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_ChangePass" />
+
         <!--
         <Button
             android:id="@+id/editProfile"
