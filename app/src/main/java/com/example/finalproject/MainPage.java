@@ -138,10 +138,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new ContactUsFragment()).commit();
                 break;
-            case R.id.nav_notification:
+            /*case R.id.nav_notification:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new NotificationFragment()).commit();
-                break;
+                break; */
         }
 
         drawer.closeDrawer((GravityCompat.START));

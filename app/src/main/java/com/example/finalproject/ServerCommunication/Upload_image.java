@@ -25,7 +25,7 @@ import com.loopj.android.http.RequestParams;
 
 @SuppressLint("NewApi")
 public class Upload_image extends Activity {
-    ProgressDialog prgDialog;
+   /* ProgressDialog prgDialog;
     String encodedString;
     RequestParams params = new RequestParams();
     String imgPath, fileName;
@@ -206,4 +206,5 @@ public class Upload_image extends Activity {
             prgDialog.dismiss();
         }
     }
+    */
 }

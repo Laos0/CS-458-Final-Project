@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner.setSelection(prefs.getInt("languageSelection",0));
         spinner.setOnItemSelectedListener(this);
         // Themes spinner setup
-        spinner2 = findViewById(R.id.themespinner);
+        spinner2 = findViewById(R.id.theme_spinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.themeslist,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);

@@ -47,7 +47,7 @@ public class UserProfileFragment extends Fragment {
         userPhone.setText(phoneToDisplay);
 
         //set up buttons
-        editbtn = getView().findViewById(R.id.editProfile);
+        editbtn = getView().findViewById(R.id.edit_profile);
         followbtn = getView().findViewById(R.id.followBtn);
 
         //intent = new Intent(getActivity(), Contact_Developer.class);
