@@ -50,5 +50,5 @@ class LanguageSelect {
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
         }
-}
+    }
 }

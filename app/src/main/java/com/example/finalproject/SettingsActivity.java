@@ -44,22 +44,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 finish();
             }
         });
-
-        /*** Log Out ***/
-        // Get the log out button as an object
-        Button logout = findViewById(R.id.logout_btn);
-        logout.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // Get the session
-                SessionManagement session = new SessionManagement(getApplicationContext());
-
-                // Call the log out function in the SessionManagement class
-                session.logoutUser();
-            }
-        });
         // Language Spinner Setup
 
         spinner = findViewById(R.id.language_spinner);
@@ -147,4 +131,4 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     }
-}
+
