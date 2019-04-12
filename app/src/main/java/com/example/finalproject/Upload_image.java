@@ -1,6 +1,4 @@
-package com.example.finalproject.ServerCommunication;
-
-import java.io.ByteArrayOutputStream;
+package com.example.finalproject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -18,10 +16,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.finalproject.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import java.io.ByteArrayOutputStream;
 
 @SuppressLint("NewApi")
 public class Upload_image extends Activity {
@@ -35,7 +34,7 @@ public class Upload_image extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_filter);
+        setContentView(R.layout.upload_image_layout);
         prgDialog = new ProgressDialog(this);
         // Set Cancelable as False
         prgDialog.setCancelable(false);
@@ -44,7 +43,7 @@ public class Upload_image extends Activity {
     public void loadImagefromGallery(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
@@ -189,7 +188,7 @@ public class Upload_image extends Activity {
                         else {
                             Toast.makeText(
                                     getApplicationContext(),
-                                    "Error Occurred n Most Common Error: 1:Device not connected to Internet. 2:Web App is not deployed in App server. 3:App server is not running HTTP Status code : "
+                                    "Error Occurred! Device not connected to Internet OR Web App is not getting deployed in App server"
                                             + statusCode, Toast.LENGTH_LONG)
                                     .show();
                         }

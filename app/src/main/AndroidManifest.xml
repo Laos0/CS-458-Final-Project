@@ -36,6 +36,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Upload_image">
+        </activity>
+
+
         <!-- Camera related activities -->
         <provider
             android:authorities="com.example.finalproject"

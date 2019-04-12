@@ -20,18 +20,18 @@
         android:layout_height="wrap_content"
         />
 
+
     <Button
-        android:id="@+id/upload_button"
-        android:layout_width="150dp"
+        android:id="@+id/buttonLoadPicture"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginBottom="71dp"
-        android:onClick="uploadImage"
-        android:text="Upload" />
-        <Button
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:text="Load Picture" >
+    </Button>
+
+
+    <Button
             android:id="@+id/filter1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
