@@ -27,6 +27,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.activity_settings);
 
@@ -82,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         int selectedPosition;
         switch(parent.getId()) {
             case R.id.language_spinner:
-                languageSelect(position);
+                LanguageSelect.languageSelect(position,this);
                 selectedPosition = spinner.getSelectedItemPosition();
                 editor.putInt("languageSelection", selectedPosition);
                 editor.apply();
@@ -127,47 +128,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         editor.apply();
 
     }
-    private void languageSelect(int position){
-        switch (position) {
-            case 0:
-                Locale locale = new Locale("en");
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.locale = locale;
-                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                break;
-            case 1:
-                Locale locale2 = new Locale("fr");
-                Locale.setDefault(locale2);
-                Configuration config2 = new Configuration();
-                config2.locale = locale2;
-                getBaseContext().getResources().updateConfiguration(config2, getBaseContext().getResources().getDisplayMetrics());
-                Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                break;
-            case 2:
-                Locale locale3 = new Locale("es");
-                Locale.setDefault(locale3);
-                Configuration config3 = new Configuration();
-                config3.locale = locale3;
-                getBaseContext().getResources().updateConfiguration(config3, getBaseContext().getResources().getDisplayMetrics());
-                Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                break;
-            case 3:
-                Locale locale4 = new Locale("de");
-                Locale.setDefault(locale4);
-                Configuration config4 = new Configuration();
-                config4.locale = locale4;
-                getBaseContext().getResources().updateConfiguration(config4, getBaseContext().getResources().getDisplayMetrics());
-                Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                break;
-            case 4:
-                Locale locale5 = new Locale("ru");
-                Locale.setDefault(locale5);
-                Configuration config5 = new Configuration();
-                config5.locale = locale5;
-                getBaseContext().getResources().updateConfiguration(config5, getBaseContext().getResources().getDisplayMetrics());
-                break;
-        }
+
     }
 }

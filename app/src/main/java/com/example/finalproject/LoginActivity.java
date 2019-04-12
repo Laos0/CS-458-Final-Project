@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.login_screen);
 
