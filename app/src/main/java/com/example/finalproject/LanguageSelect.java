@@ -7,7 +7,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 class LanguageSelect {
-    static void languageSelect(int position, Context context){
+    static void languageSelect(int position, Context context) {
         switch (position) {
             case 0:
                 Locale locale = new Locale("en");

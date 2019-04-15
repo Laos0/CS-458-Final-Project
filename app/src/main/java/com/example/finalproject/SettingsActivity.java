@@ -44,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 finish();
             }
         });
+
         // Language Spinner Setup
 
         spinner = findViewById(R.id.language_spinner);
@@ -62,6 +63,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner2.setOnItemSelectedListener(this);
 
 
+
         Button applySettings = findViewById(R.id.set_button);
         applySettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +71,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 recreate();
             }
         });
+
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener()
@@ -137,5 +140,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
-    }
+
+}
+
 
