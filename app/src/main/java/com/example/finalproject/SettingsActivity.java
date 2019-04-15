@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     {
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getApplicationContext());
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.activity_settings);
 
