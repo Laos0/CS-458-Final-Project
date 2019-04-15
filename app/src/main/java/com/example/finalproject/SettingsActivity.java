@@ -61,6 +61,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner2.setSelection(prefs.getInt("themeSelection",0));
         spinner2.setOnItemSelectedListener(this);
 
+
+        Button applySettings = findViewById(R.id.set_button);
+        applySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener()
@@ -84,11 +92,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         int selectedPosition;
         switch(parent.getId()) {
             case R.id.language_spinner:
-                LanguageSelect.languageSelect(position,this);
                 selectedPosition = spinner.getSelectedItemPosition();
                 editor.putInt("languageSelection", selectedPosition);
                 editor.apply();
-                recreate();
                 break;
             case R.id.themelabel:
                 switch (position){
@@ -105,7 +111,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 selectedPosition = spinner2.getSelectedItemPosition();
                 editor.putInt("themeSelection", selectedPosition);
                 editor.apply();
-                recreate();
                 break;
 
         }
@@ -126,6 +131,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         SharedPreferences.Editor editor = getPreferences(0).edit();
         int selectedPosition = spinner.getSelectedItemPosition();
         editor.putInt("languageSelection",selectedPosition);
+        selectedPosition = spinner2.getSelectedItemPosition();
+        editor.putInt("themeSelection", selectedPosition);
         editor.apply();
 
     }
