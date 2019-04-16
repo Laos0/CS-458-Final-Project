@@ -57,7 +57,7 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class FilterFragment extends Fragment {
 
-    private Button filterBtn1, filterBtn2, filterBtn3, saveFilterPhotoBtn, cropBtn;
+    private Button filterBtn1, filterBtn2, filterBtn3, saveFilterPhotoBtn, cropBtn, loadImageFromGallery;
     private ImageView editPhoto;
     private EditText editToCaption;
     private Bitmap bitmap;
@@ -75,6 +75,7 @@ public class FilterFragment extends Fragment {
         filterBtn3 = (Button) view.findViewById(R.id.filter3); // red
         saveFilterPhotoBtn = (Button) view.findViewById(R.id.filterSaveBtn); // saved button
         cropBtn = (Button) view.findViewById(R.id.cropButton); // cropped button
+        loadImageFromGallery = (Button) view.findViewById(R.id.buttonLoadPicture); // Upload image button
 
         editToCaption = (EditText)view.findViewById(R.id.editCaption);
         editToCaption = (EditText)view.findViewById(R.id.editCaption);
@@ -190,6 +191,16 @@ public class FilterFragment extends Fragment {
                         new HomeFragment()).commit();
                 // After photo is saved, display a toast
                 toastSavePhoto();
+
+            }
+        });
+
+        loadImageFromGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), Upload_image.class);
+                startActivity(intent);
 
             }
         });
