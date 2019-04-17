@@ -18,27 +18,14 @@ import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 public class GalleryFragment extends Fragment {
 
     // region declaration
 
     // Declare a testing array of images
-    String[] eatFoodyImages = {
-            "http://i.imgur.com/rFLNqWI.jpg",
-            "http://i.imgur.com/C9pBVt7.jpg",
-            "http://i.imgur.com/rT5vXE1.jpg",
-            "http://i.imgur.com/aIy5R2k.jpg",
-            "http://i.imgur.com/MoJs9pT.jpg",
-            "http://i.imgur.com/S963yEM.jpg",
-            "http://i.imgur.com/rLR2cyc.jpg",
-            "http://i.imgur.com/SEPdUIx.jpg",
-            "http://i.imgur.com/aC9OjaM.jpg",
-            "http://i.imgur.com/76Jfv9b.jpg",
-            "http://i.imgur.com/fUX7EIB.jpg",
-            "http://i.imgur.com/syELajx.jpg",
-            "http://i.imgur.com/COzBnru.jpg",
-            "http://i.imgur.com/Z3QjilA.jpg",
-    };
+    ArrayList<String> galleryImages = new ArrayList<>();
 
     // endregion
 
@@ -69,9 +56,10 @@ public class GalleryFragment extends Fragment {
 
         // region foreach
 
-        // TODO Replace # with amount of found images for current user
+        galleryImages.add("http://144.13.22.48/CS458SP19/Team2/pictures/20190410_134727.jpg");
+
         // For each URL in the array, set an imageview to that image
-        for (String eatFoodyImage : eatFoodyImages) {
+        for (String image : galleryImages) {
             ImageView im = new ImageView(getActivity());
             im.setScaleType(ImageView.ScaleType.FIT_XY);
             GridLayout.LayoutParams param = new GridLayout.LayoutParams();
@@ -84,11 +72,9 @@ public class GalleryFragment extends Fragment {
             param.setGravity(Gravity.CENTER);
             param.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
             param.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            // TODO AsyncTask to get image URL(s)
             // Loads the image into im using Glide
             Glide.with(this)
-                    // TODO Replace URL with location of user's photo(s)
-                    .load(eatFoodyImage)
+                    .load(image)
                     .into(im);
             grid.addView(im, param);
         }
