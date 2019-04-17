@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Locale;
+
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
@@ -24,10 +24,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getApplicationContext());
         setTheme(prefs.getInt("theme",R.style.AppTheme));
+        super.onCreate(savedInstanceState);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getApplicationContext());
+
         setContentView(R.layout.activity_settings);
 
         /* Create our toolbar as an object and add a back button to it */
