@@ -1,8 +1,5 @@
 package com.example.finalproject;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.finalproject.ServerCommunication.SessionManagement;
@@ -37,7 +33,7 @@ public class UserProfileFragment extends Fragment
         HashMap<String, String> userInfo = session.getUserDetails();
 
         // Set the user information
-        final TextView userName = getView().findViewById(R.id.profileUserName);
+        final TextView userName = getView().findViewById(R.id.user_name);
         TextView userEmail = getView().findViewById(R.id.profileEmail);
 
         String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);

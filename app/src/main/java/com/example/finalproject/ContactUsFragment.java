@@ -54,18 +54,19 @@ public class ContactUsFragment extends Fragment {
     }
 
     public void sendMail(){
-
+        // This string can contain multiple emails.
         String recipients = editTextTo.getText().toString();
+
         // finds the "," within the recipients if any, and put them in a string array
         String[] recipientList = recipients.split(",");
 
         // grabbing the user's input and turning it to a string
-        String subject = editTextSubject.getText().toString();
-        String message = editTextMessage.getText().toString();
+        String subject = editTextSubject.getText().toString(); // the subject/topic of the message
+        String message = editTextMessage.getText().toString(); // the intended message
 
-
+        // Using intent to communicate with content provider
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_EMAIL, recipientList);
+        intent.putExtra(Intent.EXTRA_EMAIL, recipientList); // send recipientList to
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, message);
 
@@ -78,6 +79,7 @@ public class ContactUsFragment extends Fragment {
 
     }
 
+    // message displayed after email has been sent
     void toastEmailSend(){
         Toast.makeText(getActivity(), "Your email has been sent.", Toast.LENGTH_LONG).show();
     }
@@ -88,6 +90,8 @@ public class ContactUsFragment extends Fragment {
         getFragmentManager().beginTransaction().replace(R.id.frame_container,
                 new HomeFragment()).commit();
         if(requestCode == 1){
+            // After the request code returns, then
+            // dispaly a toast message
             toastEmailSend();
         }else{
 

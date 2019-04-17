@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:orientation="vertical"
-    android:layout_margin="10dp"
-    >
+    android:layout_margin="10dp">
 
     <Button
         android:id="@+id/filterSaveBtn"
@@ -31,13 +33,30 @@
     </Button>
 
         <Button
+        android:id="@+id/cropButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Crop Photo" />
+
+        <Button
             android:id="@+id/filter1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:text="Filter1"
             />
-        <Button
+
+    <Button
+        android:id="@+id/buttonLoadPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="93dp"
+        android:onClick="loadImagefromGallery"
+        android:text="Upload"></Button>
+
+    <Button
             android:id="@+id/filter2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,6 +71,13 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:text="Filter 3"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/filter1"
+            android:hint="Caption your photo!"
+            android:id="@+id/editCaption"
             />
 
 </RelativeLayout>
