@@ -45,8 +45,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
-        setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
+        //LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        //setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         setContentView(R.layout.activity_main_page);
 
 
@@ -67,15 +67,13 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        // This code below loads the add friend fragment
+        /* This code below loads the add friend fragment */
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                     new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
-
-
 
         // Get the user's info from the session
         session = new SessionManagement(getApplicationContext());
@@ -91,10 +89,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
-
-
-
-        //new WeatherTask(this).execute(34.0,53.0);
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
 

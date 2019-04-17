@@ -28,13 +28,16 @@ public class UserProfileFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        // Inflate the view
+        View view = inflater.inflate(R.layout.fragment_user_profile,container, false);
+
         // Get the user's info from the session
         session = new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
 
         // Set the user information
-        final TextView userName = getView().findViewById(R.id.user_name);
-        TextView userEmail = getView().findViewById(R.id.profileEmail);
+        final TextView userName = view.findViewById(R.id.user_name);
+        TextView userEmail = view.findViewById(R.id.profileEmail);
 
         String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
         String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
@@ -42,17 +45,17 @@ public class UserProfileFragment extends Fragment
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
 
-        //editbtn = getView().findViewById(R.id.editProfile);
-        followbtn = getView().findViewById(R.id.followBtn);
-        //savebtn = getView().findViewById(R.id.saveBtn);
+        //editbtn = view.findViewById(R.id.editProfile);
+        followbtn = view.findViewById(R.id.followBtn);
+        //savebtn = view.findViewById(R.id.saveBtn);
         //savebtn.setVisibility(View.INVISIBLE);
 
         /*editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editEmail = (EditText) getView().findViewById(R.id.profileEmail);
+                EditText editEmail = (EditText) view.findViewById(R.id.profileEmail);
                 editEmail.setEnabled(true);
-                EditText editPhone = (EditText) getView().findViewById(R.id.phoneNum);
+                EditText editPhone = (EditText) view.findViewById(R.id.phoneNum);
                 editPhone.setEnabled(true);
 
                 savebtn.setVisibility(View.VISIBLE);
@@ -81,7 +84,7 @@ public class UserProfileFragment extends Fragment
             }
         });
 */
-        return inflater.inflate(R.layout.fragment_user_profile,container, false);
+        return view;
     }
 
 
