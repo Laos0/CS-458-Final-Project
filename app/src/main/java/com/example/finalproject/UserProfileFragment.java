@@ -44,24 +44,22 @@ public class UserProfileFragment extends Fragment {
         // Set the user information to appropriate fields
         TextView userName = view.findViewById(R.id.user_name);
         final TextView userEmail = view.findViewById(R.id.profileEmail);
-        final TextView userPhone = getView().findViewById(R.id.phoneNum);
+        final TextView userPhone = view.findViewById(R.id.phoneNum);
 
         // Grabs user information from shared preferences
         String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
         final String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
-        final String phoneToDisplay = userInfo.get(SessionManagement.KEY_PHONE);
 
         // Display user information
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
-        userPhone.setText(phoneToDisplay);
 
         // Set up buttons
-        editbtn = getView().findViewById(R.id.editProfile);
-        followbtn = getView().findViewById(R.id.followBtn);
+        editbtn = view.findViewById(R.id.editProfile);
+        followbtn = view.findViewById(R.id.followBtn);
 
         // Change profile picture
-        profilePicture = getView().findViewById(R.id.profileAvatar);
+        profilePicture = view.findViewById(R.id.profileAvatar);
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,7 +90,7 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_user_profile, container, false);
+        return view;
     }
 
     private void openGallery(){
@@ -109,6 +107,5 @@ public class UserProfileFragment extends Fragment {
             // Display the selected image
             profilePicture.setImageURI(imageUri);
         }
-        return view;
     }
 }
