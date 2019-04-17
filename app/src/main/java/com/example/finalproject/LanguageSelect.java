@@ -7,14 +7,14 @@ import android.widget.Toast;
 import java.util.Locale;
 
 class LanguageSelect {
-    static void languageSelect(int position, Context context) {
+    static void languageSelect(int position, Context context, Context baseContext) {
         switch (position) {
             case 0:
                 Locale locale = new Locale("en");
                 Locale.setDefault(locale);
                 Configuration config = new Configuration();
                 config.locale = locale;
-                context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+                baseContext.getResources().updateConfiguration(config, baseContext.getResources().getDisplayMetrics());
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
             case 1:
@@ -22,7 +22,7 @@ class LanguageSelect {
                 Locale.setDefault(locale2);
                 Configuration config2 = new Configuration();
                 config2.locale = locale2;
-                context.getResources().updateConfiguration(config2, context.getResources().getDisplayMetrics());
+                baseContext.getResources().updateConfiguration(config2, baseContext.getResources().getDisplayMetrics());
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
             case 2:
@@ -30,7 +30,7 @@ class LanguageSelect {
                 Locale.setDefault(locale3);
                 Configuration config3 = new Configuration();
                 config3.locale = locale3;
-                context.getResources().updateConfiguration(config3, context.getResources().getDisplayMetrics());
+                baseContext.getResources().updateConfiguration(config3, baseContext.getResources().getDisplayMetrics());
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
             case 3:
@@ -38,7 +38,7 @@ class LanguageSelect {
                 Locale.setDefault(locale4);
                 Configuration config4 = new Configuration();
                 config4.locale = locale4;
-                context.getResources().updateConfiguration(config4, context.getResources().getDisplayMetrics());
+                baseContext.getResources().updateConfiguration(config4, baseContext.getResources().getDisplayMetrics());
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
             case 4:
@@ -46,7 +46,7 @@ class LanguageSelect {
                 Locale.setDefault(locale5);
                 Configuration config5 = new Configuration();
                 config5.locale = locale5;
-                context.getResources().updateConfiguration(config5, context.getResources().getDisplayMetrics());
+                baseContext.getResources().updateConfiguration(config5, baseContext.getResources().getDisplayMetrics());
                 Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
                 break;
         }
