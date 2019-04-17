@@ -58,6 +58,15 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         spinner2.setSelection(prefs.getInt("themeSelection",0));
         spinner2.setOnItemSelectedListener(this);
 
+        Button applySettings = findViewById(R.id.set_button);
+        applySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recreate();
+            }
+        });
+
+        /* Log Out */
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener()
@@ -72,6 +81,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 session.logoutUser();
             }
         });
+
     }
 
     @Override
@@ -80,65 +90,25 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         int selectedPosition;
         switch(parent.getId()) {
             case R.id.language_spinner:
-                switch (position) {
-                    case 0:
-                        Locale locale = new Locale("en");
-                        Locale.setDefault(locale);
-                        Configuration config = new Configuration();
-                        config.locale = locale;
-                        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                        Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                        break;
-                    case 1:
-                        Locale locale2 = new Locale("fr");
-                        Locale.setDefault(locale2);
-                        Configuration config2 = new Configuration();
-                        config2.locale = locale2;
-                        getBaseContext().getResources().updateConfiguration(config2, getBaseContext().getResources().getDisplayMetrics());
-                        Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                        break;
-                    case 2:
-                        Locale locale3 = new Locale("es");
-                        Locale.setDefault(locale3);
-                        Configuration config3 = new Configuration();
-                        config3.locale = locale3;
-                        getBaseContext().getResources().updateConfiguration(config3, getBaseContext().getResources().getDisplayMetrics());
-                        Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                        break;
-                    case 3:
-                        Locale locale4 = new Locale("de");
-                        Locale.setDefault(locale4);
-                        Configuration config4 = new Configuration();
-                        config4.locale = locale4;
-                        getBaseContext().getResources().updateConfiguration(config4, getBaseContext().getResources().getDisplayMetrics());
-                        Toast.makeText(this, getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
-                        break;
-                    case 4:
-                        Locale locale5 = new Locale("ru");
-                        Locale.setDefault(locale5);
-                        Configuration config5 = new Configuration();
-                        config5.locale = locale5;
-                        getBaseContext().getResources().updateConfiguration(config5, getBaseContext().getResources().getDisplayMetrics());
-                        break;
-                }
-
                 selectedPosition = spinner.getSelectedItemPosition();
                 editor.putInt("languageSelection", selectedPosition);
                 editor.apply();
-                recreate();
                 break;
             case R.id.themelabel:
                 switch (position){
                     case 0:
+                        editor.putInt("theme",R.style.AppTheme);
+                        editor.putInt("themeNoAction",R.style.AppTheme_NoActionBar);
                         break;
                     case 1:
+                        editor.putInt("theme",R.style.AppThemeDark);
+                        editor.putInt("themeNoAction",R.style.AppThemeDark_NoActionBar);
                         break;
                 }
 
                 selectedPosition = spinner2.getSelectedItemPosition();
                 editor.putInt("themeSelection", selectedPosition);
                 editor.apply();
-                recreate();
                 break;
 
         }
@@ -148,9 +118,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-
-
-
     }
 
     @Override
@@ -159,7 +126,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         SharedPreferences.Editor editor = getPreferences(0).edit();
         int selectedPosition = spinner.getSelectedItemPosition();
         editor.putInt("languageSelection",selectedPosition);
+        selectedPosition = spinner2.getSelectedItemPosition();
+        editor.putInt("themeSelection", selectedPosition);
         editor.apply();
 
     }
+
+
 }
+
+

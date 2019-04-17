@@ -53,6 +53,7 @@
         </provider>
         <!-- End of camera related activities -->
 
+        <activity android:name=".Upload_image"/>
         <activity android:name=".SettingsActivity" android:theme="@style/AppTheme"/>
         <activity android:name=".MainPage"/>
         <activity android:name=".SignUpActivity" android:theme="@style/AppTheme" />

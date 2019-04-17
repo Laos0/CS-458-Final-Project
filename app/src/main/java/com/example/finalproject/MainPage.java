@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,7 +32,9 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     {
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
-
+        SharedPreferences prefs = getPreferences(0);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         setContentView(R.layout.activity_main_page);
 
 

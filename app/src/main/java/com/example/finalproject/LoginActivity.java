@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -25,6 +26,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getPreferences(0);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.login_screen);
 
         /* Create a session manager */
@@ -74,7 +78,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String type = "login";
-
         // Check to make sure the user actually entered a username and password
         if(username.trim().length() < 0 && password.trim().length() < 0)
         {
@@ -110,6 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 e.printStackTrace();
             }
         }
+
     }
 
 }
