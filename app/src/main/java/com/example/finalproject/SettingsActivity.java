@@ -81,7 +81,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 session.logoutUser();
             }
         });
-
     }
 
     @Override
@@ -94,7 +93,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 editor.putInt("languageSelection", selectedPosition);
                 editor.apply();
                 break;
-            case R.id.themelabel:
+            case R.id.theme_spinner:
                 switch (position){
                     case 0:
                         editor.putInt("theme",R.style.AppTheme);
