@@ -1,12 +1,14 @@
 package com.example.finalproject;
 
 import android.annotation.TargetApi;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,14 +20,24 @@ import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GalleryFragment extends Fragment {
 
     // region declaration
 
-    // Declare a testing array of images
+    public static String list = "";
+    // Declare an arrayList of images
     ArrayList<String> galleryImages = new ArrayList<>();
+    // Declare the base URL for images
+    String imageLoc = "http://144.13.22.48/CS458SP19/Team2/";
 
     // endregion
 
@@ -54,11 +66,15 @@ public class GalleryFragment extends Fragment {
 
         // endregion
 
+        new Background().execute(imageLoc + "db/getFiles.php");
+        galleryImages.addAll(Arrays.asList(list.split("<br>")));
+
+        // TEST
+        Log.i("List of images", list);
+        Log.i("Array of images", String.valueOf(galleryImages));
+
         // region foreach
-
-        galleryImages.add("http://144.13.22.48/CS458SP19/Team2/pictures/20190410_134727.jpg");
-
-        // For each URL in the array, set an imageview to that image
+        // For each URL in the array, set an imageView to that image
         for (String image : galleryImages) {
             ImageView im = new ImageView(getActivity());
             im.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -74,7 +90,7 @@ public class GalleryFragment extends Fragment {
             param.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
             // Loads the image into im using Glide
             Glide.with(this)
-                    .load(image)
+                    .load(imageLoc + "pictures/" + image)
                     .into(im);
             grid.addView(im, param);
         }
@@ -92,5 +108,42 @@ public class GalleryFragment extends Fragment {
 
         // Displays the parent layout with all elements inside
         return parent;
+    }
+}
+
+class Background extends AsyncTask<String, Void, String> {
+
+    @Override
+    protected String doInBackground(String... strings) {
+        try {
+            GalleryFragment.list = "";
+            // Build and set timeout values for the request.
+            URLConnection connection = (new URL(strings[0])).openConnection();
+            connection.setConnectTimeout(5000);
+            connection.setReadTimeout(5000);
+            connection.connect();
+
+            // Read and store the result line by line then return the entire string.
+            InputStream in = connection.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder html = new StringBuilder();
+            for (String line; (line = reader.readLine()) != null; ) {
+                html.append(line);
+            }
+            in.close();
+
+            // TEST
+            Log.i("HTML response", html.toString());
+
+            return html.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    protected void onPostExecute(String result) {
+        GalleryFragment.list = result;
     }
 }
