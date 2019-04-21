@@ -23,16 +23,6 @@
         />
 
     <Button
-        android:id="@+id/buttonLoadPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0"
-        android:onClick="loadImagefromGallery"
-        android:text="Load Picture" >
-    </Button>
-
-        <Button
         android:id="@+id/cropButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
