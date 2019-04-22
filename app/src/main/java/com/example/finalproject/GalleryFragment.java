@@ -31,9 +31,11 @@ import java.util.Arrays;
 
 public class GalleryFragment extends Fragment {
 
+
     // region declaration
 
-    public static String list = "";
+    // Declare a string to hold the list of images
+    public static String list;
     // Declare an arrayList of images
     ArrayList<String> galleryImages = new ArrayList<>();
     // Declare the base URL for images
@@ -41,10 +43,10 @@ public class GalleryFragment extends Fragment {
 
     // endregion
 
-    // Creates the fragment view for programmatic use
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
+    // Creates the fragment view for programmatic use
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // region layouts
@@ -66,14 +68,19 @@ public class GalleryFragment extends Fragment {
 
         // endregion
 
+        // region background
+
         new Background().execute(imageLoc + "db/getFiles.php");
         galleryImages.addAll(Arrays.asList(list.split("<br>")));
+
+        // endregion
 
         // TEST
         Log.i("List of images", list);
         Log.i("Array of images", String.valueOf(galleryImages));
 
         // region foreach
+
         // For each URL in the array, set an imageView to that image
         for (String image : galleryImages) {
             ImageView im = new ImageView(getActivity());
