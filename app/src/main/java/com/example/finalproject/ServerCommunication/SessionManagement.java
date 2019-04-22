@@ -35,9 +35,6 @@ public class SessionManagement
     // User's email address
     public static final String KEY_EMAIL = "email";
 
-    // User's email address
-    public static final String KEY_PHONE = "phone";
-
 
     /** Constructor for the Session Manager **/
     public SessionManagement(Context context)
@@ -49,7 +46,7 @@ public class SessionManagement
 
     /** Class Functions **/
     // Create a login session
-    public void createLoginSession(String name, String email, String phoneNum)
+    public void createLoginSession(String name, String email)
     {
         // Store the login value as true
         editor.putBoolean(IS_LOGIN, true);
@@ -59,9 +56,6 @@ public class SessionManagement
 
         // Store the email in preferences
         editor.putString(KEY_EMAIL, email);
-
-        // Store the phone in preferences
-        editor.putString(KEY_PHONE, phoneNum);
 
         // Commit the changes
         editor.commit();
@@ -84,7 +78,6 @@ public class SessionManagement
         // Get the user name and email
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
-        user.put(KEY_PHONE, pref.getString(KEY_PHONE, null));
 
         // Return the hash map with the user info
         return user;

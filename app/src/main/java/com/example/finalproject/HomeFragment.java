@@ -91,9 +91,9 @@ public class HomeFragment extends Fragment
         });
 
         // a boolean is returned from the MainPage
-       photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
+        photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
 
-       return view;
+        return view;
     }
 
     @Override // after photo is saved, give ImageView an image that is a bitmap
