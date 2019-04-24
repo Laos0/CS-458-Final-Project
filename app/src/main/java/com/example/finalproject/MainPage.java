@@ -1,15 +1,10 @@
 package com.example.finalproject;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,13 +19,6 @@ import android.widget.TextView;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.HashMap;
-import android.widget.Filter;
-import android.widget.ImageView;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -149,6 +137,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new ContactUsFragment()).commit();
                 break;
+            case R.id.nav_notification:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
+                        new NotificationFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
@@ -182,11 +174,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     public boolean isThereTargetPhoto(){
-        if(targetPhoto != null){
-            return true;
-        }else{
-            return false;
-        }
+        return targetPhoto != null;
     }
 
     public Bitmap getTargetPhoto(){

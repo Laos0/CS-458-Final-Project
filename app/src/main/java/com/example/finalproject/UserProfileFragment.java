@@ -19,27 +19,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.finalproject.ServerCommunication.ChangePassword;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
 
 public class UserProfileFragment extends Fragment {
-    Button editbtn, followbtn;
+    Button followbtn, savebtn, btnChange, editbtn;
+    EditText editChange;
+    Context c;
+    AlertDialogManager alert = new AlertDialogManager();
+    private DrawerLayout drawer; // for the drawer menu
     private SessionManagement session; // For accessing the current user info
     ImageView profilePicture;
     private static final int RESULT_LOAD_IMAGE = 1;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the view
-        View view = inflater.inflate(R.layout.fragment_user_profile,container, false);
+        // Inflate the view
+        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
 
         // Get the user's info from the session
         session = new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
+        c = this.getContext();
 
         // Set the user information to appropriate fields
         TextView userName = view.findViewById(R.id.user_name);
@@ -47,8 +54,8 @@ public class UserProfileFragment extends Fragment {
         final TextView userPhone = view.findViewById(R.id.phoneNum);
 
         // Grabs user information from shared preferences
-        String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
-        final String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+        final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
 
         // Display user information
         userName.setText(userToDisplay);
@@ -90,17 +97,45 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
+        // CODE FOR CHANGING PASSWORD -Jordan
+        editChange = getView().findViewById(R.id.txt_ChangePass);
+        btnChange = getView().findViewById(R.id.btn_ChangePass);
+
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String new_pass = String.valueOf(editChange.getText());
+                ChangePassword changePassword = new ChangePassword(c);
+
+                try {
+                    // Get the result of the login back from the server and check to see if the login was successful
+                    String result = changePassword.execute(userToDisplay, new_pass).get();
+                    if (result.contains("Success")) {
+                        alert.showAlertDialog(c, "Change Completed", result, false);
+                    } else {
+                        alert.showAlertDialog(c, "Change Failed", result, false);
+                    }
+
+                    // Else, an error will be thrown from the BackgroundWorker and be displayed to the user
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         return view;
     }
 
-    private void openGallery(){
+    private void openGallery() {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_LOAD_IMAGE){
+        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
             // Address of the image
             Uri imageUri = data.getData();
 
