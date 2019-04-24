@@ -43,6 +43,11 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Sets title up toolbar
+        getSupportActionBar().setTitle("HotSpot");
+
+
+
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

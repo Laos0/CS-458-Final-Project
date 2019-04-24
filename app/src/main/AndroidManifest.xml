@@ -23,7 +23,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -35,7 +35,7 @@
             android:theme="@style/Base.Theme.AppCompat"/>
         <!-- android:screenOrientation="portrait" -->
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Login_Signup_Selector_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -57,8 +57,11 @@
         <activity android:name=".Upload_image"/>
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".MainPage"/>
-        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignUpActivity"
+                  android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".WeatherActivity"/>
+        <activity android:name=".LoginActivity"
+                  android:windowSoftInputMode="stateHidden"/>
     </application>
 
 </manifest>
