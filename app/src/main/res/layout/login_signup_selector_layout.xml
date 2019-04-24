@@ -12,22 +12,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="HotSpot"
         android:textColor="#fff"
         android:textSize="46sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/log-in"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.112" />
 
     <Button
         android:id="@+id/log-in"
-        android:layout_width="319dp"
+        android:layout_width="0dp"
         android:layout_height="94dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="40dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/login_button"
@@ -39,32 +41,36 @@
 
     <Button
         android:id="@+id/sign-up"
-        android:layout_width="209dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="40dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="52dp"
-        android:textColor="#ffffff"
         android:background="@drawable/signup_button"
         android:text="Sign Up"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="525dp"
-        android:layout_height="425dp"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="352dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/hotspot_logo_fire" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002"
+        app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>
