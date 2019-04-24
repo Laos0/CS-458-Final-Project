@@ -51,7 +51,6 @@ public class UserProfileFragment extends Fragment {
         // Set the user information to appropriate fields
         TextView userName = view.findViewById(R.id.user_name);
         final TextView userEmail = view.findViewById(R.id.profileEmail);
-        final TextView userPhone = view.findViewById(R.id.phoneNum);
 
         // Grabs user information from shared preferences
         final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
@@ -63,7 +62,7 @@ public class UserProfileFragment extends Fragment {
 
         // Set up buttons
         editbtn = view.findViewById(R.id.editProfile);
-        followbtn = view.findViewById(R.id.followBtn);
+        //followbtn = view.findViewById(R.id.followBtn); Will possibly implement in the future. Outside of the scope of this semester
 
         // Change profile picture
         profilePicture = view.findViewById(R.id.profileAvatar);
@@ -84,8 +83,8 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-        // Follow the user
-        /*TODO: 1+ in follower counter and add follower to list*/
+        /* Follow the user (Will possibly implement in the future. Outside of the scope of this semester)
+        //TODO: 1+ in follower counter and add follower to list
         followbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +94,11 @@ public class UserProfileFragment extends Fragment {
                     followbtn.setText("Follow me");
                 }
             }
-        });
+        }); */
 
         // CODE FOR CHANGING PASSWORD -Jordan
-        editChange = getView().findViewById(R.id.txt_ChangePass);
-        btnChange = getView().findViewById(R.id.btn_ChangePass);
+        editChange = view.findViewById(R.id.txt_ChangePass);
+        btnChange = view.findViewById(R.id.btn_ChangePass);
 
         btnChange.setOnClickListener(new View.OnClickListener() {
             @Override

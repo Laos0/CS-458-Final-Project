@@ -26,7 +26,7 @@ public class ChangePassword extends AsyncTask<String, Void, String> {
 
     // Global Variables
     @SuppressLint("StaticFieldLeak")
-    private static Context context;
+    Context context;
     // Get the username and password from the fields
     private String username;
     private String password;
@@ -71,13 +71,14 @@ public class ChangePassword extends AsyncTask<String, Void, String> {
             // Create an input stream to get the result of the login back from the database
             InputStream inputStream = httpURLConnection.getInputStream();
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.ISO_8859_1));
-            StringBuilder result = new StringBuilder();
-            String line;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+            String result = "";
+            String line = "";
 
             // Read each line of the data we received and store it the result string
-            while ((line = bufferedReader.readLine()) != null) {
-                result.append(line);
+            while((line = bufferedReader.readLine()) != null)
+            {
+                result += line;
             }
 
             // Once we have finished getting all the data and storing it to result, close the buffered reader, input stream, and HTTP connection
@@ -86,7 +87,7 @@ public class ChangePassword extends AsyncTask<String, Void, String> {
             httpURLConnection.disconnect();
 
             // Return the result
-            return result.toString();
+            return result;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {

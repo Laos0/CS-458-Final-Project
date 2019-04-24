@@ -90,7 +90,7 @@
 
         </LinearLayout>
 
-
+        <!--
         <TextView
             android:id="@+id/friends"
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileInfo" />
+            app:layout_constraintTop_toBottomOf="@+id/profileInfo" /> -->
 
         <TextView
             android:id="@+id/profileEmail"
@@ -115,37 +115,19 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:ems="10"
             android:inputType="textEmailAddress"
             android:textSize="24sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneNum" />
+            app:layout_constraintTop_toBottomOf="@+id/profileInfo" />
 
-        <TextView
-            android:id="@+id/phoneNum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:inputType="phone"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/profileEmail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/friends"
-            app:layout_constraintVertical_chainStyle="spread_inside" />
-
-
-        <Button
+        <!--Button
             android:id="@+id/followBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,18 +142,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileEmail"
-            app:layout_constraintVertical_bias="0.12" />
+            app:layout_constraintVertical_bias="0.12" /-->
 
         <EditText
             android:id="@+id/txt_ChangePass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:ems="10"
             android:hint="New Password"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/followBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
 
         <Button
             android:id="@+id/btn_ChangePass"
@@ -182,7 +165,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_ChangePass" />
 
-        <!--
         <Button
             android:id="@+id/editProfile"
             android:layout_width="wrap_content"
