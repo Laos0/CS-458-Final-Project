@@ -22,16 +22,16 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class ChangeEmail extends AsyncTask<String, Void, String> {
+public class ChangePassword extends AsyncTask<String, Void, String> {
 
     // Global Variables
     @SuppressLint("StaticFieldLeak")
     private static Context context;
-    // Get the username and email from the fields
+    // Get the username and password from the fields
     private String username;
-    private String email;
+    private String password;
 
-    public ChangeEmail(Context ctx) {
+    public ChangePassword(Context ctx) {
         context = ctx;
     }
 
@@ -39,14 +39,14 @@ public class ChangeEmail extends AsyncTask<String, Void, String> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected String doInBackground(String... params) {
-        // Get the username, email, and type of function that the background worker needs to do
+        // Get the username, password, and type of function that the background worker needs to do
         String username = params[0];
-        String email = params[1];
+        String password = params[1];
 
         // Get the url to the php
-        String changeEmail_url = "http://144.13.12.48/CS458SP19/Team2/api/changeEmail.php";
+        String changePassword_url = "http://144.13.12.48/CS458SP19/Team2/api/changePassword.php";
         try {
-            URL url = new URL(changeEmail_url);
+            URL url = new URL(changePassword_url);
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");
             httpURLConnection.setDoOutput(true);
@@ -59,8 +59,8 @@ public class ChangeEmail extends AsyncTask<String, Void, String> {
             // This is the data that we received from the user that we will be passing
             String post_data = URLEncoder.encode("user_name", "UTF-8") + "=" +
                     URLEncoder.encode(username, "UTF-8") + "&" +
-                    URLEncoder.encode("new_email", "UTF-8") + "=" +
-                    URLEncoder.encode(email, "UTF-8");
+                    URLEncoder.encode("new_pass", "UTF-8") + "=" +
+                    URLEncoder.encode(password, "UTF-8");
 
             // Write the post data to the buffered writer and close the writer and the output stream
             bufferedWriter.write(post_data);

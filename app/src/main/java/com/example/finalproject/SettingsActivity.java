@@ -26,24 +26,21 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 
-//public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
-public class SettingsActivity extends AppCompatActivity
+public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+//public class SettingsActivity extends AppCompatActivity
 
 {
     private Spinner spinner;
     private Spinner spinner2;
     private SessionManagement session; // For accessing the current user info
-    private Dialog thisDialog;
-    Button btnChange, emailChange;
-    EditText editChange;
+    Button btnChange, emailChange; // Save buttons for changing password and email
+    EditText editChange, userEmail; // Changing password and email fields
     Context c;
     AlertDialogManager alert = new AlertDialogManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        c = SettingsActivity.this;
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
@@ -61,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity
                 finish();
             }
         });
-/*
+
         // Language Spinner Setup
         SharedPreferences prefs = getPreferences(0);
         spinner = findViewById(R.id.language_spinner);
@@ -78,15 +75,17 @@ public class SettingsActivity extends AppCompatActivity
         spinner2.setAdapter(adapter2);
         spinner2.setSelection(prefs.getInt("themeSelection",0));
         spinner2.setOnItemSelectedListener(this);
-*/
+
+
+        ///////////////////////////////////////// Start of Su's settings /////////////////////////////////////////
+        c = SettingsActivity.this;
         /*Display displayable user information*/
         // Get the user's info from the session
         session = new SessionManagement(getApplicationContext());
         final HashMap<String, String> userInfo = session.getUserDetails();
 
         // Set the user information to appropriate fields
-        final EditText userEmail = findViewById(R.id.email_box);
-        //final TextView userPassword = findViewById(R.id.password_box);
+        userEmail = findViewById(R.id.email_box);
 
         // Grabs user information from shared preferences
         final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
@@ -123,13 +122,13 @@ public class SettingsActivity extends AppCompatActivity
             }
         });
 
-        //Allow user to change email
+        // Allow user to change email
         emailChange = findViewById(R.id.btn_ChangeEmail);
         userEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String new_email = String.valueOf(emailChange.getText());
-                //session.editSharedPref("KEY_EMAIL",new_email);
+
 
                 ChangeEmail changeEmail = new ChangeEmail(c);
 
@@ -137,7 +136,9 @@ public class SettingsActivity extends AppCompatActivity
                     // Get the result of the login back from the server and check to see if the login was successful
                     String result = changeEmail.execute(userToDisplay, new_email).get();
                     if (result.contains("Success")) {
+                        // If successful, then updates email in shared preferences
                         alert.showAlertDialog(c, "Change Completed", result, false);
+                        session.editSharedPref("KEY_EMAIL",new_email);
                     } else {
                         alert.showAlertDialog(c, "Change Failed", result, false);
                     }
@@ -152,6 +153,8 @@ public class SettingsActivity extends AppCompatActivity
 
             }
         });
+
+        ///////////////////////////////////////// End of Su's settings /////////////////////////////////////////
 
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
@@ -169,7 +172,7 @@ public class SettingsActivity extends AppCompatActivity
         });
     }
 
-/*
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SharedPreferences.Editor editor = getPreferences(0).edit();
@@ -254,5 +257,5 @@ public class SettingsActivity extends AppCompatActivity
         editor.putInt("languageSelection",selectedPosition);
         editor.apply();
 
-    }*/
+    }
 }

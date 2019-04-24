@@ -48,7 +48,7 @@ public class UserProfileFragment extends Fragment
         session = new SessionManagement(getActivity().getApplicationContext());
         HashMap<String, String> userInfo = session.getUserDetails();
 
-        // Set the user information and display it in the text boxes
+        // Retrieve username and email then display it on the profile page
         final TextView userName = view.findViewById(R.id.profileUserName);
         TextView userEmail = view.findViewById(R.id.profileEmail);
 
@@ -115,7 +115,7 @@ public class UserProfileFragment extends Fragment
             }
         });*/
 
-        // Change profile picture - Su
+        // Change profile picture
         profilePicture = view.findViewById(R.id.profileAvatar);
         profilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
