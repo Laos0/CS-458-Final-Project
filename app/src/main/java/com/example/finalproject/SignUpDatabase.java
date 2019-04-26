@@ -9,27 +9,29 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class SignUpDatabase extends SQLiteOpenHelper{
 
-    //database version
+    // database version
     private static final int DATABASE_VERSION = 1;
 
-    //database name
+    // database name
     private static final String DATABASE_NAME = "users.db";
 
-    //table name
+    // table name
     private static final String TABLE_NAME = "userinfo";
 
-    //table fields
+    // table fields
     private static final String COLUMN_ID = "ID";
     String COLUMN_NAME = "name";
     String COLUMN_EMAIL = "email";
     String COLUMN_PASS = "password";
 
 
-    //constructor
+    // constructor
     SignUpDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Create user information table
+    // contains name, email, and password
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+TABLE_NAME+
@@ -39,12 +41,14 @@ public class SignUpDatabase extends SQLiteOpenHelper{
                 COLUMN_PASS + " TEXT )");
     }
 
+    // Upgrade user information
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
+    // Add user information to database
     public boolean addUserInfo(String userName, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -55,6 +59,7 @@ public class SignUpDatabase extends SQLiteOpenHelper{
         return true;
     }
 
+    // Search user information
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -62,6 +67,7 @@ public class SignUpDatabase extends SQLiteOpenHelper{
         return data;
     }
 
+    // Update user information
     public boolean updateUserInfo(Integer id, String name, String email, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -72,6 +78,7 @@ public class SignUpDatabase extends SQLiteOpenHelper{
         return true;
     }
 
+    // Delete user information
     public Integer deleteUserInfo(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("unserinfo",
