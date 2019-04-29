@@ -61,7 +61,7 @@ public class UserProfileFragment extends Fragment {
         userEmail.setText(emailToDisplay);
 
         // Set up buttons
-        editbtn = view.findViewById(R.id.editProfile);
+        editbtn = view.findViewById(R.id.edit_profile);
         //followbtn = view.findViewById(R.id.followBtn); Will possibly implement in the future. Outside of the scope of this semester
 
         // Change profile picture
