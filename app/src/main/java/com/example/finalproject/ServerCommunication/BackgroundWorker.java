@@ -44,7 +44,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         // Showing progress dialog
         pDialog = new ProgressDialog(context);
         pDialog.setMessage("Logging in...");
-        pDialog.setCancelable(false);
+        pDialog.setCancelable(true);
         pDialog.show();
 
     }
