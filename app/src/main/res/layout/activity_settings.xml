@@ -36,17 +36,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-
-    <Spinner
-        android:id="@+id/language_spinner"
-        android:layout_width="286dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Settings_title" />
-
     <TextView
         android:id="@+id/language_title"
         android:layout_width="82dp"
@@ -56,6 +45,100 @@
         android:text="@string/languages"
         app:layout_constraintEnd_toStartOf="@+id/language_spinner"
         app:layout_constraintTop_toTopOf="@+id/language_spinner" />
+
+    <Spinner
+        android:id="@+id/language_spinner"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Settings_title" />
+
+    <TextView
+        android:id="@+id/themelabel"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Themes:"
+        app:layout_constraintEnd_toStartOf="@id/themespinner"
+        app:layout_constraintTop_toTopOf="@id/themespinner" />
+
+    <Spinner
+        android:id="@+id/themespinner"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/language_spinner" />
+
+    <TextView
+        android:id="@+id/password_title"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Password:"
+        app:layout_constraintEnd_toStartOf="@+id/password_box"
+        app:layout_constraintTop_toTopOf="@+id/password_box" />
+
+    <TextView
+        android:id="@+id/password_box"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="textPassword"
+        android:text='"Change password"'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/themespinner" />
+
+    <TextView
+        android:id="@+id/email_title"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Email:"
+        app:layout_constraintEnd_toStartOf="@+id/email_box"
+        app:layout_constraintTop_toTopOf="@+id/email_box" />
+
+    <EditText
+        android:id="@+id/email_box"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_box" />
+
+    <TextView
+        android:id="@+id/phone_title"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Phone:"
+        app:layout_constraintEnd_toStartOf="@+id/phone_box"
+        app:layout_constraintTop_toTopOf="@+id/phone_box" />
+
+    <EditText
+        android:id="@+id/phone_box"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_box" />
 
     <Button
         android:id="@+id/logout_btn"
@@ -71,27 +154,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/themelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/themes"
-        app:layout_constraintEnd_toEndOf="@+id/language_title"
-        app:layout_constraintTop_toBottomOf="@+id/language_title" />
-
-    <Spinner
-        android:id="@+id/themespinner"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/language_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/language_spinner" />
 
     <Button
         android:id="@+id/set_button"

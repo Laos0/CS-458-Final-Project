@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         />
 
-        <Button
+    <Button
         android:id="@+id/cropButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,17 @@
             android:layout_alignParentBottom="true"
             android:text="Filter1"
             />
-        <Button
+
+    <Button
+        android:id="@+id/buttonLoadPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="93dp"
+        android:onClick="loadImagefromGallery"
+        android:text="Upload"></Button>
+
+    <Button
             android:id="@+id/filter2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

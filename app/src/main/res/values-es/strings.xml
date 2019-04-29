@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">HotSpot v0.0.1</string>
     <string name="enIsMyfriend">El español es elegante</string>
     <string name="title_activity_login">Registrarse</string>
     <string name="prompt_email">Email</string>

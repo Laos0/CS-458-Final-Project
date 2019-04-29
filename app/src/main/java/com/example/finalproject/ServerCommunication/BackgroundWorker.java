@@ -1,8 +1,11 @@
 package com.example.finalproject.ServerCommunication;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+
+import com.example.finalproject.LoginActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -21,12 +24,29 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
     // Global Variables
     Context context;
     AlertDialog alertDialog;
-    public boolean loginPass;
+    private ProgressDialog pDialog;
 
     // Constructor
     public BackgroundWorker(Context ctx)
     {
         context = ctx;
+    }
+
+    @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
+
+        // Test function to make sure that the user is not currently logged in
+        alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Login Status");
+
+        // Showing progress dialog
+        pDialog = new ProgressDialog(context);
+        pDialog.setMessage("Logging in...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
     }
 
     // Will run in the background without being directly called
@@ -45,7 +65,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
             String password = params[2];
 
             // Get the url to the database that we are logging into
-            String login_url = "http://144.13.22.48/CS458SP19/Team2/api/testEmailLogin.php";
+            String login_url = "http://144.13.22.48/CS458SP19/Team2/api/EmailUserLogin.php";
 
             try
             {
@@ -175,15 +195,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
             }
         }
         return null;
-    }
-
-
-    @Override
-    protected void onPreExecute()
-    {
-        // Test function to make sure that the user is not currently logged in
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
     }
 
     @Override

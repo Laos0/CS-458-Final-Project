@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.sign_up: {
                 Intent signUp = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(signUp);
+                finish();
                 break;
             }
             case R.id.log_in: {
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = txtPassword.getText().toString();
         String type = "login";
         // Check to make sure the user actually entered a username and password
-        if(username.trim().length() < 0 && password.trim().length() < 0)
+        if(username.trim().length() <= 0 && password.trim().length() <= 0)
         {
             // If the user didn't enter in anything, show an alert
             alert.showAlertDialog(LoginActivity.this, "Login Failed", "No username or password entered!", false);
