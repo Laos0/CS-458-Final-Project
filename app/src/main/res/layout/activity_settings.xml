@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        app:theme="@style/AppTheme" />
 
     <TextView
         android:id="@+id/Settings_title"
@@ -100,7 +100,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="Apply Settings"
+        android:text="@string/apply_settings"
         app:layout_constraintStart_toStartOf="@+id/themespinner"
         app:layout_constraintTop_toBottomOf="@+id/themespinner" />
 

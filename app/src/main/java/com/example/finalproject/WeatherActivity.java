@@ -19,7 +19,7 @@ public class WeatherActivity extends AppCompatActivity {
         SharedPreferences prefs = getPreferences(0);
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         super.onCreate(savedInstanceState);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this,getBaseContext());
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
         setContentView(R.layout.weather_popup);
         AsyncTask<Double, Void, List<Map<String, String>>> task = new WeatherTask(this);
         task.execute(44.931564,-91.404387);

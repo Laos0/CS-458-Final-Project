@@ -28,7 +28,7 @@ public class SignUpActivity extends AppCompatActivity
         SharedPreferences prefs = getPreferences(0);
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         super.onCreate(savedInstanceState);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this,getBaseContext());
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
 
         setContentView(R.layout.activity_sign_up);
 

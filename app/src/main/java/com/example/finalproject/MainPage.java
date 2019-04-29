@@ -46,7 +46,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         SharedPreferences prefs = getPreferences(0);
         setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         super.onCreate(savedInstanceState);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this,getBaseContext());
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
         setContentView(R.layout.activity_main_page);
 
 

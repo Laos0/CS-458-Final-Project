@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment
 
             }
         });
-        final Button weatherButton = view.findViewById(R.id.weather_btn);
+       /** final Button weatherButton = view.findViewById(R.id.weather_btn);
         weatherButton.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -87,6 +87,7 @@ public class HomeFragment extends Fragment
 
             }
         });
+        */
 
         // a boolean is returned from the MainPage
        photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
