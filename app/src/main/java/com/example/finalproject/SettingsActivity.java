@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
+import com.example.finalproject.ServerCommunication.SessionManagement;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.Button;
-
-import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.Locale;
 
@@ -26,6 +25,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        SharedPreferences prefs = getPreferences(0);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.activity_settings);
 
         /* Create our toolbar as an object and add a back button to it */
@@ -42,21 +44,25 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 finish();
             }
         });
+
         // Language Spinner Setup
-         SharedPreferences prefs = getPreferences(0);
+
         spinner = findViewById(R.id.language_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.language_list,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(prefs.getInt("languageSelection",0));
         spinner.setOnItemSelectedListener(this);
+
         // Themes spinner setup
-        spinner2 = findViewById(R.id.theme_spinner);
+        spinner2 = findViewById(R.id.themespinner);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.themeslist,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
         spinner2.setSelection(prefs.getInt("themeSelection",0));
         spinner2.setOnItemSelectedListener(this);
+
+
 
         Button applySettings = findViewById(R.id.set_button);
         applySettings.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +72,6 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
-        /* Log Out */
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener()
@@ -81,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 session.logoutUser();
             }
         });
+
     }
 
     @Override
@@ -93,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 editor.putInt("languageSelection", selectedPosition);
                 editor.apply();
                 break;
-            case R.id.theme_spinner:
+            case R.id.themelabel:
                 switch (position){
                     case 0:
                         editor.putInt("theme",R.style.AppTheme);
@@ -116,6 +122,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+
+
 
     }
 

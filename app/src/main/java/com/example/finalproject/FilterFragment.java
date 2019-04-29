@@ -70,6 +70,7 @@ public class FilterFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_filter, container,false);
 
+        //Create every button object
         filterBtn1 = (Button) view.findViewById(R.id.filter1); // light blue
         filterBtn2 = (Button) view.findViewById(R.id.filter2); // black n white
         filterBtn3 = (Button) view.findViewById(R.id.filter3); // red

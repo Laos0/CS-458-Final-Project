@@ -23,17 +23,6 @@
         />
 
     <Button
-        android:id="@+id/upload_button"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginBottom="71dp"
-        android:onClick="uploadImage"
-        android:text="Upload" />
-        <Button
         android:id="@+id/cropButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
