@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.finalproject.ServerCommunication.BackgroundWorker;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
+import java.io.Console;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
@@ -95,15 +96,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             {
                 // Get the result of the login back from the server and check to see if the login was successful
                 String result = backgroundWorker.execute(type, username, password).get();
-                if (result.contains("Success"))
+                if (result != null && result.contains("Success"))
                 {
-                    // Create the user login session
-                    session.createLoginSession(username, username + "@gmail.com");
+                    // Take the user to home page
                     Intent home = new Intent(LoginActivity.this, MainPage.class);
                     startActivity(home);
                 }
                 else
                 {
+                    // Display an error to the user
                     alert.showAlertDialog(LoginActivity.this, "Login Failed", result, false);
                 }
 
