@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment
         // once the photo is taken
         filterView = inflater.inflate(R.layout.fragment_filter, container,false);
 
+
+
         cameraBtn = view.findViewById(R.id.camera_btn);
         photo = view.findViewById(R.id.photo);
 
@@ -135,7 +137,6 @@ public class HomeFragment extends Fragment
             Uri photoURI = FileProvider.getUriForFile(HomeFragment.this.getActivity(), "com.example.finalproject", photoFile);
             takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePic, 1);
-            Log.i("TEST METHOD RUNS:", "Save method 1");
         }
     }
 
