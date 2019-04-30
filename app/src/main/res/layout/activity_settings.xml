@@ -50,7 +50,7 @@
         android:id="@+id/language_spinner"
         android:layout_width="286dp"
         android:layout_height="31dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,28 +82,40 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Password:"
-        app:layout_constraintEnd_toStartOf="@id/password_box"
-        app:layout_constraintTop_toTopOf="@id/password_box" />
+        app:layout_constraintEnd_toStartOf="@id/txt_ChangePass"
+        app:layout_constraintTop_toTopOf="@id/txt_ChangePass" />
 
-    <TextView
-        android:id="@+id/password_box"
+    <EditText
+        android:id="@+id/txt_ChangePass"
         android:layout_width="286dp"
         android:layout_height="31dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:hint="New Password"
         android:inputType="textPassword"
-        android:text='"Change password"'
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/theme_spinner" />
 
-    <TextView
+    <Button
+        android:id="@+id/btn_ChangePass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_ChangePass" />
+
+    <EditText
         android:id="@+id/email_title"
         android:layout_width="82dp"
         android:layout_height="31dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Email:"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/email_box"
         app:layout_constraintTop_toTopOf="@id/email_box" />
 
@@ -114,30 +126,22 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:text="New Email"
         android:inputType="textEmailAddress"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_box" />
+        app:layout_constraintTop_toBottomOf="@id/btn_ChangePass" />
 
-    <TextView
-        android:id="@+id/phone_title"
-        android:layout_width="82dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Phone:"
-        app:layout_constraintEnd_toStartOf="@id/phone_box"
-        app:layout_constraintTop_toTopOf="@id/phone_box" />
-
-    <EditText
-        android:id="@+id/phone_box"
-        android:layout_width="286dp"
-        android:layout_height="31dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:inputType="phone"
+    <Button
+        android:id="@+id/btn_ChangeEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_box" />
+
 
     <Button
         android:id="@+id/logout_btn"
