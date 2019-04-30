@@ -1,3 +1,7 @@
+/**** CLASS SUMMARY *****
+    The purpose of this class is to allow the users to communicate the developers directly through email
+ */
+
 package com.example.finalproject;
 
 import android.app.AlertDialog;
@@ -22,6 +26,7 @@ import java.util.ArrayList;
 
 public class ContactUsFragment extends Fragment {
 
+    // variables ready to be referenced to existing views in the xml file
     private EditText editTextTo;
     private EditText editTextSubject;
     private EditText editTextMessage;
@@ -37,6 +42,7 @@ public class ContactUsFragment extends Fragment {
         // For later use
         myHandler = new Handler();
 
+        // referencing the variables to the views in teh xml file
         editTextTo = (EditText) view.findViewById(R.id.edit_text_to);
         editTextSubject = (EditText) view.findViewById(R.id.edit_text_subject);
         editTextMessage = (EditText) view.findViewById(R.id.edit_text_message);

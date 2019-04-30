@@ -1,5 +1,11 @@
+/**** CLASS SUMMARY *****
+    The purpose of this class is to add friend through the fragment_addfriend.xml.
+    The whole class is currently in development
+    The class DOES NOT access the database to check if a friend exist or not.
+ */
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
 import android.support.annotation.NonNull;
@@ -21,11 +27,14 @@ public class AddFragment extends Fragment {
     Button submitBtn;
     TextView dummyT; // variable purpose: Testing
     boolean isFriendExist;
+    int counter; // this is a hardcoded variable to increment the friend's id, starting at 4
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container,false);
+
+        counter = 4;
 
         // Setting the views to the global variables
         userAcc = view.findViewById(R.id.friendAcc);
@@ -35,9 +44,14 @@ public class AddFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Testing code line, to see if my button was working in fragment
                 dummyT.setText(userAcc.getText());
                 isFriendExist = doesFriendExist(userAcc.getText().toString()); // check if friend searched exists
+
+                // get the text from the editTextView
+                String name = userAcc.getText().toString();
+                // End of transferring data to FriendFragment
 
                 if(isFriendExist != true){
                     Log.i("Does Friend Exist: ", "Yes");
@@ -46,6 +60,7 @@ public class AddFragment extends Fragment {
                 }
 
 
+                //TODO:
                 // In this setOnClickListener, it will search for the friend's name in the database
                 // If the friend exist, there will be a friend request to that friend
                 // The friend will ither accept or decline the request and returns a 0 or 1
@@ -60,6 +75,7 @@ public class AddFragment extends Fragment {
 
     /*
        Check if friend exist before adding a friend
+       Will need modification to match database
      */
     public boolean doesFriendExist(String name){
 
@@ -69,14 +85,13 @@ public class AddFragment extends Fragment {
         ArrayList<String> dataNames;
         dataNames = new ArrayList<String>();
 
-        // storing Bobi into the dataName array
+        // storing Bobs into the dataName array
         for(int i = 0; i < 50; i++){
             dataNames.add("Bob" + i);
         }
 
         // Searching for friend in the mocked data
         // O(n) - time complexity - worst case scenario
-
         // Real scenario - we will use mysql call -- note: Back end already did this method
 
         for(int j = 0; j < dataNames.size(); j++){
@@ -86,10 +101,6 @@ public class AddFragment extends Fragment {
         }
 
         return false;
-
-
         // ------- end of server side
-
-
     }
 }

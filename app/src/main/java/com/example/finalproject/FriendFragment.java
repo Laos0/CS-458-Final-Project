@@ -1,3 +1,9 @@
+/**** CLASS SUMMARY *****
+    Purpose of this class is to display all your friends in a scroll view,
+    whichever friend exist in the database should appear here
+
+ */
+
 package com.example.finalproject;
 
 import android.app.AlertDialog;
@@ -48,21 +54,12 @@ public class FriendFragment extends Fragment {
         friend4 = new Friend("Dilly",3);
 
 
-        /*
-            Real scenario would be something like this"
-            1: Fetch the data from the server using volley call(rest call)
-            2: Retrieve data as JSON/AJAX parse it to string or int
-            3: assign those to a string or int variable
-            4: String name = someVolleyCalls.fetchName.toString();
-            5: int id = someVolleyCalls.fetchId.toInterger();
-            6: Friend friend1 = new Friend(name, id);
-         */
-
         // Adding in friend obj into a Friend array
         friendArrayList.add(friend1);
         friendArrayList.add(friend2);
         friendArrayList.add(friend3);
         friendArrayList.add(friend4);
+
 
         // Sort friend in the list by their first name
         sortFriendListByFirstName();
@@ -72,9 +69,6 @@ public class FriendFragment extends Fragment {
         for(int i = 0; i < friendArrayList.size(); i++){
             friendsStringList.add(friendArrayList.get(i).getName());
         }
-
-
-
 
 
         // Adapter takes in String only, so instead of Friend
@@ -126,19 +120,6 @@ public class FriendFragment extends Fragment {
                }
            }
        }
-
-       /*
-            Example of this algorithm
-            List: Bob, Apple
-            1) We compare Bob to Apple
-            2) This will return a 1 because Bob is greater than Apple
-            3) tempFriend = Bob
-            4) Bob becomes Apple
-            5) Current List: Apple, Apple
-            6) Apple(the second one) = tempFriend <-- where tempFriend is Bob
-            7) Apple(the second one) becomes Bob
-            8) End List: Apple, Bob
-        */
 
     }
 }

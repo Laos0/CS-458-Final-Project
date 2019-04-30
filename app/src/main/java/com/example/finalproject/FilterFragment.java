@@ -40,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.bitmap.Rotate;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -54,6 +55,14 @@ import java.util.Random;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static android.os.Environment.getExternalStoragePublicDirectory;
+
+/**** CLASS SUMMARY *****
+
+    The purpose of this class is to catch the taken photo from the camera, display it in the fragment_filter.xml and
+    allow user to edit their photo through various buttons.  Although the naming convention is bad, this
+    class is suppose to be called EditPhotoFragment.java and the fragment file is suppose to be called fragment_editphoto.xml
+
+ */
 
 public class FilterFragment extends Fragment {
 
@@ -90,48 +99,19 @@ public class FilterFragment extends Fragment {
         filterBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 // Changing the color of a photo
-                // editPhoto is an ImageView
+                // To set change the color: 0x -> follow by the hex color
                 editPhoto.getDrawable().setColorFilter(0x763c3686, PorterDuff.Mode.DARKEN );
 
                 // Since I changed the editPhoto, I have to also update its bitmap and save it and use it later
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
 
-                /*
-
-               // The width and height of the photo ImageView
-                int bitW = bitmap.getWidth();
-                int bitH = bitmap.getHeight();
-                String bWidth = Integer.toString(bitW);
-                String bHeight = Integer.toString(bitH);
-
-                // I Do not need the two lines below to display it,
-                // However, I need them to display in the gallery or apply changes to the bitmap
-                Canvas canvas = new Canvas(bitmap);
-                editPhoto.draw(canvas);
-
-                Paint paint = new Paint();
-                paint.setStyle(Paint.Style.FILL);
-                paint.setStrokeWidth(1);
-                paint.setColor(Color.WHITE);
-                paint.setTextSize(50);
-
-                String myTxt = editToCaption.getText().toString();
-                float txtWidth = paint.measureText(myTxt);
-                float x = bitW/2 - txtWidth/2;
-                float y = bitH/2 - 6;
-                canvas.drawText(myTxt, x, y, paint);
-
-                editPhoto.setImageBitmap(bitmap);
-
                 // After changes on the bitmap, we need to update the photoURI for cropping purposes
-                photoUri = getImageUri(getContext(), bitmap);
-                */
-                writeText(bitmap);
+                //photoUri = getImageUri(getContext(), bitmap); <-- enable for cropping
 
-                // The width of the photo is: 774
-                // The height of the photo is: 1137
-                //Toast.makeText(getActivity(), "Photo width: " + bWidth + " " + "Photo height: " + bHeight, Toast.LENGTH_LONG).show();
+                writeText(bitmap);
+                editPhoto.setRotation(90); // we need to revert the photo back to vertical format
             }
         });
 
@@ -140,13 +120,18 @@ public class FilterFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                // TODO: Replicate filterBtn2 functions here
+
                 // Black and white filter
                 ColorMatrix matrix = new ColorMatrix();
                 matrix.setSaturation(0);
 
                 ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+
                 editPhoto.setColorFilter(filter);
+
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
+
                 //Canvas canvas = new Canvas(bitmap);
                 writeText(bitmap);
                 //editPhoto.draw(canvas);
@@ -157,6 +142,9 @@ public class FilterFragment extends Fragment {
         filterBtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // TODO: Replicate filterBtn1 here
+
                 editPhoto.getDrawable().setColorFilter(0x76f70000, PorterDuff.Mode.DARKEN );
                 bitmap = Bitmap.createBitmap(editPhoto.getWidth(),editPhoto.getHeight(), Bitmap.Config.ARGB_8888);
                 //Canvas canvas = new Canvas(bitmap);
@@ -180,14 +168,18 @@ public class FilterFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //editPhoto.setRotation(270);
-                //editPhoto.invalidate();
-                //BitmapDrawable drawable = (BitmapDrawable) editPhoto.getDrawable();
-                //bitmap = drawable.getBitmap();
-                saveBitmapToDevice(bitmap);
+                // Rotation on bitmap
+                Bitmap rotatedBitmap = RotateBitmap(bitmap,90);
+                saveBitmapToDevice(rotatedBitmap);
+
+                // End of rotation on bitmap
+
+                //saveBitmapToDevice(bitmap); <-- enable this
+
                 // After saving the photo, return to the HomeFragment
                 getFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new HomeFragment()).commit();
+
                 // After photo is saved, display a toast
                 toastSavePhoto();
 
@@ -219,12 +211,6 @@ public class FilterFragment extends Fragment {
             //String root = Environment.getExternalStorageDirectory().toString();
             File myDir = preparePhotoFile(); // give myDir a file
             myDir.mkdirs();
-            //Random generator = new Random();
-            //int n = 10000;
-            //n = generator.nextInt(n);
-            //String fname = "Image-" + n + ".jpg";
-            //File file = new File(myDir, fname);
-            //Log.i(TAG, "" + file);
 
             // If the file exists, delete it
             if (myDir.exists())
@@ -295,24 +281,6 @@ public class FilterFragment extends Fragment {
         return cs;
     }
 
-    // Delete whenever, was one of the method to combined an editText bitmap and imageview together
-    public static byte[] mergeImages(Bitmap baseImage, Bitmap captionImg){
-
-        Bitmap finalImage = Bitmap.createBitmap(baseImage.getWidth(), baseImage.getHeight(), baseImage.getConfig());
-        Canvas canvas = new Canvas(finalImage);
-        canvas.drawBitmap(baseImage, new Matrix(), null);
-
-        if(captionImg != null){
-            canvas.drawBitmap(captionImg, new Matrix(), null);
-        }
-
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        finalImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] bytes = stream.toByteArray();
-
-        return bytes;
-    }
-
     private void writeText(Bitmap b){
 
         // The width and height of the photo ImageView
@@ -334,12 +302,26 @@ public class FilterFragment extends Fragment {
         float txtWidth = paint.measureText(myTxt);
         float x = bitW/2 - txtWidth/2;
         float y = bitH/2 - 6;
+        canvas.rotate(-90, x, y);
         canvas.drawText(myTxt, x, y, paint);
 
+
         editPhoto.setImageBitmap(b);
+        // End of Bitmap Rotation
+
+        //editPhoto.setImageBitmap(b);
+
 
         // After changes on the bitmap, we need to update the photoURI for cropping purposes
         photoUri = getImageUri(getContext(), b);
+        //editPhoto.setRotation(90);
+    }
+
+    public static Bitmap RotateBitmap(Bitmap source, float angle)
+    {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
 
 

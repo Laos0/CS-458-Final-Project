@@ -1,10 +1,10 @@
+/**** CLASS SUMMARY *****
+ The purpose for this class is to store incoming data from the server side
+ solely for friends that are under a user's account
+ */
+
 package com.example.finalproject;
 
-
-/*
-    The purpose for this class is to store incoming data from the server side
-    solely for friends that are under a user's account
- */
 public class Friend {
     public String name;
     public int id;

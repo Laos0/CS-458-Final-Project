@@ -120,7 +120,6 @@ public class HomeFragment extends Fragment
         if (takePic.resolveActivity(packageManager) != null) {
             File photoFile = null;
             photoFile = preparePhotoFile();
-
             savePhotoToDevice(takePic,photoFile);
         }
     }
