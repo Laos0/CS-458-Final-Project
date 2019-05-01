@@ -1,11 +1,9 @@
 package com.example.finalproject;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class AddFragment extends Fragment {
 
     EditText userAcc;
     Button submitBtn;
-    TextView dummyT; // variable purpose: Testing
-    boolean isFriendExist;
+    TextView dummyT;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add, container,false);
-
-        // Setting the views to the global variables
         userAcc = view.findViewById(R.id.friendAcc);
         submitBtn = view.findViewById(R.id.submitAdd);
         dummyT = view.findViewById(R.id.dummyText);
@@ -37,14 +30,6 @@ public class AddFragment extends Fragment {
             public void onClick(View v) {
                 // Testing code line, to see if my button was working in fragment
                 dummyT.setText(userAcc.getText());
-                isFriendExist = doesFriendExist(userAcc.getText().toString()); // check if friend searched exists
-
-                if(isFriendExist != true){
-                    Log.i("Does Friend Exist: ", "Yes");
-                }else{
-                    Log.i("Does Friend Exist: ", "No");
-                }
-
 
                 // In this setOnClickListener, it will search for the friend's name in the database
                 // If the friend exist, there will be a friend request to that friend
@@ -56,40 +41,5 @@ public class AddFragment extends Fragment {
         });
 
         return view;
-    }
-
-    /*
-       Check if friend exist before adding a friend
-     */
-    public boolean doesFriendExist(String name){
-
-        // ------ All of this is on the server side
-        // server has tables: rows columns, it does not have an arraylist
-        // Mock Data
-        ArrayList<String> dataNames;
-        dataNames = new ArrayList<String>();
-
-        // storing Bobi into the dataName array
-        for(int i = 0; i < 50; i++){
-            dataNames.add("Bob" + i);
-        }
-
-        // Searching for friend in the mocked data
-        // O(n) - time complexity - worst case scenario
-
-        // Real scenario - we will use mysql call -- note: Back end already did this method
-
-        for(int j = 0; j < dataNames.size(); j++){
-            if(name.equals(dataNames.get(j))){
-                return true;
-            }
-        }
-
-        return false;
-
-
-        // ------- end of server side
-
-
     }
 }

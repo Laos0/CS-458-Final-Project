@@ -3,7 +3,6 @@ package com.example.finalproject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,64 +16,52 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.finalproject.ServerCommunication.ChangePassword;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-public class UserProfileFragment extends Fragment {
-    Button followbtn, savebtn, btnChange, editbtn;
+public class UserProfileFragment extends Fragment
+{
+    //private EditText userName;
+    Button editbtn;
+    Button followbtn, btnChange;
     EditText editChange;
     Context c;
     AlertDialogManager alert = new AlertDialogManager();
-    private DrawerLayout drawer; // for the drawer menu
-    private SessionManagement session; // For accessing the current user info
     ImageView profilePicture;
     private static final int RESULT_LOAD_IMAGE = 1;
+    private DrawerLayout drawer; // for the drawer menu
+    private SessionManagement session; // For accessing the current user info
+
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the view
-        // Inflate the view
-        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
-
-        // Get the user's info from the session
-        session = new SessionManagement(getActivity().getApplicationContext());
-        HashMap<String, String> userInfo = session.getUserDetails();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.fragment_user_profile,container, false);
         c = this.getContext();
 
-        // Set the user information to appropriate fields
-        TextView userName = view.findViewById(R.id.user_name);
-        final TextView userEmail = view.findViewById(R.id.profileEmail);
+        // Get the user's info from the session
+        session = new SessionManagement(c);
+        HashMap<String, String> userInfo = session.getUserDetails();
 
-        // Grabs user information from shared preferences
-        final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        // Retrieve username and email then display it on the profile page
+        TextView userName = view.findViewById(R.id.profileUserName);
+        TextView userEmail = view.findViewById(R.id.profileEmail);
+
+        String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
         String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
 
-        // Display user information
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
 
-        // Set up buttons
+        // Set up the edit button and follow button
         editbtn = view.findViewById(R.id.editProfile);
-        //followbtn = view.findViewById(R.id.followBtn); Will possibly implement in the future. Outside of the scope of this semester
 
-        // Change profile picture
-        profilePicture = view.findViewById(R.id.profileAvatar);
-        profilePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGallery();
-            }
-        });
-
-        // Redirects user to the settings page where they can
-        // make changes to the password, email, and phone
+        // Redirects user to the settings activity where they can
+        // make changes to the password and email
         editbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,19 +70,7 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
-        /* Follow the user (Will possibly implement in the future. Outside of the scope of this semester)
-        //TODO: 1+ in follower counter and add follower to list
-        followbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (followbtn.getText().toString().equalsIgnoreCase("Follow me")) {
-                    followbtn.setText("Following");
-                } else {
-                    followbtn.setText("Follow me");
-                }
-            }
-        }); */
-
+        /*
         // CODE FOR CHANGING PASSWORD -Jordan
         editChange = view.findViewById(R.id.txt_ChangePass);
         btnChange = view.findViewById(R.id.btn_ChangePass);
@@ -122,19 +97,30 @@ public class UserProfileFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+        });*/
+
+        // Change profile picture
+        profilePicture = view.findViewById(R.id.profileAvatar);
+        profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGallery();
+            }
         });
 
-        return view;
+        return inflater.inflate(R.layout.fragment_user_profile,container, false);
     }
 
-    private void openGallery() {
+    // Opens the gallery to allow for user to choose an image
+    public void openGallery(){
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, RESULT_LOAD_IMAGE);
     }
 
+    //Change and displays the new profile picture
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_LOAD_IMAGE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == RESULT_LOAD_IMAGE){
             // Address of the image
             Uri imageUri = data.getData();
 
