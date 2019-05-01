@@ -226,7 +226,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 editor.apply();
                 recreate();
                 break;
-            case R.id.theme_label:
+            case R.id.theme_title:
                 switch (position){
                     case 0:
                         break;

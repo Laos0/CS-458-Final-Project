@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.finalproject.ServerCommunication.ChangePassword;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.HashMap;
@@ -45,14 +44,14 @@ public class UserProfileFragment extends Fragment
         c = this.getContext();
 
         // Get the user's info from the session
-        session = new SessionManagement(getActivity().getApplicationContext());
+        session = new SessionManagement(c);
         HashMap<String, String> userInfo = session.getUserDetails();
 
         // Retrieve username and email then display it on the profile page
-        final TextView userName = view.findViewById(R.id.user_name);
+        TextView userName = view.findViewById(R.id.profileUserName);
         TextView userEmail = view.findViewById(R.id.profileEmail);
 
-        final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
         String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
 
         userName.setText(userToDisplay);
