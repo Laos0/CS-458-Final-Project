@@ -29,13 +29,20 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+// Creates a Callback to change the list variable in AsyncTask
+interface Callback {
+    void onValueReceived(String value);
+
+    void onFailure();
+}
+
 public class GalleryFragment extends Fragment {
 
 
     // region declaration
 
     // Declare a string to hold the list of images
-    public static String list;
+    public static String list = "";
     // Declare an arrayList of images
     ArrayList<String> galleryImages = new ArrayList<>();
     // Declare the base URL for images
@@ -70,14 +77,23 @@ public class GalleryFragment extends Fragment {
 
         // region background
 
-        new Background().execute(imageLoc + "db/getFiles.php");
+        Callback callback = new Callback() {
+            @Override
+            public void onValueReceived(final String value) {
+                list = value;
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        };
+
+        new Background(callback).execute(imageLoc + "db/getFiles.php");
         galleryImages.addAll(Arrays.asList(list.split("<br>")));
+        Log.d("galleryImages full", galleryImages.toString());
 
         // endregion
-
-        // TEST
-        Log.i("List of images", list);
-        Log.i("Array of images", String.valueOf(galleryImages));
 
         // region foreach
 
@@ -116,12 +132,20 @@ public class GalleryFragment extends Fragment {
         // Displays the parent layout with all elements inside
         return parent;
     }
+
+    // endregion
 }
 
 class Background extends AsyncTask<String, Void, String> {
 
+    private Callback callback;
+
+    Background(final Callback callback) {
+        this.callback = callback;
+    }
+
     @Override
-    protected String doInBackground(String... strings) {
+    protected String doInBackground(final String... strings) {
         try {
             GalleryFragment.list = "";
             // Build and set timeout values for the request.
@@ -140,7 +164,7 @@ class Background extends AsyncTask<String, Void, String> {
             in.close();
 
             // TEST
-            Log.i("HTML response", html.toString());
+            Log.d("HTML response", html.toString());
 
             return html.toString();
 
@@ -150,7 +174,7 @@ class Background extends AsyncTask<String, Void, String> {
         }
     }
 
-    protected void onPostExecute(String result) {
-        GalleryFragment.list = result;
+    protected void onPostExecute(final String result) {
+        callback.onValueReceived(result);
     }
 }
