@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
+
 import com.example.finalproject.ServerCommunication.ChangeEmail;
 import com.example.finalproject.ServerCommunication.ChangePassword;
 import com.example.finalproject.ServerCommunication.SessionManagement;
@@ -24,6 +25,7 @@ import com.example.finalproject.ServerCommunication.SessionManagement;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
 
 
 public class SettingsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
@@ -41,7 +43,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
+        SharedPreferences prefs = getPreferences(0);
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
         super.onCreate(savedInstanceState);
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
+
+
         setContentView(R.layout.activity_settings);
 
         /* Create our toolbar as an object and add a back button to it */

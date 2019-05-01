@@ -81,8 +81,10 @@ public class HomeFragment extends Fragment
             }
         });
 
+
         // *************DELETE ME: Button for Nicks Weather Button. Can be deleted in future.**********************
         /*final Button weatherButton = view.findViewById(R.id.weather_btn);
+
         weatherButton.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -91,7 +93,9 @@ public class HomeFragment extends Fragment
                 startActivity(WeatherPage);
 
             }
-        }); */
+        });
+        */
+
 
         // a boolean is returned from the MainPage
         photoExist = ((MainPage)getActivity()).isThereTargetPhoto();

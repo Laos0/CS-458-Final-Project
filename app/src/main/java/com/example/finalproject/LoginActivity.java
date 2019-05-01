@@ -28,8 +28,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        //LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
-        //setTheme(prefs.getInt("theme",R.style.AppTheme));
+
+        setTheme(prefs.getInt("theme",R.style.AppTheme));
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
+
         setContentView(R.layout.login_screen);
 
         /* Create a session manager */
@@ -76,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // Function to log the user into the application
     void LogIn()
     {
-        // Get the username and password from the fields
+     /*   // Get the username and password from the fields
         String username = txtUsername.getText().toString();
         String password = txtPassword.getText().toString();
         String type = "login";
@@ -114,7 +116,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+        Intent home = new Intent(LoginActivity.this, MainPage.class);
+        startActivity(home);
 
     }
 
