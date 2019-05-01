@@ -186,6 +186,7 @@ public class FilterFragment extends Fragment {
                 //editPhoto.invalidate();
                 //BitmapDrawable drawable = (BitmapDrawable) editPhoto.getDrawable();
                 //bitmap = drawable.getBitmap();
+
                 saveBitmapToDevice(bitmap);
                 // After saving the photo, return to the HomeFragment
                 getFragmentManager().beginTransaction().replace(R.id.frame_container,
@@ -258,6 +259,7 @@ public class FilterFragment extends Fragment {
 
     void toastSavePhoto(){
         // After an image has been successfully saved
+        ((MainPage)getActivity()).getSupportActionBar().show();
         Toast.makeText(getActivity(), "Photo saved", Toast.LENGTH_LONG).show();
     }
 

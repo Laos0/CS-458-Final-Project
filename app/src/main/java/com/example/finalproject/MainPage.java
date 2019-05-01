@@ -177,6 +177,7 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         targetPhoto = photo;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                 new FilterFragment()).commit();
+        getSupportActionBar().hide();
     }
 
     public boolean isThereTargetPhoto(){
