@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -29,6 +31,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 {
     private Spinner spinner;
     private Spinner spinner2;
+    private SessionManagement session; // For accessing the current user info
+    Button btnChange, emailChange; // Save buttons for changing password and email
+    EditText editChange, userEmail; // Changing password and email fields
+    Context c;
+    AlertDialogManager alert = new AlertDialogManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -84,6 +91,85 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
                 recreate();
             }
         });
+        ///////////////////////////////////////// Start of Su's settings /////////////////////////////////////////
+        c = SettingsActivity.this;
+        /*Display displayable user information*/
+        // Get the user's info from the session
+        session = new SessionManagement(getApplicationContext());
+        final HashMap<String, String> userInfo = session.getUserDetails();
+
+        // Set the user information to appropriate fields
+        userEmail = findViewById(R.id.email_box);
+
+        // Grabs user information from shared preferences
+        final String userToDisplay = userInfo.get(SessionManagement.KEY_NAME);
+        String emailToDisplay = userInfo.get(SessionManagement.KEY_EMAIL);
+
+        // Display user information
+        userEmail.setText(emailToDisplay);
+
+        // CODE FOR CHANGING PASSWORD -Jordan
+        editChange = findViewById(R.id.txt_ChangePass);
+        btnChange = findViewById(R.id.btn_ChangePass);
+
+        btnChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String new_pass = String.valueOf(editChange.getText());
+                ChangePassword changePassword = new ChangePassword(c);
+
+                try {
+                    // Get the result of the login back from the server and check to see if the login was successful
+                    String result = changePassword.execute(userToDisplay, new_pass).get();
+                    if (result.contains("Success")) {
+                        alert.showAlertDialog(c, "Change Completed", result, false);
+                    } else {
+                        alert.showAlertDialog(c, "Change Failed", result, false);
+                    }
+
+                    // Else, an error will be thrown from the BackgroundWorker and be displayed to the user
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // Allow user to change email
+        emailChange = findViewById(R.id.btn_ChangeEmail);
+        userEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String new_email = String.valueOf(emailChange.getText());
+
+
+                ChangeEmail changeEmail = new ChangeEmail(c);
+
+                try {
+                    // Get the result of the login back from the server and check to see if the login was successful
+                    String result = changeEmail.execute(userToDisplay, new_email).get();
+                    if (result.contains("Success")) {
+                        // If successful, then updates email in shared preferences
+                        alert.showAlertDialog(c, "Change Completed", result, false);
+                        session.editSharedPref("KEY_EMAIL",new_email);
+                    } else {
+                        alert.showAlertDialog(c, "Change Failed", result, false);
+                    }
+
+                    // Else, an error will be thrown from the BackgroundWorker and be displayed to the user
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+        ///////////////////////////////////////// End of Su's settings /////////////////////////////////////////
+
 
         // Get the log out button as an object
         Button logout = findViewById(R.id.logout_btn);
