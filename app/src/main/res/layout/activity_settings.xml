@@ -36,6 +36,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
+    <TextView
+        android:id="@+id/language_title"
+        android:layout_width="82dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/languages"
+        app:layout_constraintEnd_toStartOf="@id/language_spinner"
+        app:layout_constraintTop_toTopOf="@id/language_spinner" />
+
 
     <Spinner
         android:id="@+id/language_spinner"
@@ -48,14 +58,98 @@
         app:layout_constraintTop_toBottomOf="@+id/Settings_title" />
 
     <TextView
-        android:id="@+id/language_title"
+    android:id="@+id/theme_title"
+    android:layout_width="82dp"
+    android:layout_height="31dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:text="@string/themes"
+    app:layout_constraintEnd_toStartOf="@+id/theme_spinner"
+    app:layout_constraintTop_toTopOf="@+id/theme_spinner" />
+
+    <Spinner
+        android:id="@+id/theme_spinner"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/language_spinner" />
+
+    <TextView
+    android:id="@+id/password_title"
+    android:layout_width="82dp"
+    android:layout_height="31dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginRight="8dp"
+    android:text="Password:"
+    app:layout_constraintEnd_toStartOf="@id/txt_ChangePass"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/txt_ChangePass" />
+
+    <EditText
+        android:id="@+id/txt_ChangePass"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="New Password"
+        android:inputType="textPassword"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/theme_spinner" />
+
+    <Button
+    android:id="@+id/btn_ChangePass"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/change_password"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.466"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/txt_ChangePass" />
+
+    <EditText
+        android:id="@+id/email_title"
         android:layout_width="82dp"
         android:layout_height="31dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/languages"
-        app:layout_constraintEnd_toStartOf="@+id/language_spinner"
-        app:layout_constraintTop_toTopOf="@+id/language_spinner" />
+        android:text="@string/email"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/email_box"
+        app:layout_constraintTop_toTopOf="@id/email_box" />
+
+    <EditText
+        android:id="@+id/email_box"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="textEmailAddress"
+        android:text="New Email"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_ChangePass" />
+
+    <Button
+    android:id="@+id/btn_ChangeEmail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="32dp"
+    android:text="@string/change_email"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.409"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/email_box" />
+
+
+
 
     <Button
         android:id="@+id/logout_btn"
@@ -65,33 +159,14 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/log_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.895"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/themelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="@string/themes"
-        app:layout_constraintEnd_toEndOf="@+id/language_title"
-        app:layout_constraintTop_toBottomOf="@+id/language_title" />
 
-    <Spinner
-        android:id="@+id/themespinner"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/language_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/language_spinner" />
 
     <Button
         android:id="@+id/set_button"
