@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/AppTheme" />
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <TextView
         android:id="@+id/Settings_title"
@@ -97,11 +97,12 @@
         android:id="@+id/set_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginBottom="48dp"
         android:text="@string/apply_settings"
-        app:layout_constraintStart_toStartOf="@+id/themespinner"
-        app:layout_constraintTop_toBottomOf="@+id/themespinner" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
