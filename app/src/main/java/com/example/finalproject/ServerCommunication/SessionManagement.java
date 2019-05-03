@@ -61,15 +61,6 @@ public class SessionManagement
         editor.commit();
     }
 
-    public void editSharedPref(String key,String input)
-    {
-        // Store the phone in preferences
-        editor.putString(key, input);
-
-        // Commit the changes
-        editor.commit();
-    }
-
     // Get the current logged in user data
     public HashMap<String, String> getUserDetails()
     {

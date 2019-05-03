@@ -5,8 +5,8 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F899"
-    tools:context=".UserProfileFragment">
+    tools:context=".UserProfileFragment"
+    android:background="#F899">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,10 +23,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+        <ImageView
             android:id="@+id/profileAvatar"
-            style="?android:attr/borderlessButtonStyle"
-            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -59,7 +57,7 @@
                 tools:layout_editor_absoluteX="205dp">
 
                 <TextView
-                    android:id="@+id/profileUserName"
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -93,7 +91,7 @@
 
         </LinearLayout>
 
-        <!--
+
         <TextView
             android:id="@+id/friends"
             android:layout_width="wrap_content"
@@ -109,7 +107,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileInfo" /> -->
+            app:layout_constraintTop_toBottomOf="@+id/profileInfo" />
 
         <EditText
             android:id="@+id/profileEmail"
@@ -118,24 +116,39 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="36dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:editable="true"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileInfo" />
             android:text="email@domain.com"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNum" />
+
+        <EditText
+            android:id="@+id/phoneNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:editable="true"
+            android:ems="10"
+            android:inputType="phone"
+            android:text="(123)456-7890"
+            app:layout_constraintBottom_toTopOf="@+id/profileEmail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/friends" />
 
-        <!--Button
+
+        <Button
             android:id="@+id/followBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,48 +158,51 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:text="Follow me"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileEmail"
-            app:layout_constraintVertical_bias="0.12" /-->
+            app:layout_constraintVertical_bias="0.12" />
 
-        <!-- <EditText
-            android:id="@+id/txt_ChangePass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="New Password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/followBtn" />
-
-        <Button
-            android:id="@+id/btn_ChangePass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Change Password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_ChangePass" />-->
-
+        <!--
         <Button
             android:id="@+id/editProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="532dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Edit Profile"
+            android:text="Edit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.957"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.988" />
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="12dp"
+            android:text="Save"
+            app:layout_constraintBottom_toTopOf="@+id/editProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.957"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.989"/>
+-->
 
     </android.support.constraint.ConstraintLayout>
 
