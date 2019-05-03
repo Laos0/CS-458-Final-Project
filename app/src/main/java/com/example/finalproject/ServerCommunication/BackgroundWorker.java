@@ -1,18 +1,8 @@
 package com.example.finalproject.ServerCommunication;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.android.volley.TimeoutError;
-import com.example.finalproject.LoginActivity;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,40 +13,20 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import static com.android.volley.VolleyLog.TAG;
 
 public class BackgroundWorker extends AsyncTask<String, Void, String>
 {
     // Global Variables
     Context context;
     AlertDialog alertDialog;
-    private ProgressDialog pDialog;
+    public boolean loginPass;
 
     // Constructor
     public BackgroundWorker(Context ctx)
     {
         context = ctx;
-    }
-
-    @Override
-    protected void onPreExecute()
-    {
-        super.onPreExecute();
-
-        // Test function to make sure that the user is not currently logged in
-        alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("Login Status");
-
-        // Showing progress dialog
-        pDialog = new ProgressDialog(context);
-        pDialog.setMessage("Logging in...");
-        pDialog.setCancelable(false);
-        pDialog.show();
-
     }
 
     // Will run in the background without being directly called
@@ -75,7 +45,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
             String password = params[2];
 
             // Get the url to the database that we are logging into
-            String login_url = "http://144.13.22.48/CS458SP19/Team2/api/LoginForTesting.php";
+            String login_url = "http://144.13.22.48/CS458SP19/Team2/api/testEmailLogin.php";
 
             try
             {
@@ -85,7 +55,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
-                httpURLConnection.setConnectTimeout(1000);
 
                 // Create an output stream to send our data to the database to check the login info against
                 OutputStream outputStream = httpURLConnection.getOutputStream();
@@ -116,36 +85,13 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                     result += line;
                 }
 
-                if(result != null && !result.equals("")) {
-                    try
-                    {
-                        // Get the user info as JSON
-                        JSONArray userInfo = new JSONArray(result);
-                        JSONObject user = userInfo.getJSONObject(0);
+                // Once we have finished getting all the data and storing it to result, close the buffered reader, input stream, and HTTP connection
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
 
-                        // Create a user session and store the data
-                        SessionManagement session = new SessionManagement(context);
-                        session.createLoginSession(user.getString("user_name"), user.getString("email"));
-
-                        // Once we have finished getting all the data and storing it to result, close the buffered reader, input stream, and HTTP connection
-                        bufferedReader.close();
-                        inputStream.close();
-                        httpURLConnection.disconnect();
-
-                        return "Login Successful!";
-                    } catch (final JSONException e) {
-                        Log.e(TAG, "Json parsing error: " + e.getMessage());
-                        return "Json parsing error: " + e.getMessage();
-                    }
-                } else {
-                    // Once we have finished getting all the data and storing it to result, close the buffered reader, input stream, and HTTP connection
-                    bufferedReader.close();
-                    inputStream.close();
-                    httpURLConnection.disconnect();
-
-                    // Return the result
-                    return result;
-                }
+                // Return the result
+                return result;
             } catch (MalformedURLException e)
             {
                 alertDialog.setMessage("Incorrect URL!");
@@ -222,11 +168,6 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
                 alertDialog.setMessage("Incorrect URL!");
                 e.printStackTrace();
             }
-            catch (SocketTimeoutException e)
-            {
-                alertDialog.setMessage("Server Timed!");
-                e.printStackTrace();
-            }
             catch (IOException e)
             {
                 alertDialog.setMessage("IO Exception!");
@@ -236,11 +177,17 @@ public class BackgroundWorker extends AsyncTask<String, Void, String>
         return null;
     }
 
+
     @Override
-    protected void onPostExecute(String result)
+    protected void onPreExecute()
     {
-        pDialog.dismiss();
+        // Test function to make sure that the user is not currently logged in
+        alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Login Status");
     }
+
+    @Override
+    protected void onPostExecute(String result) { }
 
     @Override
     protected void onProgressUpdate(Void... values)

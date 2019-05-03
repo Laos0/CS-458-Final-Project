@@ -1,10 +1,15 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +24,13 @@ import android.widget.TextView;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
 import java.util.HashMap;
+import android.widget.Filter;
+import android.widget.ImageView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -33,8 +45,8 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         /* Instantiate the activity */
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        //LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
-        //setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
+        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
+        setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         setContentView(R.layout.activity_main_page);
 
 
@@ -42,11 +54,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         // The tool bar or navigation to add friend implementations
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Sets title up toolbar
-        getSupportActionBar().setTitle("HotSpot");
-
-
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -60,13 +67,15 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /* This code below loads the add friend fragment */
+        // This code below loads the add friend fragment
 
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                     new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_home);
         }
+
+
 
         // Get the user's info from the session
         session = new SessionManagement(getApplicationContext());
@@ -82,6 +91,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
 
         userName.setText(userToDisplay);
         userEmail.setText(emailToDisplay);
+
+
+
+        //new WeatherTask(this).execute(34.0,53.0);
 
         //--------------------------- End of Navigation Drawer Implementations ----------------------------------------------------
 
@@ -142,10 +155,6 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                         new ContactUsFragment()).commit();
                 break;
-            case R.id.nav_notification:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
-                        new NotificationFragment()).commit();
-                break;
         }
 
         drawer.closeDrawer((GravityCompat.START));
@@ -176,11 +185,14 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
         targetPhoto = photo;
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container,
                 new FilterFragment()).commit();
-        getSupportActionBar().hide();
     }
 
     public boolean isThereTargetPhoto(){
-        return targetPhoto != null;
+        if(targetPhoto != null){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public Bitmap getTargetPhoto(){

@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -43,9 +42,9 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class HomeFragment extends Fragment
 {
     String pathToFile; // path of the image in directory
-    Button cameraBtn;
+    FloatingActionButton cameraBtn;
     ImageView photo, filterPhoto;
-    Button saveBtn, filterBtn1, filterBtn2, filterBtn3, button;
+    Button saveBtn, filterBtn1, filterBtn2, filterBtn3;
     boolean photoExist;
     View filterView;
 
@@ -58,8 +57,6 @@ public class HomeFragment extends Fragment
 
         // once the photo is taken
         filterView = inflater.inflate(R.layout.fragment_filter, container,false);
-
-
 
         cameraBtn = view.findViewById(R.id.camera_btn);
         photo = view.findViewById(R.id.photo);
@@ -81,8 +78,10 @@ public class HomeFragment extends Fragment
             }
         });
 
+
         // *************DELETE ME: Button for Nicks Weather Button. Can be deleted in future.**********************
         /*final Button weatherButton = view.findViewById(R.id.weather_btn);
+
         weatherButton.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -91,12 +90,13 @@ public class HomeFragment extends Fragment
                 startActivity(WeatherPage);
 
             }
+
         }); */
 
         // a boolean is returned from the MainPage
-        photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
+       photoExist = ((MainPage)getActivity()).isThereTargetPhoto();
 
-        return view;
+       return view;
     }
 
     @Override // after photo is saved, give ImageView an image that is a bitmap
@@ -137,6 +137,7 @@ public class HomeFragment extends Fragment
             Uri photoURI = FileProvider.getUriForFile(HomeFragment.this.getActivity(), "com.example.finalproject", photoFile);
             takePic.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             startActivityForResult(takePic, 1);
+            Log.i("TEST METHOD RUNS:", "Save method 1");
         }
     }
 

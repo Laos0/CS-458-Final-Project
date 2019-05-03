@@ -40,7 +40,6 @@ public class SignUpActivity extends AppCompatActivity
 
         /* Create the register button as an object and create an onclick() function */
         Button register = findViewById(R.id.register);
-        Button already_account = findViewById(R.id.already_have_account);
 
         // Go to the main page on tapping the register button
         register.setOnClickListener(new View.OnClickListener()
@@ -52,20 +51,6 @@ public class SignUpActivity extends AppCompatActivity
                 RegisterUser();
             }
         });
-
-        //Takes user to account login activity
-        already_account.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // Register the user by calling the method
-                Intent login = new Intent(SignUpActivity.this, LoginActivity.class);
-                startActivity(login);
-                finish();
-            }
-        });
-
 
         /* Create our toolbar as an object and add a back button to it */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -133,5 +118,4 @@ public class SignUpActivity extends AppCompatActivity
             }
         }
     }
-
 }
