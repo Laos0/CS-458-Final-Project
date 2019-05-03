@@ -19,8 +19,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 
-
-
 public class MapBox extends Fragment {
     private MapView mapView;
 

@@ -31,11 +31,10 @@ public class MainPage extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState)
     {
         /* Instantiate the activity */
-        SharedPreferences prefs = getPreferences(0);
-        setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         super.onCreate(savedInstanceState);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
-
+        SharedPreferences prefs = getPreferences(0);
+        //LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        //setTheme(prefs.getInt("themeNoAction",R.style.AppTheme_NoActionBar));
         setContentView(R.layout.activity_main_page);
 
 
