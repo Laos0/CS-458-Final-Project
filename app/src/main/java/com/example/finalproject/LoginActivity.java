@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.finalproject.ServerCommunication.BackgroundWorker;
 import com.example.finalproject.ServerCommunication.SessionManagement;
 
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText txtUsername, txtPassword;
     SessionManagement session;
     AlertDialogManager alert = new AlertDialogManager();
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,7 +32,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences prefs = getPreferences(0);
 
         setTheme(prefs.getInt("theme",R.style.AppTheme));
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),getBaseContext());
+        position = prefs.getInt("languageSelection",0);
+        switch (position) {
+            case 0:
+                Locale locale = new Locale("en");
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                //Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+                break;
+            case 1:
+                Locale locale2 = new Locale("fr");
+                Locale.setDefault(locale2);
+                Configuration config2 = new Configuration();
+                config2.locale = locale2;
+                getBaseContext().getResources().updateConfiguration(config2, getBaseContext().getResources().getDisplayMetrics());
+                //Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+                break;
+            case 2:
+                Locale locale3 = new Locale("es");
+                Locale.setDefault(locale3);
+                Configuration config3 = new Configuration();
+                config3.locale = locale3;
+                getBaseContext().getResources().updateConfiguration(config3, getBaseContext().getResources().getDisplayMetrics());
+                //Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+                break;
+            case 3:
+                Locale locale4 = new Locale("de");
+                Locale.setDefault(locale4);
+                Configuration config4 = new Configuration();
+                config4.locale = locale4;
+                getBaseContext().getResources().updateConfiguration(config4, getBaseContext().getResources().getDisplayMetrics());
+                //Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+                break;
+            case 4:
+                Locale locale5 = new Locale("ru");
+                Locale.setDefault(locale5);
+                Configuration config5 = new Configuration();
+                config5.locale = locale5;
+                getBaseContext().getResources().updateConfiguration(config5, getBaseContext().getResources().getDisplayMetrics());
+                //Toast.makeText(context, context.getString(R.string.enIsMyfriend), Toast.LENGTH_LONG).show();
+                break;
+        }
 
         setContentView(R.layout.login_screen);
 
@@ -64,7 +109,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             }
             case R.id.log_in: {
-                LogIn();
+                //LogIn();
+                Intent home = new Intent(LoginActivity.this, SettingsActivity.class);
+                startActivity(home);
                 break;
             }
 
@@ -75,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     // Function to log the user into the application
     void LogIn()
+
     {
         // Get the username and password from the fields
         String username = txtUsername.getText().toString();
@@ -118,4 +166,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getPreferences(0);
+        if(position != prefs.getInt("languageSelection",0)){
+            recreate();
+        }
+    }
+
 }
+

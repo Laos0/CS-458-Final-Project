@@ -10,4 +10,12 @@
     <string name="error_invalid_email">Cette adresse email est invalide</string>
     <string name="error_invalid_password">Ce mot de passe est trop court</string>
     <string name="error_incorrect_password">Ce mot de passe est incorrect</string>
+    <string name="apply_settings">Appliquer les paramètres</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="found_image">image trouvée</string>
+    <string name="settings">Réglages</string>
+    <string name="themes">Thèmes:</string>
+    <string name="title_activity_settings">Réglages</string>
+    <string name="languages">Langues:</string>
+    <string name="log_out">Connectez - Out</string>
 </resources>

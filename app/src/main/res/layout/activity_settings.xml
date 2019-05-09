@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".SettingsActivity"
+    android:background="?attr/colorPrimary">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,10 +17,10 @@
         android:layout_marginRight="8dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
+        android:text="@string/settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/Settings_title"

@@ -25,7 +25,7 @@ public class Login_Signup_Selector_Activity extends AppCompatActivity implements
         /* Creates the activity upon starting the app */
         super.onCreate(savedInstanceState);
         SharedPreferences prefs = getPreferences(0);
-        LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
+        //LanguageSelect.languageSelect(prefs.getInt("LanguageSelection",0),this);
         setTheme(prefs.getInt("theme",R.style.AppTheme));
         setContentView(R.layout.login_signup_selector_layout);
 
